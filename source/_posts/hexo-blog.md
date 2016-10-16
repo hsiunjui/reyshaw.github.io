@@ -103,7 +103,8 @@ deploy:
     	 │   ├── page.md
     	 │   └── post.md
     	 ├── source 
-    	 │   └── _posts
+    	 │   ├── _posts
+    	 │   └── uploads[手动创建]
     	 ├── themes                                       
     	 ├── .gitignore
 		 ├── .swp[生成]  		
@@ -130,7 +131,7 @@ deploy:
 ```
 4.发布到master
 ```bash
-	hexo deploy
+	hexo deploy -g
 ```
 
 --------------------------------------------------------------------------------------------------------
@@ -138,7 +139,7 @@ deploy:
 # 参考文档
 [使用Hexo & Github,搭建属于自己的博客](https://segmentfault.com/a/1190000006749038)
 [hexo博客更换主题](http://www.tuicool.com/articles/zeIZJzv)
-			
+[官方说明](http://theme-next.iissnan.com/getting-started.html)			
 
 
 		
