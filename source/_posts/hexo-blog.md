@@ -68,7 +68,7 @@ deploy:
 	hexo deploy
 ```
 
-# 更换主题[nexT](http://theme-next.iissnan.com/getting-started.html)
+# 更换主题[nexT](http://theme-next.iissnan.com/)
 ###### 1.更改
 ```bash
 	 cd gnoixs.github.io
@@ -89,12 +89,11 @@ deploy:
 	git commit -m"theme"
 	git push orgin hexo
 ```
-###### 5.发布
+###### 4.发布
 ```bash
 	hexo deploy
 ```
-	
-	 
+
 # 项目结构
 	[gnoixs.github.com]
     	├── .deploy_git[生成]
@@ -112,9 +111,7 @@ deploy:
     	├── _config.yml
 		├── .db.json[生成] 
     	└── package.json
-		
-
-		
+				
 #写博客
 	hexo new "title"		#title是文章标题，这样会在source下的_posts下生成相关的md文件
 	hexo generate			#生成
@@ -122,7 +119,9 @@ deploy:
 	
 --------------------------------------------------------------------------------------------------------
 
-#参考https://segmentfault.com/a/1190000006749038
+# 参考文档
+[使用Hexo & Github,搭建属于自己的博客](https://segmentfault.com/a/1190000006749038)
+[hexo博客更换主题](http://www.tuicool.com/articles/zeIZJzv)
 			
 
 
