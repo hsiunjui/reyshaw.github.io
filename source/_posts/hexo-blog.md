@@ -102,9 +102,8 @@ tags: github
 1.克隆项目
  ```bash
      git clone https://github.com/gnoixs/gnoixs.github.io.git
-     npm install hexo -g
+	 or git clone git@github.com:gnoixs/gnoixs.github.io.git
      npm install
-     npm install hexo-deployer-git --save
  ```
 2.添加或修改文章
 ```bash
