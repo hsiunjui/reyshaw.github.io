@@ -24,7 +24,7 @@ tags: github
  
  deploy:                        #路径:/_config.yml                   
     type: git                   #注意冒号后的空格
-    repo: ssh://git@github.com/gnoixs/gnoixs.github.io  #一个ssh时可用repo地址
+    repo: ssh://git@github.com/gnoixs/gnoixs.github.io  #一个ssh时可用原repo地址
     branch: master
 ```
 4.github仓库配置
@@ -100,26 +100,16 @@ tags: github
 				
 # 写博客
 1.克隆项目
- ```bash
-     git clone https://github.com/gnoixs/gnoixs.github.io.git
-	 or git clone git@github.com:gnoixs/gnoixs.github.io.git
-     npm install
- ```
-2.添加或修改文章
 ```bash
-	hexo new "title"
-	hexo generate
-	hexo server
+ git clone https://github.com/gnoixs/gnoixs.github.io.git
+ or git clone git@github.com:gnoixs/gnoixs.github.io.git
+ npm install
 ```
+2.添加**hexo new "title"**或修改文章并本地预览
 3.提交代码到hexo
+4.发布到线上master
 ```bash
-	 git add --all
-	 git commit -m"update"
-	 git push origin hexo
-```
-4.发布到master
-```bash
-	hexo deploy -g
+ hexo deploy -g
 ```
 
 --------------------------------------------------------------------------------------------------------
