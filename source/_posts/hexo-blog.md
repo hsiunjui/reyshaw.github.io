@@ -154,10 +154,10 @@ deploy:
 --------------------------------------------------------------------------------------------------------
 
 # 参考文档
+[官方说明](http://theme-next.iissnan.com/getting-started.html)	
 [使用Hexo & Github,搭建属于自己的博客](https://segmentfault.com/a/1190000006749038)
 [hexo博客更换主题](http://www.tuicool.com/articles/zeIZJzv)
-[官方说明](http://theme-next.iissnan.com/getting-started.html)			
-
+[Hexo主题同步](http://w4lle.github.io/2016/06/06/Hexo-themes/)
 
 		
 		
