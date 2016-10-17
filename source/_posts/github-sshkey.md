@@ -5,8 +5,10 @@ categories: github
 tags: sshkey
 ---
 # SSH的作用
->用于验证github的需要
-    
+>用于无密码输入的git提交,验证github的需要
+
+<!--more-->
+
 # 设置步骤
 ```bash
  cd ~/.ssh  #检查是否配置ssh

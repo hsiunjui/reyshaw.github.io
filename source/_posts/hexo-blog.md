@@ -6,9 +6,12 @@ tags: hexo
 ---
 
 # 介绍
->hexo是一个基于Node.js的静态博客程序，可以方便的生成静态网页托管在github和Heroku上。
->>软件工具：windows10  git  node  hexo
+>hexo是基于Node.js的静态博客程序，可以生成静态网页托管在github和Heroku上。
 
+<!--more-->
+# 软件环境
+    windows10  git  node  hexo
+    
 # 步骤
 1.在github上新建一个空仓库[gnoixs.github.io]
 2.在windows桌面上新建文件夹[gnoixs.github.io]并cd切入

@@ -82,3 +82,9 @@ social:
   weibo: http://weibo.com/feaco
   #douban: http://douban.com/people/your-user-name
   #zhihu: http://www.zhihu.com/people/your-user-name
+  
+# Social Links Icons
+social_icons:
+  enable: true
+  GitHub: github
+  weibo: weibo
