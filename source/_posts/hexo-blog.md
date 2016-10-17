@@ -70,9 +70,11 @@ deploy:
 	
 # 更换主题[nexT](http://theme-next.iissnan.com/)
 1.更改
+    在github上fork https://github.com/iissnan/hexo-theme-next  https://github.com/gnoixs/hexo-theme-next.git
 ```bash
 	 cd gnoixs.github.io
 	 git clone https://github.com/iissnan/hexo-theme-next themes/next
+     
 	 theme: next #/confit.yml
 	 scheme: Pisces	#/theme/next/_config.yml
 ```
