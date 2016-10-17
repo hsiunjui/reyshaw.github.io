@@ -80,7 +80,12 @@ deploy:
      git push origin hexo
      
      git remote add -f next git@github.com:gnoixs/hexo-theme-next.git
+     提交一次
      git subtree add --prefix=themes/next next master --squash
+     
+     git fetch next master
+     
+     git subtree pull --prefix=themes/next next master --squash
      
 	 theme: next #/confit.yml
 	 scheme: Pisces	#/theme/next/_config.yml
