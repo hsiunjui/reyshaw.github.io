@@ -74,3 +74,11 @@ deploy:
 
 #avatar
 avatar: /uploads/avatar.jpg
+
+# Social links
+social:
+  github: https://github.com/gnoixs
+  #twitter: https://twitter.com/your-user-name
+  weibo: http://weibo.com/feaco
+  #douban: http://douban.com/people/your-user-name
+  #zhihu: http://www.zhihu.com/people/your-user-name
