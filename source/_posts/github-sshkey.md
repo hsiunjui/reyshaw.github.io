@@ -1,7 +1,8 @@
 ---
 title: github ssh key的配置
 date: 2016-10-17 13:31:43
-tags: github
+categories: github
+tags: sshkey
 ---
 # SSH的作用
 >用于验证github的需要

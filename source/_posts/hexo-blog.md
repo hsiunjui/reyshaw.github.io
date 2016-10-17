@@ -1,7 +1,8 @@
 ---
 title: 用hexo搭建github博客
 date: 2016-10-16 14:39:30
-tags: github
+categories: github
+tags: hexo
 ---
 
 # 介绍
@@ -109,6 +110,7 @@ tags: github
 3.提交代码到hexo
 4.发布到线上master
 ```bash
+ hexo clean
  hexo deploy -g
 ```
 
