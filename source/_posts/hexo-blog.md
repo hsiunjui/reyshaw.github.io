@@ -24,7 +24,7 @@ tags: github
  
  deploy:                        #路径:/_config.yml                   
     type: git                   #注意冒号后的空格
-    repo: https://github.com/gnoixs/gnoixs.github.io.git
+    repo: ssh://git@github.com/gnoixs/gnoixs.github.io  #一个ssh时可用repo地址
     branch: master
 ```
 4.github仓库配置
