@@ -32,7 +32,7 @@ tags: github
     
 # 测试
 ```bash
- ssh -T git@github.com
+ ssh -T git@github.com    #无密码push需要重启电脑
 ```
         
 # 参考
