@@ -22,7 +22,7 @@ tags: hexo
  npm install hexo-deployer-git --save
  
  hexo generate                              #生成
- hexo server                                #预览
+ hexo server -p 4000                        #预览,如果端口被占用,可以修改端口
  http://localhost:4000/
  
  deploy:                        #路径:/_config.yml                   
