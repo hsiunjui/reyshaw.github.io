@@ -5,7 +5,6 @@ categories: github
 tags: hexo
 ---
 
-# 介绍
 >hexo是基于Node.js的静态博客程序，可以生成静态网页托管在github和Heroku上。
 
 <!--more-->
