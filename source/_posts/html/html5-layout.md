@@ -27,7 +27,7 @@ categories: HTML
 </body>
 ```
 - 传统布局图
-![传统布局](../images/layout_before_html5.jpg)
+![传统布局](/images/layout_before_html5.jpg)
 # HTML5布局
 ```html
 <body>
@@ -48,4 +48,4 @@ categories: HTML
 </body>
 ```
 - HTML5布局图
-![HTML5布局](../images/layout_html5.jpg)
+![HTML5布局](/images/layout_html5.jpg)

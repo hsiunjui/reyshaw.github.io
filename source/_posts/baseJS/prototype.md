@@ -14,4 +14,4 @@ categories: 客户端JS
     	//内存模型图如下    
 	}  
 ```
-![图片](layout_html5.jpg)
+![图片](/images/layout_html5.jpg)
