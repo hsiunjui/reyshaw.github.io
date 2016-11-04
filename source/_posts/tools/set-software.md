@@ -1,8 +1,8 @@
 layout: w
 title: 必要的软件及基本设置
 date: 2016-10-18 10:11:39
-categories: 工具
-tags: 软件
+categories: 辅助
+tags: 装机配置
 ---
 >刚拿到一台电脑需要安装那些必要的软件
 
