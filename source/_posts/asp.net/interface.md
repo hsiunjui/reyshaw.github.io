@@ -6,6 +6,7 @@ tags: c#高级
 ---
 >c#中接口的定义及特性。
 
+<!--more-->
 # 接口
 ```c#
     public interface Person{
