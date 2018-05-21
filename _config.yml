@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Feaco's Blog
+title: Feiker's Blog
 subtitle: 好记性，不如烂笔头！
 description: 与其更好，不如不同！
-author: Feaco Shaw
+author: Feiker XR
 language: zh-Hans
 timezone:
 
@@ -69,7 +69,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
     type: git
-    repo: ssh://git@github.com/gnoixs/gnoixs.github.io   #拥有两个ssh
+    repo: ssh://git@github.com/feiker-xr/feiker-xr.github.io   #拥有两个ssh
     branch: master
 
 #avatar
@@ -77,12 +77,12 @@ avatar: /uploads/avatar.jpg
 
 # Social links
 social:
-  github: https://github.com/gnoixs
+  github: https://github.com/feiker-xr
   #twitter: https://twitter.com/your-user-name
-  weibo: http://weibo.com/feaco
+  weibo: http://weibo.com/feiker-xr
   #douban: http://douban.com/people/your-user-name
   #zhihu: http://www.zhihu.com/people/your-user-name
-  
+
 # Social Links Icons
 social_icons:
   enable: true
