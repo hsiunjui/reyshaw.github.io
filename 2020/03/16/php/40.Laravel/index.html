@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php框架," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Lavavel框架的介绍及相关操作.">
+<meta name="keywords" content="php框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP之Laravel">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/40.Laravel/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="Lavavel框架的介绍及相关操作.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:53:10.237Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP之Laravel">
+<meta name="twitter:description" content="Lavavel框架的介绍及相关操作.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/40.Laravel/"/>
+
+
+  <title> PHP之Laravel | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP之Laravel
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Lavavel框架的介绍及相关操作.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Laravel开发环境-集成环境"><a href="#Laravel开发环境-集成环境" class="headerlink" title="Laravel开发环境(集成环境)"></a>Laravel开发环境(集成环境)</h1><ul>
+<li>WAMP/MAMP</li>
+<li>HomeStead(官方推荐跨平台虚拟机)</li>
+</ul>
+<h1 id="laravel的安装"><a href="#laravel的安装" class="headerlink" title="laravel的安装"></a>laravel的安装</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">composer golbal <span class="keyword">require</span> <span class="string">"laravel/installer"</span></span><br><span class="line">laravel <span class="keyword">new</span> project_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置请求目录至public,设置默认页面为index.php</li>
+<li>配置文件.env</li>
+</ul>
+<h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app <span class="comment">// 所有核心源码,MC,计划，对列等等</span></span><br><span class="line">bootstrap <span class="comment">// 项目启动文件</span></span><br><span class="line">config <span class="comment">// 项目所有配置</span></span><br><span class="line">database <span class="comment">// 数据库</span></span><br><span class="line"><span class="keyword">public</span> <span class="comment">// 入口文件及静态资源(css,js等),全部都可以公开访问</span></span><br><span class="line">resources <span class="comment">// 未编译的原始文件,资源目录(assets lang),views模板文件</span></span><br><span class="line">routes <span class="comment">// 路由</span></span><br><span class="line">storage <span class="comment">// 已经编译的balde模板</span></span><br><span class="line">tests <span class="comment">// 自动化测试文件</span></span><br><span class="line">vendor <span class="comment">// composer的所有依赖</span></span><br></pre></td></tr></table></figure>
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><ul>
+<li><p>定义静态路由</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; <span class="comment">// routes/web.php</span></span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态路由</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'/&#123;name?&#125;'</span>, <span class="string">'CtrlName@CtrlFunc'</span>); <span class="comment">// &#123;name&#125;传递参数,?选传</span></span><br><span class="line">Route::match($arr); <span class="comment">// 匹配多个请求方式</span></span><br><span class="line">Route::any(); <span class="comment">// 匹配任何的请求</span></span><br><span class="line">Route::resouce(<span class="string">'/resouce'</span>,<span class="string">'CtrlName'</span>)-&gt;middleware(<span class="string">'checkAuth'</span>); <span class="comment">// 会对应resful的方法, php artisan Roote:list可以查看</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路由分组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Route::prefix(<span class="string">'前缀'</span>)-&gt;group(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; <span class="comment">// 按控制器</span></span><br><span class="line">    Route::get(<span class="string">'二级路由'</span>,<span class="string">'ctrl@func'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">Route::namespace(<span class="string">'前缀'</span>)-&gt;group(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="comment">/**/</span>&#125;); <span class="comment">// 按命名空间</span></span><br><span class="line">Route::middleware(<span class="string">'mdName'</span>)-&gt;group(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="comment">/**/</span>&#125;); <span class="comment">// 按中间件,三种可链式</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:controller CtrlName <span class="comment">// app/Http/Controller/CtrlName.php, --resource 会生成resful的方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">(Request $request)</span> </span>&#123; <span class="comment">// Request依赖注入</span></span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">'test.index'</span>, compact(<span class="string">'var'</span>)); <span class="comment">// 第二个参数可以传变量数组等</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// index 展示所有资源</span></span><br><span class="line"><span class="comment">// create 展示创建表单</span></span><br><span class="line"><span class="comment">// store 处理创建表单的数据并整理入库</span></span><br><span class="line"><span class="comment">// show 展示单个资源信息</span></span><br><span class="line"><span class="comment">// edit 展示编辑表单</span></span><br><span class="line"><span class="comment">// update 收集更新表单中的数据并整理入库</span></span><br><span class="line"><span class="comment">// delete // 删除资源信息</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>中间件<ul>
+<li>过滤所有进入应用的HTTP请求</li>
+<li>在请求过程中执行相应任务</li>
+<li>进行统一认证,如CSRF Auth等认证<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:middleware mdName <span class="comment">// app/Http/Middleware/mdName.php</span></span><br><span class="line"><span class="comment">// 在app/Http/Kernel.php中注册</span></span><br><span class="line"><span class="comment">// 在路由上使用拦截-&gt;middleware('注册时的名字')</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><ul>
+<li>视图放置在resources/views</li>
+<li><p>视图以.blade.php结尾(有上级目录,需要用.号)</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; $var &#125;&#125; <span class="comment">// 普通参数</span></span><br><span class="line">&#123;!! $var !!&#125; <span class="comment">// 原样输出$var</span></span><br><span class="line">@&#123;&#123; $var &#125;&#125; <span class="comment">// 原封不动地输出&#123;&#123; $var &#125;&#125;</span></span><br><span class="line">@json(); <span class="comment">// 直接输出json表达式</span></span><br><span class="line">@verbatim ...@endverbatim <span class="comment">// 输出大段原始表达式</span></span><br><span class="line">@<span class="keyword">if</span>() @<span class="keyword">elseif</span>() @<span class="keyword">else</span>() @<span class="keyword">endif</span> <span class="comment">// 条件输出(注意缩进)</span></span><br><span class="line">@unless() @endunless() <span class="comment">// 除非</span></span><br><span class="line">@<span class="keyword">isset</span>() @isempty() <span class="comment">// 是否存在,是否为空</span></span><br><span class="line">@<span class="keyword">switch</span>() @<span class="keyword">case</span>() @<span class="keyword">break</span> @<span class="keyword">default</span> @<span class="keyword">endswitch</span> </span><br><span class="line">@auth() @guest() <span class="comment">// 认证表达式</span></span><br><span class="line">@hasSection()和@<span class="keyword">endif</span>() <span class="comment">// 判断section是否存在</span></span><br><span class="line">@<span class="keyword">for</span>() @<span class="keyword">endfor</span></span><br><span class="line">@<span class="keyword">foreach</span>() @<span class="keyword">endforeach</span></span><br><span class="line">@forelse() @<span class="keyword">empty</span> @endforelse() <span class="comment">// 对数组是否存在判断,再遍历</span></span><br><span class="line">@<span class="keyword">while</span>()</span><br><span class="line">@php @endphp <span class="comment">// php代码</span></span><br><span class="line">&#123;&#123;-- --&#125;&#125; <span class="comment">// 注释</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>视图可以被继承</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># layout</span></span><br><span class="line">@<span class="keyword">yield</span>($var, <span class="string">'value'</span>); <span class="comment">// 定义变量,value是默认设置</span></span><br><span class="line">@<span class="keyword">include</span>(<span class="string">'dir.file'</span>); <span class="comment">// 包含,style，js等等</span></span><br><span class="line">@section($var) <span class="comment">// 定义部分内容</span></span><br><span class="line">@show</span><br><span class="line"><span class="comment"># extended page</span></span><br><span class="line">@extends(<span class="string">'dir.file'</span>)</span><br><span class="line">@section($var, $value) <span class="comment">// 覆盖定义时的值,可以独写一行,也可成块</span></span><br><span class="line">@section($var) <span class="comment">// 相当于slot</span></span><br><span class="line">  @<span class="keyword">parent</span> <span class="comment">// 保留原始的内容</span></span><br><span class="line"> ...content</span><br><span class="line">@endsection</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><ul>
+<li><p>使用原生SQL语句</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DB::slect($sql); <span class="comment">// 查询 sql语句种的?,会用第二个参数[]指定(索引数组)</span></span><br><span class="line">DB::insert($sql); <span class="comment">// 新增,如果时:绑定,可以传关联数组</span></span><br><span class="line">DB::update($sql); <span class="comment">// 更新, dd(); 打印</span></span><br><span class="line">DB::delete($sql); <span class="comment">// 删除</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询构造器(链式操作)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询</span></span><br><span class="line">  DB::table(<span class="string">'table_name'</span>)</span><br><span class="line">      -&gt;select(<span class="string">'字段名'</span>) <span class="comment">// 可以传数组</span></span><br><span class="line">      -&gt;where(<span class="string">'条件'</span>) <span class="comment">// </span></span><br><span class="line">      -&gt;first(); <span class="comment">// 查询第一条 get(),取出所有 toArray(),聚合函数,exists(),doesntExists();</span></span><br><span class="line">      <span class="comment">// DB::raw(); // 加入原生SQL,join()/leftjoin/rightjoin, orderby(), groupBy(), having()</span></span><br><span class="line"><span class="comment"># 插入</span></span><br><span class="line">  DB::table(<span class="string">"table_name"</span>)-&gt;insert([ <span class="comment">// insertGetId</span></span><br><span class="line">      key =&gt; value</span><br><span class="line">  ]); <span class="comment">// 可以插入多条数据</span></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">  DB::table(<span class="string">"table_name"</span>)-&gt;update([ <span class="comment">// 返回影响行数</span></span><br><span class="line">      key =&gt; value</span><br><span class="line">  ])-&gt;where(<span class="string">"条件"</span>); <span class="comment">// increment()/decrement自增()/自减</span></span><br><span class="line"><span class="comment"># 删除  </span></span><br><span class="line">  DB::table(<span class="string">"table_name"</span>)</span><br><span class="line">  -&gt;delete()</span><br><span class="line">  -&gt;where(<span class="string">"条件"</span>); <span class="comment">// increment()/decrement自增()/自减</span></span><br><span class="line">  <span class="comment">// -&gt;truncate() // 删除表且删除id,重新插入会从1开始</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Eloquent ORM(把一个表映射成一个对象,操作对象即操作表;一个模型对应一个表;多个模型可以有多个关系(一对一,一对多,多对多))</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成Model文件</span></span><br><span class="line">  php artisan make:model ModelName <span class="comment">// --migration 生成对应的数据库迁移文件,app/Http/ModelName.php</span></span><br><span class="line">  php artisan migrate <span class="comment">// 生成</span></span><br><span class="line"><span class="comment"># 模型默认属性</span></span><br><span class="line">  <span class="keyword">protected</span> $table = <span class="string">"model_name"</span>; <span class="comment">// 默认指向这个表,也可以使用其他表</span></span><br><span class="line">  <span class="keyword">protected</span> $timestamps = <span class="keyword">true</span>; <span class="comment">// 是否自动维护时间戳,默认true</span></span><br><span class="line">  <span class="keyword">const</span> CTEATED_AT = <span class="string">'created_at'</span>, <span class="comment">// 默认常量,可修改成数据库字段,UPDATED_AT</span></span><br><span class="line"><span class="comment"># 新增</span></span><br><span class="line">  ModelName::create([ <span class="comment">// 需要在模型种定义$fileable(那些字段可以被修改),</span></span><br><span class="line">      key =&gt; value</span><br><span class="line">  ]) <span class="comment">// createMany()</span></span><br><span class="line"><span class="comment"># 查询</span></span><br><span class="line">  $result = ModelName::find(<span class="number">1</span>);  <span class="comment">// where findOrFail</span></span><br><span class="line">  <span class="comment">// var_export($result) 打印</span></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">  $result-&gt;attribute = <span class="string">"value"</span>; <span class="comment">// 先查询出来,修改属性</span></span><br><span class="line">  $result.save(); <span class="comment">// 再保存包数据库</span></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">  $result-&gt;delete(); </span><br><span class="line"><span class="comment"># 模型关联(一对一,如书[主]和索引号[附])</span></span><br><span class="line">  <span class="comment">// 主表</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">bookCard</span><span class="params">()</span> </span>&#123; <span class="comment">// bookCard方法是附表的表名</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">$this</span>.hasOne(BookCard::class);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 附表(附表一般持有外键)</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">book</span><span class="params">()</span> </span>&#123; <span class="comment">// book是主表的表名</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">$this</span>.belongsTo(Book::class);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// $book-&gt;bookCard()-&gt;create([]); 创建一条数据</span></span><br><span class="line">  <span class="comment">// Book::with('bookCard')-&gt;find(1); // with采用了join的方式,只查询一次,效率较高 </span></span><br><span class="line"><span class="comment"># 模型关联(一对多,如借阅卡[主],借阅记录[附])</span></span><br><span class="line">  hasMany();</span><br><span class="line">  belongsTo();</span><br><span class="line">  <span class="comment">// 附表查主表</span></span><br><span class="line">  $bch = BookBorrowHistory::find(<span class="number">1</span>);</span><br><span class="line">  $res = $bch-&gt;bookCard; <span class="comment">// 不需要括号</span></span><br><span class="line"> <span class="comment"># 模型关系(多对多,如书[主],书和标签关系,标签[附])</span></span><br><span class="line">  <span class="comment">// 主表</span></span><br><span class="line">  belongsToMany([</span><br><span class="line">      Tag::class, <span class="comment">// 附表命名空间</span></span><br><span class="line">      <span class="string">'book_tag'</span>, <span class="comment">// 书和标签的关系表</span></span><br><span class="line">      <span class="string">'book_id'</span>, <span class="comment">// 本表的主键</span></span><br><span class="line">      <span class="string">'tag_id'</span>, <span class="comment">// 附表的id</span></span><br><span class="line">  ]);</span><br><span class="line">  <span class="comment">// 附表</span></span><br><span class="line">  belongsToMany([</span><br><span class="line">      Book::class, <span class="comment">// 主表命名空间</span></span><br><span class="line">      <span class="string">"book_tag"</span>, <span class="comment">// 中间表表名</span></span><br><span class="line">      <span class="string">"tag_id"</span>, <span class="comment">// 附表主键</span></span><br><span class="line">      <span class="string">"book_id"</span> <span class="comment">// 主表主键</span></span><br><span class="line">  ]);</span><br><span class="line">  <span class="comment">// 插入等操作</span></span><br><span class="line">  $book = Book::find(<span class="number">1</span>);</span><br><span class="line">  $book-&gt;tag()-&gt;attach([<span class="string">'2'</span>,<span class="string">'3'</span>]); <span class="comment">// 打标签, detach([]),删除标签</span></span><br><span class="line">  $tags = $book-&gt;tag; <span class="comment">// 获取标签</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="数据库迁移-小型版本库"><a href="#数据库迁移-小型版本库" class="headerlink" title="数据库迁移(小型版本库)"></a>数据库迁移(小型版本库)</h1><ul>
+<li>特点<ul>
+<li>方便团队管理</li>
+<li>自动生成安全的SQL语句</li>
+<li>支持回滚</li>
+</ul>
+</li>
+<li><p>步骤</p>
+<ul>
+<li><p>生成迁移指令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:migration tbl(create_test_table) <span class="comment">// app/database/migrations/时间戳_tbl.php</span></span><br><span class="line">php artisan make:migration alert_test_table --table=table_name <span class="comment">// 更新表结构</span></span><br><span class="line">php artisan migrate:rollback --step=<span class="number">1</span> <span class="comment">// 回滚,step回滚的迁移次数</span></span><br><span class="line">php artisan migrate:reset <span class="comment">// 回滚所有迁移</span></span><br><span class="line">php artisan migrate:fresh <span class="comment">// 删除所有表并进行迁移</span></span><br><span class="line">php artisan migrate:refresh <span class="comment">// 回滚所有迁移并重新执行</span></span><br><span class="line">Schema::drop(table_name); <span class="comment">// 删除表</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改建表规则</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Schema::create(<span class="string">'table_name'</span>,<span class="function"><span class="keyword">function</span><span class="params">(Blueprint $table)</span></span>&#123;</span><br><span class="line">        $table-&gt;increpments(<span class="string">'id'</span>);</span><br><span class="line">        $table-&gt;string(<span class="string">'title'</span>)-&gt;index(); <span class="comment">// 指定字符串类型(加索引) char,dateTime,decimal,integer,tinyInteger,longText...</span></span><br><span class="line">        $table-&gt;timestamps(); <span class="comment">// 维护create_at,udpate_at</span></span><br><span class="line">        <span class="comment">// renameColumn(xx,yy); // 更新时重命名字段</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span> </span>&#123; <span class="comment">// 回滚运行的代码,一般做相反的操作</span></span><br><span class="line">    Schema::dropIfExists(<span class="string">'table_name'</span>); <span class="comment">// dropColumn()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     php artisan migrate</span><br><span class="line">     ```  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询作用域</span></span><br><span class="line">- 本地作用域</span><br><span class="line">  * 定义一个公用的查询方法,以便多次复用</span><br><span class="line">  * 再需要查询的方法前加上**scope**关键字</span><br><span class="line">    ```php</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">scopeActive</span><span class="params">($query)</span> </span>&#123; <span class="comment">// 可以被多次调用,而不需要重复定义</span></span><br><span class="line">        <span class="keyword">return</span> $query—&gt;where(<span class="string">'active'</span>,<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>再需要使用的作用域中链式调用(不需要加scope)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ModelName::active()-&gt;get(); <span class="comment">// get是框架提供的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>全局作用域(给所有模型定义的公共作用域)</p>
+<ul>
+<li><p>实现Illumimate\Database\Eloquent\Scope类</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 再app下新建目录Scope,再Scope下新建ScopeName.php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illumimate</span>\<span class="title">database</span>\<span class="title">Eloquent</span>\<span class="title">Scope</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illumimate</span>\<span class="title">database</span>\<span class="title">Eloquent</span>\<span class="title">Model</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illumimate</span>\<span class="title">database</span>\<span class="title">Eloquent</span>\<span class="title">Builder</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScopeName</span> <span class="keyword">implements</span> <span class="title">Scope</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现apply方法,再方法中书写全局作用域</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">apply</span><span class="params">(Builder $builder, Model $model)</span> </span>&#123;</span><br><span class="line">    $builder-&gt;where([</span><br><span class="line">        [<span class="string">'active'</span>,<span class="string">'&gt;'</span>,<span class="string">'0'</span>]</span><br><span class="line">    ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用addSelect()替代select()方法,避免重复</p>
+</li>
+<li>引用<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重写Model中的boot方法,app/ModelName.php</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>:boot();</span><br><span class="line">        <span class="keyword">self</span>::addGlobalScope(<span class="keyword">new</span> ScopeName);</span><br><span class="line">        <span class="comment">// 匿名方式</span></span><br><span class="line">        <span class="comment">// static::addGlobalScope('name', function($builder $builder) &#123; &#125;)</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">    ModelName::get(); <span class="comment">// 会自动应用active &gt; 0的条件,而不必写where</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php框架/" rel="tag">#php框架</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/5.PHP的数据类型/" rel="next" title="PHP的数据类型">
+                <i class="fa fa-chevron-left"></i> PHP的数据类型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/4.PHP的常量/" rel="prev" title="PHP的常量">
+                PHP的常量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laravel开发环境-集成环境"><span class="nav-number">1.</span> <span class="nav-text">Laravel开发环境(集成环境)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#laravel的安装"><span class="nav-number">2.</span> <span class="nav-text">laravel的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目结构"><span class="nav-number">3.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由"><span class="nav-number">4.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制器"><span class="nav-number">5.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图"><span class="nav-number">6.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">7.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库迁移-小型版本库"><span class="nav-number">8.</span> <span class="nav-text">数据库迁移(小型版本库)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

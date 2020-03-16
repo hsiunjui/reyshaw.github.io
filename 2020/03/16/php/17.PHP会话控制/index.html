@@ -1,0 +1,701 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php高级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP中session及cookie的相关操作.">
+<meta name="keywords" content="php高级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP会话控制">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/17.PHP会话控制/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP中session及cookie的相关操作.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:35:37.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP会话控制">
+<meta name="twitter:description" content="PHP中session及cookie的相关操作.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/17.PHP会话控制/"/>
+
+
+  <title> PHP会话控制 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP会话控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP中session及cookie的相关操作.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="session"><a href="#session" class="headerlink" title="session"></a>session</h1><ul>
+<li>用与存储用户会话信息,更改用户会员设置的。</li>
+<li>session是一个时间概念。</li>
+<li>会话信息是临时的,用户离开网站会被删除</li>
+</ul>
+<h1 id="为什么使用session"><a href="#为什么使用session" class="headerlink" title="为什么使用session"></a>为什么使用session</h1><ul>
+<li>http是无状态的</li>
+<li>session存储单一用户信息.并且对应用程序用所有页面都可用</li>
+<li>session信息是存储在服务端的</li>
+</ul>
+<h1 id="session的工作原理"><a href="#session的工作原理" class="headerlink" title="session的工作原理"></a>session的工作原理</h1><ul>
+<li>访问页面，发生第一次http请求</li>
+<li>初始化session(创建sessionID)</li>
+<li>将session数据存储到预定义变量$_SESSION中<ul>
+<li>http响应(携带sessionID)</li>
+<li>显示页面,将sessionID存储到cookie</li>
+</ul>
+</li>
+<li>程序执行完毕,将session信息存储到文件<ul>
+<li>文件名包含sessionID</li>
+<li>文件存储在Apache\htdocs\sess(php.ini中修改)</li>
+<li>会话结束,文件会被销毁</li>
+</ul>
+</li>
+<li>第二次http请求(携带sessionID)</li>
+<li>session初始化,根据sessionID读取session文件</li>
+<li>执行PHP,携带sessionID响应并存储session信息到文件</li>
+</ul>
+<h1 id="会话标识符"><a href="#会话标识符" class="headerlink" title="会话标识符"></a>会话标识符</h1><ul>
+<li>sessionID被称为会话标识符,它是自动被创建的</li>
+<li>默认情况下sessionID的值存储在客户端的cookie中(服务端是文件形式)</li>
+<li>sessionID会自动携带,并可以通过函数session_id()读取</li>
+<li>sessionID默认<strong>1440s</strong>(24分钟)后会过期,即24分钟内没有新请求,会话结束(下一次会开启新的会话)</li>
+</ul>
+<h1 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.创建一个sessionID</span></span><br><span class="line"><span class="comment">// 2.在服务器上创建一个包含sessionID为名称的文件</span></span><br><span class="line"><span class="comment">// 3.该函数必须位于文档开始</span></span><br><span class="line">session_start(); <span class="comment">// 标识开启一个会话,php中默认是关闭的</span></span><br><span class="line">$_SESSION[<span class="string">'username'</span>] = <span class="string">'test'</span>;</span><br><span class="line">session_id(); <span class="comment">// 获取sessionID</span></span><br><span class="line">session_name([$value]); <span class="comment">// 读取/设置session的key,默认PHPSESSID,需位于session_start()之前</span></span><br><span class="line"><span class="keyword">unset</span>(); <span class="comment">/// 可以销毁session中指定的值或全部</span></span><br><span class="line">session_destroy(); <span class="comment">// 销毁一个会话中的全部数据,如注销功能</span></span><br></pre></td></tr></table></figure>
+<h1 id="PHP中session配置的相关片段-php-ini"><a href="#PHP中session配置的相关片段-php-ini" class="headerlink" title="PHP中session配置的相关片段(php.ini)"></a>PHP中session配置的相关片段(php.ini)</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">session.auto_start = <span class="number">0</span>; <span class="comment">// 会话模块是否自动开启,不推荐自动开启</span></span><br><span class="line">session.name = <span class="string">'PHP_SESSID'</span>; <span class="comment">// 默认名称</span></span><br><span class="line">session.save_handler = <span class="string">'files'</span>; <span class="comment">// 默认存储方式</span></span><br><span class="line">session_save_path=<span class="string">'htdocs\\sess'</span>; <span class="comment">// 文件存储路径</span></span><br><span class="line">session.gc_maxlifetime = <span class="number">1440</span>; <span class="comment">// 指定多少秒后数据被视为垃圾并清除</span></span><br><span class="line">session.gc_probability = <span class="number">1</span>; <span class="comment">// 每次垃圾回收的概率 gc_probability/gcdivisor</span></span><br><span class="line">session.gc_divisor = <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><ul>
+<li>cookie常用于识别用户</li>
+<li>cookie是一种服务器留在用户计算机上的小<strong>文件</strong></li>
+<li>每当同一台计算机通过浏览器请求页面是,会发送相应的cookie</li>
+<li>cookie是http表头的组成部分</li>
+</ul>
+<h1 id="cookie的存储位置-windows为例"><a href="#cookie的存储位置-windows为例" class="headerlink" title="cookie的存储位置(windows为例)"></a>cookie的存储位置(windows为例)</h1><ul>
+<li>%APPDATA%\Microsoft\Windows\Cookies\目录中的xxx.txt</li>
+<li>Firefox:  %APPDATA%\Mozilla\Firefox\Profiles\目录中的xxx.default目录,名为cookies.sqlite的文件</li>
+<li>Chrome: %LOCALAPPDATA%\Google\Chrome\User Data\Default目录中,名为Cookies的文件</li>
+</ul>
+<h1 id="cookie的应用"><a href="#cookie的应用" class="headerlink" title="cookie的应用"></a>cookie的应用</h1><ul>
+<li>会话状态管理(用户登录状态,购物车等)</li>
+<li>个性化设置(用户自定义行为)</li>
+<li>浏览器行为跟踪(如跟踪分析用户行为)</li>
+<li><h1 id="cookie的相关操作"><a href="#cookie的相关操作" class="headerlink" title="cookie的相关操作"></a>cookie的相关操作</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">setcookie(<span class="string">'usernmae'</span>, <span class="string">'test'</span>, time() + <span class="number">10</span>*<span class="number">86400</span>, <span class="string">'/foo'</span>, <span class="string">'*.test.com'</span>); <span class="comment">// 设置cookie,10天后过期,该方法需出现在文档开头</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1.第三个参数$expire过期时间(Unix时间戳),如果没有设置,浏览器关闭后会自动失效(会话期的cookie)</span></span><br><span class="line"><span class="comment"> * 2.第四个参数$path指在那个路径下有效,如/foo</span></span><br><span class="line"><span class="comment"> * 3.第五个参数$domain用于设置cookie的可用范围(包括子域名)</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line">$_COOKIE[<span class="string">"username"</span>]; <span class="comment">// 获取cookie的值</span></span><br><span class="line">setcookie(<span class="string">'xxxx'</span>, <span class="string">""</span>, time() - <span class="number">3600</span>); <span class="comment">// 删除cookie,设置过期时间比现在早</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php高级/" rel="tag">#php高级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/18.PHP文件操作/" rel="next" title="PHP文件操作">
+                <i class="fa fa-chevron-left"></i> PHP文件操作
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/15.PHP类的多态性/" rel="prev" title="PHP类的多态性">
+                PHP类的多态性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#session"><span class="nav-number">1.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么使用session"><span class="nav-number">2.</span> <span class="nav-text">为什么使用session</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session的工作原理"><span class="nav-number">3.</span> <span class="nav-text">session的工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#会话标识符"><span class="nav-number">4.</span> <span class="nav-text">会话标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session操作"><span class="nav-number">5.</span> <span class="nav-text">session操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP中session配置的相关片段-php-ini"><span class="nav-number">6.</span> <span class="nav-text">PHP中session配置的相关片段(php.ini)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie"><span class="nav-number">7.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的存储位置-windows为例"><span class="nav-number">8.</span> <span class="nav-text">cookie的存储位置(windows为例)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的应用"><span class="nav-number">9.</span> <span class="nav-text">cookie的应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie的相关操作"><span class="nav-number">10.</span> <span class="nav-text">cookie的相关操作</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="行为型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="又被称作发布-订阅者模式或消息机制，定义了一种依赖关系，解决了主体对象与观察者之间功能的耦合。">
+<meta name="keywords" content="行为型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="观察者模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/observer/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="又被称作发布-订阅者模式或消息机制，定义了一种依赖关系，解决了主体对象与观察者之间功能的耦合。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.745Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="观察者模式">
+<meta name="twitter:description" content="又被称作发布-订阅者模式或消息机制，定义了一种依赖关系，解决了主体对象与观察者之间功能的耦合。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/observer/"/>
+
+
+  <title> 观察者模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                观察者模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T15:16:11+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>又被称作发布-订阅者模式或消息机制，定义了一种依赖关系，解决了主体对象与观察者之间功能的耦合。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="卫星、飞机、中转站之间的观察者模型"><a href="#卫星、飞机、中转站之间的观察者模型" class="headerlink" title="卫星、飞机、中转站之间的观察者模型"></a>卫星、飞机、中转站之间的观察者模型</h1><ul>
+<li>卫星为飞机导航，卫星作为一个观察者监测飞机的位置信息，那这架飞机便是一个被观察者或一个主体对象。飞机向卫星发送位置消息，卫星接收位置消息。而中转站想要获取飞机的具体位置，需要在卫星上注册，以便接收这家飞机的信息。这样，飞机发送信息给卫星，卫星广播给注册的中转站，并在必要的时候移除中转站，形成一个观察者的模式。 </li>
+</ul>
+<h1 id="观察者对象"><a href="#观察者对象" class="headerlink" title="观察者对象"></a>观察者对象</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Observer = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;             <span class="comment">//将观察者放到闭包中，页面加载即执行</span></span><br><span class="line">    <span class="keyword">var</span> _msg = &#123;&#125;;                                      <span class="comment">//防止消息队列暴露而被篡改，故将消息容器设为静态私有变量</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        regist: <span class="function"><span class="keyword">function</span> (<span class="params">type, fn</span>) </span>&#123;                            <span class="comment">//注册信息接口,接收消息类型和处理动作</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> _msg[type] === <span class="string">'undefined'</span>) &#123;                  <span class="comment">//如果消息不存在，则应该创建一个该消息类型</span></span><br><span class="line">                _msg[type] = [fn];                                                   <span class="comment">//将动作推入到该消息对应的动作执行队列中，这里是一个动作数组</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                _msg[type].push(fn);                                             <span class="comment">//将动作方法直接推入</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        fire: <span class="function"><span class="keyword">function</span> (<span class="params">type, args</span>) </span>&#123;             <span class="comment">//发布信息接口(将所有订阅者订阅的消息一次执行)</span></span><br><span class="line">            <span class="keyword">if</span> (!_msg[type]) &#123;                                 <span class="comment">//如果消息没有注册，则返回</span></span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">var</span> events = &#123;                                <span class="comment">//定义消息信息</span></span><br><span class="line">                    type: type,                                 <span class="comment">//消息类型</span></span><br><span class="line">                    args: args || &#123;&#125;                           <span class="comment">//消息所要携带的信息（参数）</span></span><br><span class="line">                &#125;,</span><br><span class="line">                i = <span class="number">0</span>,                                       <span class="comment">//消息动作循环变量</span></span><br><span class="line">                len = _msg[type].length;        <span class="comment">//消息动作长度</span></span><br><span class="line">            <span class="keyword">for</span> (; i &lt; len; i++) &#123;                          <span class="comment">//遍历消息动作</span></span><br><span class="line">                _msg[type][i].call(<span class="keyword">this</span>, events);       <span class="comment">//依次执行注册的消息对应的动作序列</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        remove: <span class="function"><span class="keyword">function</span> (<span class="params">type, fn</span>) </span>&#123;                <span class="comment">//移除信息接口</span></span><br><span class="line">            <span class="keyword">if</span> (_msg[type] <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;            <span class="comment">//检测消息队列是否存在</span></span><br><span class="line">                <span class="keyword">var</span> i = _msg[type].length - <span class="number">1</span>;                  <span class="comment">//从最后一个消息动作遍历</span></span><br><span class="line">                <span class="keyword">for</span> (; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                    _msg[type][i] === fn &amp;&amp; _msg[type].splice(i, <span class="number">1</span>);      <span class="comment">//如果存在动作则在消息动作序列中移除相应动作</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">//订阅消息</span></span><br><span class="line"><span class="keyword">var</span> listen = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e.type + <span class="string">' '</span> + e.args.msg);</span><br><span class="line">&#125;</span><br><span class="line">Observer.regist(<span class="string">'test'</span>, listen);</span><br><span class="line"><span class="comment">//发布消息</span></span><br><span class="line">Observer.fire(<span class="string">'test'</span>, &#123;<span class="attr">msg</span>: <span class="string">'传递参数'</span>&#125;);       <span class="comment">//test 传递参数</span></span><br><span class="line"><span class="comment">//取消订阅</span></span><br><span class="line">Observer.remove(<span class="string">'test'</span>,listen);</span><br><span class="line">Observer.fire(<span class="string">'test'</span>, &#123;<span class="attr">msg</span>: <span class="string">'传递参数'</span>&#125;);      <span class="comment">//无输出</span></span><br></pre></td></tr></table></figure>
+<h1 id="模块通信"><a href="#模块通信" class="headerlink" title="模块通信"></a>模块通信</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'msg_num'</span>&gt;</span>0<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"msg"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'text'</span> <span class="attr">id</span>=<span class="string">'user_input'</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'user_submit'</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">     <span class="function"><span class="keyword">function</span> <span class="title">$</span>(<span class="params">id</span>) </span>&#123;                                        <span class="comment">//外观模式，通过id获取元素</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="built_in">document</span>.getElementById(id);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//模块A，既是消息发出者也是消息执行者</span></span></span><br><span class="line"><span class="javascript">    (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">addMsgItem</span>(<span class="params">e</span>) </span>&#123;                        <span class="comment">//追加一则消息</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> text = e.args.text,</span></span><br><span class="line"><span class="javascript">                    ul = $(<span class="string">'msg'</span>),</span></span><br><span class="line"><span class="javascript">                    li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>),</span></span><br><span class="line"><span class="javascript">                    span = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</span></span><br><span class="line"><span class="javascript">                    span.innerHTML = <span class="string">'删除'</span>;</span></span><br><span class="line"><span class="undefined">            li.innerHTML = text;</span></span><br><span class="line"><span class="javascript">            span.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;                    <span class="comment">//删除追加的项</span></span></span><br><span class="line"><span class="undefined">                ul.removeChild(li);</span></span><br><span class="line"><span class="javascript">                Observer.fire(<span class="string">'removeCommentMessage'</span>, &#123;<span class="attr">num</span>: <span class="number">-1</span>&#125;);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">            li.appendChild(span);</span></span><br><span class="line"><span class="undefined">            ul.appendChild(li);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        Observer.regist(<span class="string">'addCommentMessage'</span>,addMsgItem);</span></span><br><span class="line"><span class="undefined">    &#125;)();</span></span><br><span class="line"><span class="javascript">    <span class="comment">//模块B，消息执行者</span></span></span><br><span class="line"><span class="javascript">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">changeMsgNum</span>(<span class="params">e</span>)</span>&#123;               <span class="comment">//更改用户消息数</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> num = e.args.num;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">'msg_num'</span>).innerHTML = <span class="built_in">parseInt</span>($(<span class="string">'msg_num'</span>).innerHTML)+num;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        Observer.regist(<span class="string">'addCommentMessage'</span>,changeMsgNum);</span></span><br><span class="line"><span class="javascript">        Observer.regist(<span class="string">'removeCommentMessage'</span>,changeMsgNum);</span></span><br><span class="line"><span class="undefined">    &#125;)();</span></span><br><span class="line"><span class="javascript">    <span class="comment">//模块C，消息发出者</span></span></span><br><span class="line"><span class="javascript">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">'user_submit'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;          <span class="comment">//提交数据</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> text = $(<span class="string">'user_input'</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(text.value == <span class="string">''</span>)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            Observer.fire(<span class="string">'addCommentMessage'</span>,&#123;</span></span><br><span class="line"><span class="undefined">                text:text.value,</span></span><br><span class="line"><span class="undefined">                num:1</span></span><br><span class="line"><span class="undefined">            &#125;)</span></span><br><span class="line"><span class="javascript">            text.value = <span class="string">''</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">    &#125;)()                        <span class="comment">//regist即添加方法，fire即执行队列里面的方法，剩下的便是谁注册和谁发布的问题了。</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="对象间解耦"><a href="#对象间解耦" class="headerlink" title="对象间解耦"></a>对象间解耦</h1><pre><code class="javascript"><span class="comment">//学生类</span>
+<span class="keyword">var</span> Student = <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>{
+    <span class="keyword">var</span> that = <span class="keyword">this</span>;
+    <span class="keyword">this</span>.result = result;                <span class="comment">//回答的结果</span>
+    that.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{          <span class="comment">//回答问题的动作</span>
+        <span class="built_in">console</span>.log(that.result);
+    }
+}
+Student.prototype.answer = <span class="function"><span class="keyword">function</span> (<span class="params">question</span>) </span>{       <span class="comment">//回答问题方法</span>
+    Observer.regist(question, <span class="keyword">this</span>.say);                             <span class="comment">//注册参数问题</span>
+}
+Student.prototype.sleep = <span class="function"><span class="keyword">function</span> (<span class="params">question</span>) </span>{               <span class="comment">//睡觉的同学不能回答老师问题</span>
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.result + <span class="string">' '</span> + question + <span class="string">'已经被注销'</span>);
+    Observer.remove(question, <span class="keyword">this</span>.say);                         <span class="comment">//取消对老师问题的监听</span>
+}
+<span class="comment">//教师类</span>
+<span class="keyword">var</span> Teacher = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+}
+Teacher.prototype.ask = <span class="function"><span class="keyword">function</span> (<span class="params">question</span>) </span>{         <span class="comment">//老师提问题的方法</span>
+    <span class="built_in">console</span>.log(<span class="string">'问题是:'</span> + question);
+    Observer.fire(question);                                            <span class="comment">//发布提问消息</span>
+}
+<span class="comment">//创建学生对象并构造答案结果</span>
+<span class="keyword">var</span> stu1 = <span class="keyword">new</span> Student(<span class="string">'stu1'</span>),
+    stu2 = <span class="keyword">new</span> Student(<span class="string">'stu2'</span>),
+    stu3 = <span class="keyword">new</span> Student(<span class="string">'stu3'</span>);
+<span class="comment">//学生订阅老师的问题</span>
+stu1.answer(<span class="string">'question1'</span>);            
+stu1.answer(<span class="string">'question2'</span>);
+stu2.answer(<span class="string">'question1'</span>);
+stu3.answer(<span class="string">'question1'</span>);              <span class="comment">//到这里_msg里question1里已经有3个函数对象了，有调优的空间</span>
+stu3.answer(<span class="string">'question2'</span>);
+stu3.sleep(<span class="string">'question2'</span>);
+<span class="keyword">var</span> teacher = <span class="keyword">new</span> Teacher();        <span class="comment">//构建教师对象</span>
+<span class="comment">//老师发布了2个问题</span>
+teacher.ask(<span class="string">'question1'</span>);
+teacher.ask(<span class="string">'question2'</span>);
+<span class="comment">/**</span>
+<span class="comment"> stu3 question2已经被注销            //因stu3订阅第二个问题后睡着了，所以取消订阅第二个问题</span>
+<span class="comment"> 问题是:question1                              //老师发布问题1，因3位学生都监听，故均有答案</span>
+<span class="comment"> stu1</span>
+<span class="comment"> stu2</span>
+<span class="comment"> stu3</span>
+<span class="comment"> 问题是:question2                              //老师发布问题2，因现在只有stu1订阅，故只有他一人回答</span>
+<span class="comment"> stu1</span>
+<span class="comment"> */</span>
+</code></pre>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><pre><code>主要用于解决类或对象之间的耦合，解耦两个相互依赖的对象，使其依赖于观察者消息机制。
+另外在大型项目中用于模块之间的相互通信也是常用的方式之一。
+</code></pre><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><pre><code>对于每一个订阅者来说，其自身既可以是消息的发出者也可以是消息的执行者，
+这都依赖于调用观察者对象的三种方法(订阅消息，注销消息，发布消息)中的哪一种。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/行为型模式/" rel="tag">#行为型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/template-method/" rel="next" title="模板方法模式">
+                <i class="fa fa-chevron-left"></i> 模板方法模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/state/" rel="prev" title="状态模式">
+                状态模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#卫星、飞机、中转站之间的观察者模型"><span class="nav-number">1.</span> <span class="nav-text">卫星、飞机、中转站之间的观察者模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#观察者对象"><span class="nav-number">2.</span> <span class="nav-text">观察者对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模块通信"><span class="nav-number">3.</span> <span class="nav-text">模块通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象间解耦"><span class="nav-number">4.</span> <span class="nav-text">对象间解耦</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用场景"><span class="nav-number">5.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意"><span class="nav-number">6.</span> <span class="nav-text">注意</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

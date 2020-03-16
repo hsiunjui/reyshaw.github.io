@@ -1,0 +1,696 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php面向对象," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP中命名空间的定义及使用。">
+<meta name="keywords" content="php面向对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP命名空间">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/16.PHP命名空间/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP中命名空间的定义及使用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:34:46.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP命名空间">
+<meta name="twitter:description" content="PHP中命名空间的定义及使用。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/16.PHP命名空间/"/>
+
+
+  <title> PHP命名空间 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP命名空间
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP中命名空间的定义及使用。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><ul>
+<li>命名空间时一种封装事物的方法,如操作系统中的目录。</li>
+<li><p>在PHP中,命名空间用来解决在编写类库或者应用程序时创建可重用的代码如类或函数时碰到的两类问题:</p>
+<ul>
+<li><p>用户编写的代码与PHP内部(或第三方)<strong>类</strong>/<strong>函数</strong>/<strong>常量</strong>之间的名字冲突;</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span></span>&#123; <span class="comment">// 将提示不能重写系统函数</span></span><br><span class="line">   <span class="comment">// overwrite</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为很长的标识符名称创建一个别名,提高代码的可读性。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">'\SpaceName\ClassName'</span>; <span class="comment">// 1.必须使用完全限定名称</span></span><br><span class="line"><span class="keyword">new</span> $a(); <span class="comment">// 2.前导反斜杠是不必要的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="定义命名空间"><a href="#定义命名空间" class="headerlink" title="定义命名空间"></a>定义命名空间</h1><ul>
+<li><p>命名空间通关关键字namespace来声明。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">SpaceName</span>; <span class="comment">// namespace SpaceName&#123; // content &#125;</span></span><br><span class="line"><span class="comment">// content</span></span><br><span class="line"><span class="comment">// namespace &#123;&#125; ,这是全局命名空间</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果一个文件中包含命名空间，它必须在其他所有代码之前声明命名空间。(除declare外)</p>
+</li>
+<li><p>可以定义子命名空间</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">Project</span>\<span class="title">Ctrl</span>\<span class="title">Index</span>; <span class="comment">// 多级</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在一个文件中定义多个空间(不建议)</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">Project</span>; <span class="comment">// namespace Project &#123; // 代码片 &#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span></span>&#123;&#125; <span class="comment">// Project空间下的代码</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Project</span>\<span class="title">Ctrl</span>; <span class="comment">// namespace 子空间&#123; // 代码片 &#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">time</span><span class="params">()</span></span>&#123;&#125; <span class="comment">// Project\Ctrl空间下的代码</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="使用命名空间"><a href="#使用命名空间" class="headerlink" title="使用命名空间"></a>使用命名空间</h1><ul>
+<li><p>调用</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// time(); 非限定名称</span></span><br><span class="line">\time(); <span class="comment">// 全局空间</span></span><br><span class="line">\Project\time(); <span class="comment">// Project空间</span></span><br><span class="line">\Project\Ctrl\time(); <span class="comment">// Project\Ctrl空间 (完全限定名称)</span></span><br><span class="line">Ctrl\time(); <span class="comment">// 如果在Project空间下,可以采用这种相对空间的形式 (限定名称)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>别名/导入(use)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">foo</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Project</span>; <span class="comment">// 1.导入,使用完全限定名,不要\</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Project</span>\<span class="title">Ctrl</span>\<span class="title">Index</span> <span class="title">as</span> <span class="title">MyIndex</span>; <span class="comment">// 2.别名导入,可以同时导入多个,中间用逗号隔开</span></span><br><span class="line"><span class="comment">// 3.可以导入空间/接口/类/常量/方法等(常量/方法不可以同时多个导入且要php5.6以上)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="全局命名空间"><a href="#全局命名空间" class="headerlink" title="全局命名空间"></a>全局命名空间</h1><ul>
+<li>默认情况下,所有常量、类和函数都放在全局命名空间下,和PHP未引入全局空间之前一样。</li>
+<li>在名称前前加上前缀\表示该名称是全局空间中的名称,即使该名称位于其他的命名空间中也是如此。</li>
+<li>对于函数和常量来将，如果在该命名空间下不存在，则会在全局空间下查找(如is_array()函数等)</li>
+</ul>
+<h1 id="NAMESPACE常量"><a href="#NAMESPACE常量" class="headerlink" title="NAMESPACE常量"></a><strong>NAMESPACE</strong>常量</h1><ul>
+<li>该常量的值是包含当前命名空间名称的字符串。</li>
+<li>在全局的,不包括任何命名空间中的代码,它是一个空字符串。</li>
+<li>使用include进来的文件,不会导致当前命名空间的改变</li>
+</ul>
+<h1 id="命名空间顺序"><a href="#命名空间顺序" class="headerlink" title="命名空间顺序"></a>命名空间顺序</h1><ul>
+<li>在当前命名空间中查找</li>
+<li>在全局查找(函数/常量) / 尝试自动装载类<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">A</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">B</span>\<span class="title">D</span>, <span class="title">C</span>\<span class="title">E</span> <span class="title">as</span> <span class="title">F</span>;</span><br><span class="line"><span class="comment">// 函数(常量)调用</span></span><br><span class="line">foo(); <span class="comment">// 首先尝试调用定义在命名空间A中的函数foo(),没有找到则调用全局的foo();</span></span><br><span class="line"><span class="comment">// 类引用</span></span><br><span class="line"><span class="keyword">new</span> B(); <span class="comment">// 创建命名空间A中定义的类B的一个实例,如果未找到,则尝试自动装载类"A\B"</span></span><br><span class="line"><span class="keyword">new</span> D(); <span class="comment">//使用导入规则,创建命名空间B中定义的类D的一个对象,如果未找到，则尝试自动装载类"B\D"</span></span><br><span class="line"><span class="keyword">new</span> F(); <span class="comment">// 使用导入规则,创建命名空间C中定义的类E的一个对象,如果未找到则尝试自动装载类"C\E"</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php面向对象/" rel="tag">#php面向对象</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/15.PHP类的多态性/" rel="next" title="PHP类的多态性">
+                <i class="fa fa-chevron-left"></i> PHP类的多态性
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/14.PHP类的继承性/" rel="prev" title="PHP类的继承性">
+                PHP类的继承性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义命名空间"><span class="nav-number">2.</span> <span class="nav-text">定义命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用命名空间"><span class="nav-number">3.</span> <span class="nav-text">使用命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全局命名空间"><span class="nav-number">4.</span> <span class="nav-text">全局命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NAMESPACE常量"><span class="nav-number">5.</span> <span class="nav-text">NAMESPACE常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间顺序"><span class="nav-number">6.</span> <span class="nav-text">命名空间顺序</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

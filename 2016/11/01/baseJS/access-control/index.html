@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js扩展," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="JavaScript中没有定义相关访问控制的关键字，是通过模拟来完成的。">
+<meta name="keywords" content="js扩展">
+<meta property="og:type" content="article">
+<meta property="og:title" content="访问控制">
+<meta property="og:url" content="http://yoursite.com/2016/11/01/baseJS/access-control/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="JavaScript中没有定义相关访问控制的关键字，是通过模拟来完成的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.709Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="访问控制">
+<meta name="twitter:description" content="JavaScript中没有定义相关访问控制的关键字，是通过模拟来完成的。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/01/baseJS/access-control/"/>
+
+
+  <title> 访问控制 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                访问控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-01T17:42:32+08:00" content="2016-11-01">
+              2016-11-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/客户端JS/" itemprop="url" rel="index">
+                    <span itemprop="name">客户端JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>JavaScript中没有定义相关访问控制的关键字，是通过模拟来完成的。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="访问控制模拟"><a href="#访问控制模拟" class="headerlink" title="访问控制模拟"></a>访问控制模拟</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = <span class="function"><span class="keyword">function</span>(<span class="params">id,name,price</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span>;                                <span class="comment">//私有属性,相当于private num = 0;每个对象各执一份</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkId</span>(<span class="params"></span>)</span>&#123;                      <span class="comment">//私有方法,相当于private checkId();</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'私有方法checkId...'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.id = id;                                   <span class="comment">//公开属性,相当于public id</span></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 【可以通过如下方法设置或获取私有变量的值】</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    <span class="keyword">this</span>.getNum = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.setNum = <span class="function"><span class="keyword">function</span>(<span class="params">_num</span>)</span>&#123;</span><br><span class="line">        num+=_num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//特权方法</span></span><br><span class="line">    <span class="keyword">this</span>.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.getPrice = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.price;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.setPrice = <span class="function"><span class="keyword">function</span>(<span class="params">price</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//构造器</span></span><br><span class="line">    <span class="keyword">this</span>.setName(name);</span><br><span class="line">    <span class="keyword">this</span>.setPrice(price);</span><br><span class="line">&#125;</span><br><span class="line">Book.isChinese = <span class="string">'是'</span>;                 <span class="comment">//类的静态公有属性（对象不能访问）,相当于public static isChinese;</span></span><br><span class="line">Book.pubTime = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;        <span class="comment">//类的静态公有方法（对象不能访问）,相当于public static pubTime();</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'pub time...'</span>;</span><br><span class="line">&#125;</span><br><span class="line">Book.prototype = &#123;</span><br><span class="line">    <span class="keyword">constructor</span>:Book,</span><br><span class="line">    isJsBook:'是',                         //公有属性</span><br><span class="line">    display:function()&#123;                 <span class="comment">//公有方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'原型方法display...'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> Book(<span class="number">11</span>,<span class="string">'JavaScript设计模式'</span>,<span class="number">50</span>);</span><br><span class="line"><span class="comment">//通过this索引的基本都通过对象点属性或方法的形式访问,因为它是public的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.id--&gt;'</span>+book.id);                    <span class="comment">//11</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.name--&gt;'</span>+book.name+<span class="string">',或book.getName()--&gt;'</span>+book.getName());              <span class="comment">//JavaScript设计模式</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.price--&gt;'</span>+book.price+<span class="string">',或book.getPrice()--&gt;'</span>+book.getPrice());                  <span class="comment">//50</span></span><br><span class="line"><span class="comment">//私有变量不能通过对象点属性来访问，必须使用对外公开的方法来访问，num属性在每个对象中均有一份，所以设置或修改的是自己的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.num--&gt;'</span>+book.num);                           <span class="comment">//undefined</span></span><br><span class="line">book.setNum(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.getNum()--&gt;'</span>+book.getNum());            <span class="comment">//10</span></span><br><span class="line"><span class="comment">//不可以用对象访问类的静态公有属性和方法</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.isChinese--&gt;'</span>+book.isChinese);              <span class="comment">//undefined</span></span><br><span class="line"><span class="comment">//console.log('book.pubTime()--&gt;'+book.pubTime());          //报错,方法未定义</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Book.isChinese--&gt;'</span>+Book.isChinese);            <span class="comment">//是</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Book.pubTime()--&gt;'</span>+Book.pubTime());           <span class="comment">//pub time...</span></span><br><span class="line"><span class="comment">//对象可以访问原型属性及方法</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.isJsBook--&gt;'</span>+book.isJsBook);            <span class="comment">//是</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'book.display()--&gt;'</span>+book.display());             <span class="comment">//原型方法display...</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   可以简单地总结为：用var可以定义类的private属性,用this可以定义类的public属性。</span></span><br><span class="line"><span class="comment"> *                  -- 方法一般定义在prototype中</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h1 id="利用闭包实现的静态私有变量"><a href="#利用闭包实现的静态私有变量" class="headerlink" title="利用闭包实现的静态私有变量"></a>利用闭包实现的静态私有变量</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;              <span class="comment">//用匿名函数自执行的方式来返回一个闭包函数，用于创建对象</span></span><br><span class="line">    <span class="keyword">var</span> bookNum = <span class="number">0</span>;                 <span class="comment">//私有静态变量，各个对象共享一份，这个变量可以通过对象的公开接口方法访问</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkBook</span>(<span class="params"></span>)</span>&#123;           <span class="comment">//私有静态方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">newId,newName</span>)</span>&#123;         <span class="comment">//返回闭包，但bookNum的作用域还在</span></span><br><span class="line">        <span class="keyword">var</span> name;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">checkID</span>(<span class="params">id</span>)</span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.getNum = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;           <span class="comment">//用于对外提供访问接口，该方法不能写在原型中，因为原型中没有指向</span></span><br><span class="line">            <span class="keyword">return</span> bookNum;                    <span class="comment">//这里不能是this.bookNum,因为bookNum是共有的，不属于特定的某个对象</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.id= newId;</span><br><span class="line">        bookNum++;                             <span class="comment">//内部使用静态私有变量，每创建一个对象，该值会加1</span></span><br><span class="line">        <span class="keyword">if</span>(bookNum&gt;<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'超出限制...'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.setName(newName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 上面一段话执行完后，相当于Book =function(newId,newName)&#123;&#125;；该函数保存了上级的作用域，即bookNum,checkBook还在内存中</span></span><br><span class="line"><span class="comment"> * 每次new的时候，不会再经过var bookNum = 0; function checkBook()&#123;&#125;的步骤了，因此它只有一份。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Book.prototype = &#123;</span><br><span class="line">    <span class="keyword">constructor</span>:Book,</span><br><span class="line">    isJsBook:'是',</span><br><span class="line">    display:function()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'原型中的display...'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    getName :<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;,</span><br><span class="line">    setName : <span class="function"><span class="keyword">function</span>(<span class="params">newName</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = newName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> book1 = <span class="keyword">new</span> Book(<span class="number">1</span>,<span class="string">'java'</span>);</span><br><span class="line"><span class="keyword">var</span> book2 = <span class="keyword">new</span> Book(<span class="number">2</span>,<span class="string">'javaScript'</span>);</span><br><span class="line"><span class="comment">//var book3 = new Book(3,'javaScript设计模式');       //会抛超出限制的异常，因为只允许最大2个对象</span></span><br><span class="line"><span class="comment">//依然不能通过对象点属性的方式直接访问静态私有变量，但可以通过公开的接口</span></span><br><span class="line"><span class="built_in">console</span>.log(book1.bookNum);         <span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(book1.getNum());        <span class="comment">//2</span></span><br><span class="line"><span class="built_in">console</span>.log(book2.getNum());        <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<h1 id="用闭包定义完整的类"><a href="#用闭包定义完整的类" class="headerlink" title="用闭包定义完整的类"></a>用闭包定义完整的类</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bookNum = <span class="number">0</span>;                        <span class="comment">//静态私有变量</span></span><br><span class="line">    functioncheckBook()&#123;                  <span class="comment">//静态私有方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">_book</span>(<span class="params">newId,newName</span>)</span>&#123;          <span class="comment">//定义类</span></span><br><span class="line">        <span class="keyword">var</span> name;                                           <span class="comment">//私有变量</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">checkId</span>(<span class="params"></span>)</span>&#123;                             <span class="comment">//私有方法</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.id = newId;                                    <span class="comment">//公有属性</span></span><br><span class="line">        <span class="keyword">this</span>.getNum = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                    <span class="comment">//公有方法</span></span><br><span class="line">            <span class="keyword">return</span> bookNum;</span><br><span class="line">        &#125;</span><br><span class="line">        bookNum++;</span><br><span class="line">        <span class="keyword">if</span>(bookNum &gt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'limited...'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.setName(newName);              <span class="comment">//构造器</span></span><br><span class="line">    &#125;</span><br><span class="line">    _book.prototype = &#123;                           <span class="comment">//构建原型</span></span><br><span class="line">        <span class="keyword">constructor</span>:_book,</span><br><span class="line">        //特权方法</span><br><span class="line">        setName : function(newName)&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = newName;</span><br><span class="line">        &#125;,</span><br><span class="line">        getName : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;,</span><br><span class="line">        idJsBook:<span class="literal">false</span>,                         <span class="comment">//静态公有属性</span></span><br><span class="line">        display:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                     <span class="comment">//静态公有方法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">'display in prototype...'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _book;                               <span class="comment">//返回类</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h1 id="创建对象的安全模式"><a href="#创建对象的安全模式" class="headerlink" title="创建对象的安全模式"></a>创建对象的安全模式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Book = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> Book)&#123;            <span class="comment">//如果是通过new关键字创建的</span></span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;                                       <span class="comment">//不是通过new创建的</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Book(name);      <span class="comment">//这里又会去判断if..else了，这下是new的了，所以会有this.name = name;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b1 = <span class="keyword">new</span> Book(<span class="string">'java'</span>);           <span class="comment">//new创建</span></span><br><span class="line"><span class="built_in">console</span>.log(b1.name);                <span class="comment">//java</span></span><br><span class="line"><span class="keyword">var</span> b2 = Book(<span class="string">'Javascript'</span>);        <span class="comment">//直接调用创建</span></span><br><span class="line"><span class="built_in">console</span>.log(b2.name);               <span class="comment">//javascript</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js扩展/" rel="tag">#js扩展</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/01/baseJS/flexibility/" rel="next" title="JavaScript的灵活性">
+                <i class="fa fa-chevron-left"></i> JavaScript的灵活性
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/01/baseJS/multiple-inheritance/" rel="prev" title="多继承">
+                多继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#访问控制模拟"><span class="nav-number">1.</span> <span class="nav-text">访问控制模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用闭包实现的静态私有变量"><span class="nav-number">2.</span> <span class="nav-text">利用闭包实现的静态私有变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用闭包定义完整的类"><span class="nav-number">3.</span> <span class="nav-text">用闭包定义完整的类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建对象的安全模式"><span class="nav-number">4.</span> <span class="nav-text">创建对象的安全模式</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

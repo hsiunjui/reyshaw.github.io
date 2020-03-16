@@ -1,0 +1,699 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php高级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="使用PHP进行邮件发送.">
+<meta name="keywords" content="php高级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP邮件发送">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/32.PHP邮件发送/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="使用PHP进行邮件发送.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:47:42.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP邮件发送">
+<meta name="twitter:description" content="使用PHP进行邮件发送.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/32.PHP邮件发送/"/>
+
+
+  <title> PHP邮件发送 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP邮件发送
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>使用PHP进行邮件发送.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="邮件的应用场景"><a href="#邮件的应用场景" class="headerlink" title="邮件的应用场景"></a>邮件的应用场景</h1><ul>
+<li>身份验证</li>
+<li>市场营销</li>
+<li>邮件报警</li>
+</ul>
+<h1 id="SMTP协议"><a href="#SMTP协议" class="headerlink" title="SMTP协议"></a>SMTP协议</h1><p>SMTP(Simple Mail Transfer Protocol),即简单邮件传输协议,它是一组用于由源地址到目的地址传送邮件的规则,由它来控制信件的中转方式。</p>
+<h1 id="POSTFIX服务器的安装-linux"><a href="#POSTFIX服务器的安装-linux" class="headerlink" title="POSTFIX服务器的安装(linux)"></a>POSTFIX服务器的安装(linux)</h1><ul>
+<li><p>安装</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install postfix -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/postfix/main.cf</span></span><br><span class="line">postconf -d | less <span class="comment"># 查看默认配置 -n 查看当前</span></span><br><span class="line">tnet_interfaces = all</span><br><span class="line">mydestination = <span class="variable">$myhostname</span>, locahost.<span class="variable">$mydomain</span>,localhost</span><br><span class="line">mydomain = xxxx.xxx</span><br><span class="line">myhostname = xxxx.xxx</span><br><span class="line">mynetworks = 127.0.0.0/8</span><br><span class="line">myorigin = <span class="variable">$mydomain</span></span><br><span class="line"><span class="comment"># hostnamectl set-hostname xxxx.xxx</span></span><br><span class="line">systemctl restart postfix <span class="comment"># 重启服务</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DNS设置(dnspod等第三方) </p>
+</li>
+</ul>
+<h1 id="发送邮件的方式"><a href="#发送邮件的方式" class="headerlink" title="发送邮件的方式"></a>发送邮件的方式</h1><ul>
+<li><p>使用telnet命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">systemctl status postfix <span class="comment">#预先必须由postfix邮件服务器</span></span><br><span class="line">telnet 127.0.0.1 25 <span class="comment"># 连接到邮件服务器</span></span><br><span class="line">EOL xxxxx.com</span><br><span class="line">MAIL FROM: <span class="comment"># 发件人 </span></span><br><span class="line">RCPT TO: <span class="comment"># 收件人</span></span><br><span class="line">DATA: <span class="comment"># 内容</span></span><br><span class="line">  from:</span><br><span class="line">  to: </span><br><span class="line">  content...</span><br><span class="line">QUIT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用mail命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"content"</span> | mail -s <span class="string">'title'</span> xxxxx@xx.xxx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用代码实现SMTP协议</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配合以下函数使用</span></span><br><span class="line">stream_socket_client();</span><br><span class="line">fread();</span><br><span class="line">fwrite();</span><br><span class="line">fcolse();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用php提供的mail函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool mail(string $to, string $subject, string $message, [,string $addtional_headers [,string $addtional_params]]); <span class="comment"># 依赖postfix</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用第三方库</p>
+<ul>
+<li><p>swiftmailer</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># composer require "swiftmailer/swiftmailer:^6.0"</span></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">"vendor/autoload.php"</span>;</span><br><span class="line">$transport = (<span class="keyword">new</span> Swift_SmtpTransport(<span class="string">'127.0.0.1'</span>,<span class="string">'25'</span>));</span><br><span class="line">$mailer = <span class="keyword">new</span> Swift_Mailer($transport);</span><br><span class="line">$message = (<span class="keyword">new</span> Swift_Message(<span class="string">'your subject'</span>))</span><br><span class="line">    -&gt;setForm([<span class="string">'xxxx@xx.xx'</span> =&gt; <span class="string">'from name'</span>])</span><br><span class="line">    -&gt;setTo([<span class="string">'xxxx@xx.xx'</span>]) <span class="comment"># 可以群发</span></span><br><span class="line">    -&gt;setBody(<span class="string">'mail content'</span>);</span><br><span class="line">$attachment = Swift_Attachment::fromPath(<span class="string">'./logo.png'</span>,<span class="string">'image/png'</span>); <span class="comment"># 可以由多种MIME类型</span></span><br><span class="line">$message-&gt;attach($attchament); <span class="comment"># 发送附件 </span></span><br><span class="line">$mailer-&gt;send($message); <span class="comment"># 第二个参数可以指定类型,如text/html</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>phpmailer</p>
+</li>
+</ul>
+</li>
+<li>使用第三方服务<ul>
+<li>Mailgun</li>
+<li>AWS SES</li>
+<li>QQ企业邮箱</li>
+</ul>
+</li>
+</ul>
+<h1 id="邮件异步发送-注意限速"><a href="#邮件异步发送-注意限速" class="headerlink" title="邮件异步发送(注意限速)"></a>邮件异步发送(注意限速)</h1><ul>
+<li>Redis</li>
+<li>beanstalk</li>
+<li>rabbitMQ</li>
+<li>kafka<br>发送出错时可以使用monolog记录日志或用logrotate切割日志等,supervisord</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php高级/" rel="tag">#php高级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/33.SSO单点登录/" rel="next" title="PHP单点登录">
+                <i class="fa fa-chevron-left"></i> PHP单点登录
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/31.HTTP协议/" rel="prev" title="PHP之HTTP">
+                PHP之HTTP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件的应用场景"><span class="nav-number">1.</span> <span class="nav-text">邮件的应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SMTP协议"><span class="nav-number">2.</span> <span class="nav-text">SMTP协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POSTFIX服务器的安装-linux"><span class="nav-number">3.</span> <span class="nav-text">POSTFIX服务器的安装(linux)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发送邮件的方式"><span class="nav-number">4.</span> <span class="nav-text">发送邮件的方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件异步发送-注意限速"><span class="nav-number">5.</span> <span class="nav-text">邮件异步发送(注意限速)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

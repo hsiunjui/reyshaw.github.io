@@ -1,0 +1,994 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="标签," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="HTML 的特性之一是可以使 HTML 事件触发浏览器中的行为。">
+<meta name="keywords" content="标签">
+<meta property="og:type" content="article">
+<meta property="og:title" content="标签的事件属性">
+<meta property="og:url" content="http://yoursite.com/2016/10/20/html/event-attr/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="HTML 的特性之一是可以使 HTML 事件触发浏览器中的行为。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.767Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="标签的事件属性">
+<meta name="twitter:description" content="HTML 的特性之一是可以使 HTML 事件触发浏览器中的行为。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/20/html/event-attr/"/>
+
+
+  <title> 标签的事件属性 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                标签的事件属性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T22:10:03+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>HTML 的特性之一是可以使 HTML 事件触发浏览器中的行为。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="窗口事件"><a href="#窗口事件" class="headerlink" title="窗口事件"></a>窗口事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明</th>
+<th>作用范围 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onload</td>
+<td>当文档被载入时执行脚本</td>
+</tr>
+<tr>
+<td>onunload</td>
+<td>当文档被卸载时执行脚本</td>
+<td>body iframe frameset</td>
+</tr>
+</tbody>
+</table>
+<h1 id="表单元素事件"><a href="#表单元素事件" class="headerlink" title="表单元素事件"></a>表单元素事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明</th>
+<th>作用范围 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onchange</td>
+<td>当元素改变时执行脚本</td>
+</tr>
+<tr>
+<td>onselect</td>
+<td>当元素被选取时执行脚本</td>
+</tr>
+<tr>
+<td>onfocus</td>
+<td>当元素获得焦点时执行脚本</td>
+</tr>
+<tr>
+<td>onblur</td>
+<td>当元素失去焦点时执行脚本</td>
+</tr>
+<tr>
+<td>onsubmit</td>
+<td>当表单被提交时执行脚本</td>
+</tr>
+<tr>
+<td>onreset</td>
+<td>当表单被重置时执行脚本</td>
+<td>仅在表单元素中有效</td>
+</tr>
+</tbody>
+</table>
+<h1 id="图像事件"><a href="#图像事件" class="headerlink" title="图像事件"></a>图像事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明</th>
+<th>作用范围 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onabort</td>
+<td>图片加载中断时执行脚本</td>
+<td>img</td>
+</tr>
+</tbody>
+</table>
+<h1 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明</th>
+<th>作用范围 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onkeydown</td>
+<td>当键盘被按下时执行脚本</td>
+</tr>
+<tr>
+<td>onkeypress</td>
+<td>键盘被按下又松开时执行脚本</td>
+</tr>
+<tr>
+<td>onkeyup</td>
+<td>当键盘被松开时执行脚本</td>
+<td>除html head meta title style script base frameset frame iframe param bdo br外</td>
+</tr>
+</tbody>
+</table>
+<h1 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明</th>
+<th>作用范围 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onclick</td>
+<td>当鼠标被单击时执行脚本    </td>
+</tr>
+<tr>
+<td>ondblclick</td>
+<td>当鼠标被双击时执行脚本</td>
+</tr>
+<tr>
+<td>onmousemove</td>
+<td>当鼠标指针移动时执行脚本</td>
+</tr>
+<tr>
+<td>onmouseover</td>
+<td>鼠标指针悬停于某元素之上时</td>
+</tr>
+<tr>
+<td>onmouseout</td>
+<td>当鼠标指针移出某元素时</td>
+</tr>
+<tr>
+<td>onmousedown</td>
+<td>当鼠标按钮被按下时执行脚本</td>
+</tr>
+<tr>
+<td>onmouseup</td>
+<td>当鼠标按钮被松开时执行脚本</td>
+<td>除html head meta title style script base frameset frame iframe param bdo br外</td>
+</tr>
+</tbody>
+</table>
+<h1 id="触屏事件"><a href="#触屏事件" class="headerlink" title="触屏事件"></a>触屏事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明</th>
+<th>作用范围 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ontouchstart</td>
+<td>当屏幕被点击时触发</td>
+</tr>
+<tr>
+<td>ontouchmove</td>
+<td>在屏幕上移动时连续触发</td>
+</tr>
+<tr>
+<td>ontouchend</td>
+<td>当离开屏幕时触发</td>
+<td>移动设备</td>
+</tr>
+</tbody>
+</table>
+<h1 id="其他不常用或非标准事件"><a href="#其他不常用或非标准事件" class="headerlink" title="其他不常用或非标准事件"></a>其他不常用或非标准事件</h1><table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>事件说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onscroll</td>
+<td>浏览器滚动条滚动时所激发的事件</td>
+</tr>
+<tr>
+<td>onresize</td>
+<td>当浏览器窗口大小被改变时所激发的事件</td>
+</tr>
+<tr>
+<td>onreadystatechange</td>
+<td>当对象的初始值发生变化时所激发的事件</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>在产生异常时所激发的事件</td>
+</tr>
+<tr>
+<td>ondrag</td>
+<td>当对象被拖动时所激发的事件</td>
+</tr>
+<tr>
+<td>ondragdrop</td>
+<td>当一个外部对象被拖进当前窗口或框架中时所激发的事件</td>
+</tr>
+<tr>
+<td>ondragstart</td>
+<td>当对象开始拖动时所激发的事件(拖动对象上触发)</td>
+</tr>
+<tr>
+<td>ondragover</td>
+<td>当对象被拖到当前对象范围上时所激发的事件(目标对象上触发)</td>
+</tr>
+<tr>
+<td>ondragenter</td>
+<td>当对象拖动到当前对象范围中时所激发的事件(目标对象上触发)</td>
+</tr>
+<tr>
+<td>ondragleave</td>
+<td>当对象被拖出当前对象范围时所激发的事件(目标对象上触发)</td>
+</tr>
+<tr>
+<td>ondragend</td>
+<td>当拖动完成时所激发的事件(拖动对象上触发)</td>
+</tr>
+<tr>
+<td>ondrop</td>
+<td>在拖动时释放鼠标键时所激发的事件(目标对象上触发)</td>
+</tr>
+<tr>
+<td>onbeforecopy</td>
+<td>在当前页面被选择的内容将要复制到系统剪贴板前时所激发的事件</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>在当前页中复制内容时所激发的事件</td>
+</tr>
+<tr>
+<td>onbeforecut</td>
+<td>当前页面中的内容将被剪切到系统剪贴板前时所激发的事件</td>
+</tr>
+<tr>
+<td>oncut</td>
+<td>在当前页中剪切内容时所激发的事件</td>
+</tr>
+<tr>
+<td>onbeforepaste</td>
+<td>从系统剪贴板粘贴内容到页面中时所激发的事件</td>
+</tr>
+<tr>
+<td>onpaste</td>
+<td>在当前窗口中粘贴内容时所激发的事件</td>
+</tr>
+<tr>
+<td>onbeforeunload</td>
+<td>卸载文档前所激发的事件（通常是当前页面内容要改变）</td>
+</tr>
+<tr>
+<td>onbeforeeditfocus</td>
+<td>当前元素将要进入编辑状态时所激发的事件</td>
+</tr>
+<tr>
+<td>oncontextmenu</td>
+<td>弹出右键菜单时所激发的事件</td>
+</tr>
+<tr>
+<td>onselectstart</td>
+<td>当前文档内容开始选择时所激发的事件</td>
+</tr>
+<tr>
+<td>onpropertychange</td>
+<td>当对象的属性发生变化时所激发的事件</td>
+</tr>
+<tr>
+<td>onstop</td>
+<td>按下浏览器的停止按钮时或正在下载的文档被中断时所激发的事件</td>
+</tr>
+<tr>
+<td>onmove</td>
+<td>当浏览器窗口移动时所激发的事件</td>
+</tr>
+<tr>
+<td>onlosecapture</td>
+<td>当元素失去鼠标移动形成的选择焦点时所激发的事件</td>
+</tr>
+<tr>
+<td>ondataavailable</td>
+<td>当数据接收完毕时所激发的事件</td>
+</tr>
+<tr>
+<td>ondatasetcomplete</td>
+<td>当数据源中的所有数据读取完毕时所激发的事件</td>
+</tr>
+<tr>
+<td>oncellchange</td>
+<td>在数据来源发生变化时所激发的事件</td>
+</tr>
+<tr>
+<td>onbeforeupdate</td>
+<td>更新数据前所激发的事件</td>
+</tr>
+<tr>
+<td>ondatasetchanged</td>
+<td>当数据在数据源中发生变化时所激发的事件</td>
+</tr>
+<tr>
+<td>onerrorupdate</td>
+<td>更新数据异常所激发的事件</td>
+</tr>
+<tr>
+<td>onafterupdate</td>
+<td>当数据源向对象传送完数据后所激发的事件</td>
+</tr>
+<tr>
+<td>onrowexit</td>
+<td>当数据源的数据将在发生变化时所激发的事件</td>
+</tr>
+<tr>
+<td>onrowenter</td>
+<td>当数据源的数据发生变化并且有新的有效数据产生时所激发的事件</td>
+</tr>
+<tr>
+<td>onrowsinserted</td>
+<td>当数据源将要插入新记录时所激发的事件</td>
+</tr>
+<tr>
+<td>onrowsdelete</td>
+<td>当数据记录被删除时所激发的事件</td>
+</tr>
+<tr>
+<td>onstart</td>
+<td>当Marquee开始显示内容时所激发的事件</td>
+</tr>
+<tr>
+<td>onbounce</td>
+<td>在Marquee中的内容移动到显示范围之外时所激发的事件</td>
+</tr>
+<tr>
+<td>onfinish</td>
+<td>当Marquee完成需要显示的内容之后所激发的事件</td>
+</tr>
+<tr>
+<td>onbeforeprint</td>
+<td>文档打印前所激发的事件</td>
+</tr>
+<tr>
+<td>onafterprint</td>
+<td>打印文档后所激发的事件</td>
+</tr>
+<tr>
+<td>onfilterchange</td>
+<td>当某个对象的滤镜效果产生变化时所激发的事件</td>
+</tr>
+<tr>
+<td>onhelp</td>
+<td>当使用者按下F1键或浏览器的帮助选项时所激发的事件</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/标签/" rel="tag">#标签</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/html/base-attr/" rel="next" title="标签的基本属性">
+                <i class="fa fa-chevron-left"></i> 标签的基本属性
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/20/html/tag-change/" rel="prev" title="HTML5标签的变化">
+                HTML5标签的变化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#窗口事件"><span class="nav-number">1.</span> <span class="nav-text">窗口事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表单元素事件"><span class="nav-number">2.</span> <span class="nav-text">表单元素事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像事件"><span class="nav-number">3.</span> <span class="nav-text">图像事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#键盘事件"><span class="nav-number">4.</span> <span class="nav-text">键盘事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#鼠标事件"><span class="nav-number">5.</span> <span class="nav-text">鼠标事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#触屏事件"><span class="nav-number">6.</span> <span class="nav-text">触屏事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他不常用或非标准事件"><span class="nav-number">7.</span> <span class="nav-text">其他不常用或非标准事件</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

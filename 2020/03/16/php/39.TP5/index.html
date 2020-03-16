@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php框架," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="ThinkPHP 5的安装及基本架构和操作.">
+<meta name="keywords" content="php框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP之ThinkPHP">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/39.TP5/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="ThinkPHP 5的安装及基本架构和操作.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:52:20.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP之ThinkPHP">
+<meta name="twitter:description" content="ThinkPHP 5的安装及基本架构和操作.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/39.TP5/"/>
+
+
+  <title> PHP之ThinkPHP | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP之ThinkPHP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>ThinkPHP 5的安装及基本架构和操作.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Composer"><a href="#Composer" class="headerlink" title="Composer"></a>Composer</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Composer是php的一个依赖管理工具。它允许声明项目所依赖的代码库,它会在项目中自动安装它们。</p>
+<h2 id="Composer的安装-windows"><a href="#Composer的安装-windows" class="headerlink" title="Composer的安装(windows)"></a>Composer的安装(windows)</h2><ul>
+<li>获取composer-setup.exe</li>
+<li>安装(php.ini需要启动php_openssl.dll)</li>
+<li>测试composer -V</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project topthink/think(包名,从packagist.org获取的) folder <span class="comment"># 安装tp5</span></span><br></pre></td></tr></table></figure>
+<h1 id="TP5"><a href="#TP5" class="headerlink" title="TP5"></a>TP5</h1><h2 id="TP5的定义"><a href="#TP5的定义" class="headerlink" title="TP5的定义"></a>TP5的定义</h2><p>TP5, ThankPHP 5的简称。它是一个开源、快速、简单的面向对象的轻量级框架。(基于MVC,借鉴Laravel)</p>
+<ul>
+<li>PHP&gt;=5.4.0</li>
+<li>PDO PHP Extension</li>
+<li>MBString PHP Extension</li>
+<li>CURL PHP Extension</li>
+</ul>
+<h2 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h2><ul>
+<li>PSR-2命名规范,PSR-4自动加载规范</li>
+<li>目录使用小写加下划线;</li>
+<li>类库和函数文件统一以.php结尾</li>
+<li>类文件均已命名空间定义(命名空间名一般为文件所在的路径)</li>
+<li>类文件采用驼峰命名法(大驼峰),其他小写加下划线</li>
+<li>类名和类文件名保持一致</li>
+<li>函数命名使用小写字母加下划线</li>
+<li>方法、属性命名使用小驼峰</li>
+<li>“__”为魔术方法</li>
+<li>常量以大写字母和下划线命名</li>
+<li>配置参数以小写字母+下划线</li>
+<li>数据表和字段采用小写字母加下划线,且不要以下划线开头</li>
+</ul>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">think <span class="comment"># 模拟Larvel的命令行,create ctroller等等</span></span><br><span class="line">composer.json <span class="comment"># composer定义文件</span></span><br><span class="line">build <span class="comment"># 自动生成定义文件</span></span><br><span class="line">vendor <span class="comment"># 第三方类库</span></span><br><span class="line">thinkphp <span class="comment"># 系统框架目录</span></span><br><span class="line">runtime <span class="comment"># 运行时文件(临时文件)</span></span><br><span class="line">public <span class="comment"># web部署目录(单一入口文件)</span></span><br><span class="line">  |- static <span class="comment"># 存放静态文件的</span></span><br><span class="line">        |- images </span><br><span class="line">        |- css/js...</span><br><span class="line">extend</span><br><span class="line">application <span class="comment"># 应用目录(所有的业务及代码)</span></span><br><span class="line">    |- index <span class="comment"># 模块名称(path_1)</span></span><br><span class="line">        |- controller <span class="comment"># 控制器</span></span><br><span class="line">        |     |- Index.php <span class="comment"># 具体的控制器(path_2)</span></span><br><span class="line">        |           |- index() <span class="comment"># 控制器的index方法(path_3)</span></span><br><span class="line">        |           |- otherFunc() <span class="comment"># 控制器的其他方法</span></span><br><span class="line">        |- model <span class="comment"># 模型</span></span><br><span class="line">        |- view <span class="comment"># 视图目录</span></span><br><span class="line">            |- index <span class="comment"># 一般一个目录对应一个控制器</span></span><br><span class="line">                |- index.html <span class="comment"># 一般是对应方法的html</span></span><br><span class="line">                |- otherFunc.html</span><br><span class="line">    |- otherModule <span class="comment"># 其他模块,与index结构一致</span></span><br></pre></td></tr></table></figure>
+<h2 id="TP5的URL设计"><a href="#TP5的URL设计" class="headerlink" title="TP5的URL设计"></a>TP5的URL设计</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://server_name/index.php/模块(目录path_1)/控制器(控制器文件path_2)/操作(方法名path_3)/[参数名/参数值]</span><br><span class="line"><span class="comment"># 默认采用多模块的架构(也支持单一模块,一般不采用)</span></span><br><span class="line"><span class="comment"># 命名空间都已app作为根空间(可在config中配置)</span></span><br><span class="line"><span class="comment"># 如果只有一个模块，可以进行模块绑定(入口文件: define('BIND_MODULE', 'index'),如果控制器也只有一个,也可以绑定控制器 'index/index')</span></span><br></pre></td></tr></table></figure>
+<h2 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h2><ul>
+<li><p>控制器可以继承标准控制器</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在控制器中返回视图  </p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// return view('index'); // 未继承controller</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">$this</span>-&gt;fetch(); <span class="comment">// 继承controller, 默认'index/index.html'</span></span><br><span class="line"><span class="comment">// fetch未传参,默认返回view下当前控制器/当前方法.html;</span></span><br><span class="line"><span class="comment">// fetch(模块@/控制器/方法), 也可以跨模块调用,可以简单理解为模块/view/相对路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// html不是一个普通的html,可以有特殊的语法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向视图传递数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">$this</span>-&gt;fetch(<span class="string">'index'</span>, [username =&gt; <span class="string">'aa'</span>]); <span class="comment">// 第二个参数是给视图的数据</span></span><br><span class="line">  <span class="keyword">$this</span>-&gt;assign(<span class="string">"useranme"</span>, <span class="string">'aa'</span>); <span class="comment">// 也可以是用该方法</span></span><br><span class="line">  ```    </span><br><span class="line">- 静态文件地址问题</span><br><span class="line">  ```php</span><br><span class="line">  &lt;img src=<span class="string">"__PUBLIC__/file_path"</span>&gt;</span><br><span class="line">  <span class="comment"># &#123;:url('public/static/images/logo.png','参数','是否带伪静态')&#125;,</span></span><br><span class="line">  <span class="comment"># config中配置'view_replace_str' =&gt; ['__ROOT__' =&gt; '/project', '__PUBLIC__' =&gt; '/project/public']</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="路由Route"><a href="#路由Route" class="headerlink" title="路由Route"></a>路由Route</h2><ul>
+<li>动态注册:Route::rule(‘路由表达式’,’路由地址’,’请求类型’) </li>
+<li>路由简化:Route::get(‘news/:id’, ‘index/index/index’); // post/put/delete/any</li>
+</ul>
+<h2 id="视图与模板"><a href="#视图与模板" class="headerlink" title="视图与模板"></a>视图与模板</h2><p>在TP5中模板与视图是不同概念.</p>
+<ul>
+<li><p>视图</p>
+<ul>
+<li>视图由\think\View类配合视图驱动类完成</li>
+<li>内置模板引擎包含php原生模板和Think模板引擎</li>
+<li>视图文件的根目录默认放在模块的view目录</li>
+</ul>
+</li>
+<li><p>模板</p>
+<ul>
+<li>内置的模板支持普通标签和xml表示两种方式定义</li>
+<li>每个模板文件在执行过程中都会生成一个编译后的缓存文件(在runtime/temp,可运行的.php)<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通变量</span></span><br><span class="line">  &#123;$variable&#125; <span class="comment">// 适用基本类型</span></span><br><span class="line">  &#123;$variable.attrbute / $variable[attrbute]&#125;  <span class="comment">// 使用数组</span></span><br><span class="line">  &#123;$variable:attrbute&#125; <span class="comment">// 适用对象</span></span><br><span class="line"><span class="comment"># 系统变量</span></span><br><span class="line">  &#123;$Think.系统变量名称.下标&#125; <span class="comment">// 支持$_SERVER,$ENV,$_POST,$_GET,$REQUEST,$_SESSION,$COOKIE,如&#123;$Think.server.document_root&#125;</span></span><br><span class="line"><span class="comment"># 系统常量</span></span><br><span class="line">  &#123;$Think.<span class="keyword">const</span>.变量名称&#125; </span><br><span class="line">  &#123;$Think.变量名称&#125; <span class="comment">// 如&#123;$Think.APP_PATH&#125;</span></span><br><span class="line"><span class="comment"># 配置选项</span></span><br><span class="line">  &#123;$Think.config.配置选项名称&#125; <span class="comment">// 如&#123;$Think.config.app_namespace&#125;</span></span><br><span class="line"><span class="comment"># 使用函数</span></span><br><span class="line">  单个参数&#123;变量|函数名称&#125; <span class="comment">// 如&#123;$username | strtoupper&#125;</span></span><br><span class="line">  多个参数&#123;变量|函数名称,占位符&#125; <span class="comment">// 如&#123;$str|substr=0,4&#125;</span></span><br><span class="line"><span class="comment"># 三元运算</span></span><br><span class="line">  &#123;$变量?值<span class="number">1</span>:值<span class="number">2</span>&#125;</span><br><span class="line">  &#123;$变量??值&#125;</span><br><span class="line"><span class="comment"># 原样输出(样式,脚本等)</span></span><br><span class="line">  &#123;literal&#125;</span><br><span class="line">      <span class="comment">/////</span></span><br><span class="line">  &#123;/literal&#125;</span><br><span class="line"><span class="comment"># 循环</span></span><br><span class="line">  &#123;<span class="keyword">foreach</span> $list <span class="keyword">as</span> $vo&#125;</span><br><span class="line">      &#123;$vo.id&#125; : &#123;$vo.name&#125;</span><br><span class="line">  &#123;/<span class="keyword">foreach</span>&#125;</span><br><span class="line">  <span class="comment">/**************/</span></span><br><span class="line">  &#123;volist name=<span class="string">"list"</span> id=<span class="string">"vo"</span>, offset=<span class="string">"5"</span> length=<span class="string">"10"</span>&#125;</span><br><span class="line">      &#123;$vo.name&#125;</span><br><span class="line">  &#123;/volist&#125;</span><br><span class="line"><span class="comment"># 条件</span></span><br><span class="line">  &#123;<span class="keyword">if</span> condition=<span class="string">"条件1"</span>&#125;</span><br><span class="line">      value1</span><br><span class="line">  &#123;<span class="keyword">elseif</span> condition=<span class="string">"条件2"</span>&#125;</span><br><span class="line">      value2</span><br><span class="line">  &#123;<span class="keyword">else</span>&#125;</span><br><span class="line">      value3</span><br><span class="line">  &#123;/<span class="keyword">if</span>&#125;</span><br><span class="line">  <span class="comment">/**********************/</span></span><br><span class="line">  &#123;<span class="keyword">switch</span> name=<span class="string">"变量"</span>&#125;</span><br><span class="line">      &#123;<span class="keyword">case</span> value=<span class="string">"值1"</span> <span class="keyword">break</span>=<span class="string">"0/1"</span>&#125;</span><br><span class="line">          输出内容</span><br><span class="line">      &#123;/<span class="keyword">case</span>&#125;</span><br><span class="line">      &#123;<span class="keyword">default</span> /&#125;</span><br><span class="line">  &#123;/<span class="keyword">switch</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><ul>
+<li>TP5的数据模型<ul>
+<li>TP5内置抽象数据库访问层,把不同数据库操作封装起来</li>
+<li>需要使用公共的Db类进行操作</li>
+<li>目前包含Mysql,SqlServer,PgSql,Sqlite等数据库 </li>
+</ul>
+</li>
+<li>数据库的配置的三种方法<ul>
+<li>配置定义文件database.php(应用目录或模块目录,主要方式)</li>
+<li>方法配置,调用Db类的时候动态定义连接数据</li>
+<li>模型类定义,模型类里定义connection属性</li>
+</ul>
+</li>
+<li><p>字符串连接的定义格式(不常用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据库类型://用户名:密码@数据库地址:端口/数据库名#字符集</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用</p>
+<ul>
+<li><p>原生sql操作</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 常用方法</span></span><br><span class="line">  query(); <span class="comment">// 查询</span></span><br><span class="line">  execute(); <span class="comment">// 增删改如Db:execute(insert into tbl(username) values(:username), ['username'=&gt;"aaa"]) 占位符, :username, 后面可以传关联数组</span></span><br><span class="line">  getLastInsID(); <span class="comment">// 获取最后插入的id</span></span><br><span class="line">  getNumRows(); <span class="comment">// 收影响的行数</span></span><br><span class="line"><span class="comment"># 获取页面参数(需要继承Controller)</span></span><br><span class="line">  <span class="keyword">$this</span>-&gt;request-&gt;post(<span class="string">'参数名'</span>);</span><br><span class="line">  <span class="keyword">$this</span>-&gt;request-param(<span class="string">'参数名'</span>);</span><br><span class="line"><span class="comment"># 跳转</span></span><br><span class="line">  <span class="keyword">$this</span>-&gt;redirect(<span class="string">'模块/控制器/方法'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询构造器</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建查询构造器</span></span><br><span class="line">  Db::table(tbl);</span><br><span class="line">  Db:name();</span><br><span class="line"><span class="comment"># 查询</span></span><br><span class="line">  Db::table(tbl)-&gt;find($id); <span class="comment">// 查询一条记录</span></span><br><span class="line">  Db::table(tbl)-&gt;select(); <span class="comment">// 查询多条记录</span></span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">  Db::table(tbl)-&gt;insert($data); <span class="comment">// 数组</span></span><br><span class="line">  Db::table(tbl)-&gt;insertAll($data); <span class="comment">// 一般很少用</span></span><br><span class="line">  Db::table(tbl)-&gt;getLastInsID();</span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">  Db::table(tbl)-update($data);  <span class="comment">// 数组</span></span><br><span class="line">  <span class="comment">// setField() 更新指定的字段</span></span><br><span class="line">  <span class="comment">// setInc() / setDec() 设定指定字段的自增/自减</span></span><br><span class="line"><span class="comment">#  删除</span></span><br><span class="line">  Db::table(tbl)-&gt;delete();</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连贯操作</span></span><br><span class="line">  - where <span class="keyword">and</span>查询</span><br><span class="line">  - whereOr <span class="keyword">or</span>查询</span><br><span class="line">  - wheretime 时间日期快捷查询</span><br><span class="line">  - alias 取别名</span><br><span class="line">  - field 指定字段</span><br><span class="line">  - order 排序</span><br><span class="line">  - limit 限制结果</span><br><span class="line">  - page 查询分页</span><br><span class="line">  - group 分组</span><br><span class="line">  - having 分组过滤</span><br><span class="line">  - join 连接</span><br><span class="line"><span class="comment"># 聚合函数</span></span><br><span class="line">  count()</span><br><span class="line">  sum()</span><br><span class="line">  avg()</span><br><span class="line">  min()</span><br><span class="line">  max()</span><br><span class="line"><span class="comment"># 数据集</span></span><br><span class="line">  isEmpty()</span><br><span class="line">  all()</span><br><span class="line">  toArray()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php框架/" rel="tag">#php框架</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/4.PHP的常量/" rel="next" title="PHP的常量">
+                <i class="fa fa-chevron-left"></i> PHP的常量
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/38.Socket/" rel="prev" title="PHP之Socket">
+                PHP之Socket <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Composer"><span class="nav-number">1.</span> <span class="nav-text">Composer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composer的安装-windows"><span class="nav-number">1.2.</span> <span class="nav-text">Composer的安装(windows)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">1.3.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TP5"><span class="nav-number">2.</span> <span class="nav-text">TP5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TP5的定义"><span class="nav-number">2.1.</span> <span class="nav-text">TP5的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发规范"><span class="nav-number">2.2.</span> <span class="nav-text">开发规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TP5的URL设计"><span class="nav-number">2.4.</span> <span class="nav-text">TP5的URL设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器"><span class="nav-number">2.5.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由Route"><span class="nav-number">2.6.</span> <span class="nav-text">路由Route</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图与模板"><span class="nav-number">2.7.</span> <span class="nav-text">视图与模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">2.8.</span> <span class="nav-text">模型</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

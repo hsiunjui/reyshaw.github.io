@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="行为型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="对于一种语言，给出其文法表示形式，并定义一种解释器，通过使用这种解释器来解释语言中定义的的句子。">
+<meta name="keywords" content="行为型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解释器模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/interperter/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="对于一种语言，给出其文法表示形式，并定义一种解释器，通过使用这种解释器来解释语言中定义的的句子。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解释器模式">
+<meta name="twitter:description" content="对于一种语言，给出其文法表示形式，并定义一种解释器，通过使用这种解释器来解释语言中定义的的句子。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/interperter/"/>
+
+
+  <title> 解释器模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                解释器模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T15:53:26+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>对于一种语言，给出其文法表示形式，并定义一种解释器，通过使用这种解释器来解释语言中定义的的句子。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Xpath解析器-模拟冒泡路径"><a href="#Xpath解析器-模拟冒泡路径" class="headerlink" title="Xpath解析器(模拟冒泡路径)"></a>Xpath解析器(模拟冒泡路径)</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span1"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span2"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span6"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span7"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> Interpreter = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">getSublingName</span>(<span class="params">node</span>) </span>&#123;              <span class="comment">//获取兄弟元素名称</span></span></span><br><span class="line"><span class="xml">            if (node.previousSibling) &#123;                           //如果存在上一个兄弟元素，标签名不一定相同<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> name = <span class="string">''</span>,                                              <span class="comment">//返回的上一个兄弟元素名称字符串(标签名)</span></span></span><br><span class="line"><span class="javascript">                        count = <span class="number">1</span>,                                           <span class="comment">//紧邻兄弟元素中相同名称元素的个数</span></span></span><br><span class="line"><span class="javascript">                        nodeName = node.nodeName,         <span class="comment">//原始字节名称</span></span></span><br><span class="line"><span class="javascript">                        sibling = node.previousSibling;         <span class="comment">//前一个兄弟元素</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">while</span> (sibling) &#123;                                 <span class="comment">//如果存在前一个兄弟元素</span></span></span><br><span class="line"><span class="javascript">                    <span class="comment">//如果节点为元素，并且节点类型与前一个兄弟元素类型相同，并且前一个兄弟元素名称存在（同级元素）</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (sibling.nodeType == <span class="number">1</span> &amp;&amp; sibling.nodeType === node.nodeType &amp;&amp; sibling.nodeName) &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">if</span> (nodeName == sibling.nodeName) &#123;         <span class="comment">//如果节点名称和前一个兄弟元素名称相同</span></span></span><br><span class="line"><span class="javascript">                            name += ++count;                                            <span class="comment">//节点名称后面添加计数</span></span></span><br><span class="line"><span class="javascript">                        &#125; <span class="keyword">else</span> &#123;                                                         <span class="comment">//如果节点名称和前一个兄弟元素不同</span></span></span><br><span class="line"><span class="javascript">                            count = <span class="number">1</span>;                                                               <span class="comment">//重置个数</span></span></span><br><span class="line"><span class="javascript">                            name += <span class="string">'|'</span> + sibling.nodeName.toUpperCase();   <span class="comment">//追加新的节点名称</span></span></span><br><span class="line"><span class="undefined">                        &#125;</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="javascript">                    sibling = sibling.previousSibling;          <span class="comment">//向前获取前一个兄弟元素</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> name;</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;                                                        <span class="comment">//不存在兄弟元素返回空字符串</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> <span class="string">''</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">node, wrap</span>) </span>&#123;            <span class="comment">//目标节点和容器节点</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> path = [],                                          <span class="comment">//路径数组</span></span></span><br><span class="line"><span class="javascript">                    wrap = wrap || <span class="built_in">document</span>;             <span class="comment">//如果不存在容器节点，默认为document</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (node === wrap) &#123;                          <span class="comment">//如果当前节点等于容器节点</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (wrap.nodeType == <span class="number">1</span>) &#123;                  <span class="comment">//容器节点为元素</span></span></span><br><span class="line"><span class="javascript">                    path.push(wrap.nodeName.toUpperCase());      <span class="comment">//路径容器中输入容器节点名称</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> path;                                        <span class="comment">//返回路径数组结果</span></span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (node.parentNode !== wrap) &#123;        <span class="comment">//如果当前节点的父节点不等于容器节点</span></span></span><br><span class="line"><span class="javascript">                path = <span class="built_in">arguments</span>.callee(node.parentNode, wrap);         <span class="comment">//对当前节点的父节点执行遍历操作</span></span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;                                              <span class="comment">//如果当前节点的父节点与容器节点相等</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (wrap.nodeType == <span class="number">1</span>) &#123;                   <span class="comment">//如果容器节点为元素</span></span></span><br><span class="line"><span class="javascript">                    path.push(wrap.nodeName.toUpperCase());    <span class="comment">//路径数组中输入容器节点名称</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> sublingNames = getSublingName(node);            <span class="comment">//获取元素的兄弟元素名称统计</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (node.nodeType == <span class="number">1</span>) &#123;                       <span class="comment">//如果节点是元素</span></span></span><br><span class="line"><span class="javascript">                path.push(node.nodeName.toUpperCase() + sublingNames);   <span class="comment">//输入当前节点元素名称及其前面兄弟元素名称统计</span></span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> path;            <span class="comment">//返回最终路径数组结果</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)();</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> path = Interpreter(<span class="built_in">document</span>.getElementById(<span class="string">'span7'</span>));</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(path.join(<span class="string">'&gt;'</span>));            <span class="comment">//  HTML&gt;BODY|HEAD&gt;DIV2&gt;DIV2&gt;UL&gt;LI2&gt;SPAN</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="上式递归示意"><a href="#上式递归示意" class="headerlink" title="上式递归示意"></a>上式递归示意</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = Interpreter(<span class="built_in">document</span>.getElementById(<span class="string">'container'</span>));</span><br><span class="line">   <span class="built_in">console</span>.log(path.join(<span class="string">'&gt;'</span>));                                <span class="comment">// HTML&gt;BODY|HEAD&gt;DIV2</span></span><br><span class="line">   <span class="keyword">var</span> _con = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</span><br><span class="line">   <span class="keyword">var</span> _boby = con.parentNode;</span><br><span class="line">   <span class="keyword">var</span> _html = _body.parentNode;</span><br><span class="line">   (<span class="function"><span class="keyword">function</span>(<span class="params">_con,document</span>)</span>&#123;                           <span class="comment">//1.相当于当前目标是container,容器节点是document</span></span><br><span class="line">       <span class="keyword">var</span> path = [];</span><br><span class="line">       <span class="comment">//...中间步骤省略</span></span><br><span class="line">       <span class="keyword">if</span>(_con.parentNode !== <span class="built_in">document</span>)&#123;           <span class="comment">//1.1container的父节点不是document,于是</span></span><br><span class="line">           <span class="comment">//【第一次递归调用】</span></span><br><span class="line">           (<span class="function"><span class="keyword">function</span>(<span class="params">_body,document</span>)</span>&#123;               <span class="comment">//2.相当于当前目标是container,容器节点是document</span></span><br><span class="line">               <span class="keyword">var</span> path = [];</span><br><span class="line">               <span class="comment">//...中间步骤省略</span></span><br><span class="line">               <span class="keyword">if</span>(_body.parentNode !== <span class="built_in">document</span>)&#123;     <span class="comment">//2.1body的父节点是html,于是</span></span><br><span class="line">                   <span class="comment">//【第二次递归调用】</span></span><br><span class="line">                   (<span class="function"><span class="keyword">function</span> (<span class="params">_html, document</span>) </span>&#123;    <span class="comment">//3.相当于当前目标是container,容器节点是document</span></span><br><span class="line">                       <span class="keyword">var</span> path = [];</span><br><span class="line">                       <span class="comment">//...中间步骤省略</span></span><br><span class="line">                       <span class="keyword">if</span> (_html.parentNode !== <span class="built_in">document</span>) &#123;      <span class="comment">//到这里，条件成立，则会去执行else及后面的部分</span></span><br><span class="line">                       &#125; <span class="keyword">else</span> &#123;                                      <span class="comment">//3.1执行else分支相应的操作</span></span><br><span class="line">                       &#125;</span><br><span class="line">                       <span class="keyword">var</span> sublingNames = getSublingName(_con);  <span class="comment">//3.2继续执行逻辑</span></span><br><span class="line">                       <span class="comment">//push path...后面省略，</span></span><br><span class="line">                       <span class="keyword">return</span> path;                                                      <span class="comment">//3.3 path被覆盖，返回出path</span></span><br><span class="line">                   &#125;)()                                        <span class="comment">//3.4 执行完成，释放空间</span></span><br><span class="line">                   <span class="comment">//【第二次递归调用结束】</span></span><br><span class="line">               &#125;</span><br><span class="line">                                                                        <span class="comment">//2.2拿到path 继续push</span></span><br><span class="line">               <span class="keyword">var</span> sublingNames = getSublingName(_con);</span><br><span class="line">               <span class="comment">//...后面省略</span></span><br><span class="line">               <span class="keyword">return</span> path;                                    <span class="comment">//2.3再次返回path</span></span><br><span class="line">           &#125;)()                                                     <span class="comment">//2.4 递归完成，释放空间</span></span><br><span class="line">           <span class="comment">//【第一次递归调用结束】</span></span><br><span class="line">       &#125;</span><br><span class="line">                                                                           <span class="comment">//1.2 再次拿到path,继续push</span></span><br><span class="line">       <span class="keyword">var</span> sublingNames = getSublingName(_con);</span><br><span class="line">       <span class="comment">//...后面省略</span></span><br><span class="line">       <span class="keyword">return</span> path;                                                <span class="comment">//1.3 最后返回path</span></span><br><span class="line">   &#125;)()</span><br><span class="line">   <span class="comment">//其整个过程是目标元素向html递归调用函数,而有从html递归返回数据</span></span><br></pre></td></tr></table></figure>
+<h1 id="应用准则"><a href="#应用准则" class="headerlink" title="应用准则"></a>应用准则</h1><pre><code>能否根据需求解析出一套完整的语法规则，不论语法规则简单或是复杂。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/行为型模式/" rel="tag">#行为型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/iterator/" rel="next" title="迭代器模式">
+                <i class="fa fa-chevron-left"></i> 迭代器模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/operate-of-responsibility/" rel="prev" title="链模式">
+                链模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath解析器-模拟冒泡路径"><span class="nav-number">1.</span> <span class="nav-text">Xpath解析器(模拟冒泡路径)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上式递归示意"><span class="nav-number">2.</span> <span class="nav-text">上式递归示意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用准则"><span class="nav-number">3.</span> <span class="nav-text">应用准则</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

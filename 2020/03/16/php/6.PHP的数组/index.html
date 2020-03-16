@@ -1,0 +1,732 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP中的数据定义、分类及相关操作.">
+<meta name="keywords" content="php基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP的数组">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/6.PHP的数组/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP中的数据定义、分类及相关操作.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:26:28.230Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP的数组">
+<meta name="twitter:description" content="PHP中的数据定义、分类及相关操作.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/6.PHP的数组/"/>
+
+
+  <title> PHP的数组 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP的数组
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP中的数据定义、分类及相关操作.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h1><p>数组是一个能在单个变量中存储多个值的特殊变量。PHP中的数组实际上是一个有序映射。</p>
+<h1 id="数组的分类"><a href="#数组的分类" class="headerlink" title="数组的分类"></a>数组的分类</h1><ul>
+<li>索引数组：数组的下标是数字 array(‘a’,’b’) / [‘a’, ‘b’]</li>
+<li><p>关联数组：数组的下标是字符array(0=&gt;’a’, 1=&gt;’b’)</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>其键名可以是合法的整型、字符串</span><br><span class="line"><span class="number">2.</span>布尔值(<span class="number">0</span>,<span class="number">1</span>)、浮点数(会舍掉小数部分)、<span class="keyword">NULL</span>(<span class="string">''</span>)会被转换</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>混合数组：包含索引数组和关联数组 array(1,2,2=&gt;’a’)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.</span>键名重复,会被覆盖 <span class="comment">// array('a', 0 =&gt; 'b')</span></span><br><span class="line"><span class="number">4.</span>如果没有指定键名,而且键名不都是负数,新添加元素键名为已有键名最大值+<span class="number">1</span> <span class="comment">// array('a', 5=&gt;'b', 19=&gt;'e', 'f') ,f下标为20</span></span><br><span class="line"><span class="number">5.</span>如果键名都为负数,那新添加的未指定键名的键为<span class="number">0</span> <span class="comment">// array(-11=&gt;'a', -34=&gt;'b', 'c'), c下标为0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多维数组：包含数组的数组(以二维为例)</p>
+<ul>
+<li>二维索引+索引 // array(array(0,1)) // [[0,1],[2,3]]</li>
+<li><strong>二维索引+关联</strong>(常用,如读取数据库记录) // array(array(name=’n1’, ‘age’=&gt;18), array(‘name’=&gt;’n2’, ‘age’=&gt;19))</li>
+<li>二维关联+索引 // array(‘names’=&gt;array(‘n1’, ‘n2’), ‘ages’=&gt; array(18, 19))</li>
+<li><strong>二维关联+关联</strong>(也常用) // array(‘users’=&gt;array(name=&gt;n1,age=&gt;18), ‘courses’=&gt; array(‘id’=&gt; ‘yw’, ‘name’=&gt;’YW’))</li>
+</ul>
+</li>
+</ul>
+<h1 id="数组的创建"><a href="#数组的创建" class="headerlink" title="数组的创建"></a>数组的创建</h1><ul>
+<li>通过array()形式创建</li>
+<li>通过[]形式创建 // $arr[] = 1; $arr[-2] = 2; $arr[] = [1,2]</li>
+<li><p>通过range()和compact()创建</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">range(<span class="number">1</span>,<span class="number">10</span>); <span class="comment">// 快速创建下标连续的索引数组,第三参数可以设置步长</span></span><br><span class="line">$username=<span class="string">'test'</span>;</span><br><span class="line">$age = <span class="number">18</span>;</span><br><span class="line">compact(<span class="string">'username'</span>, <span class="string">'age'</span>); <span class="comment">// 快速创建关联数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过define定义常量数组</p>
+</li>
+</ul>
+<h1 id="检测是否是数组"><a href="#检测是否是数组" class="headerlink" title="检测是否是数组"></a>检测是否是数组</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var_dump($arr); <span class="comment">// 打印具体信息</span></span><br><span class="line">gettype($arr); <span class="comment">// 获取类型,需要比较返回值</span></span><br><span class="line">is_array($arr); <span class="comment">// 返回布尔值</span></span><br><span class="line"><span class="comment">// print_r($arr); // 打印调试数组</span></span><br></pre></td></tr></table></figure>
+<h1 id="数组的操作"><a href="#数组的操作" class="headerlink" title="数组的操作"></a>数组的操作</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>查：根据数组的键(索引)来获取相应的值 [index] / {index}</li>
+<li>改：找到值用赋值表达式(=)覆盖</li>
+<li>增：新增键名(索引值)和键值</li>
+<li>删：找到该值,然后unset()</li>
+</ul>
+<h2 id="数组运算"><a href="#数组运算" class="headerlink" title="数组运算"></a>数组运算</h2><ul>
+<li><p>+表示合并数组</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$arr1=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]; $arr2 = [<span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>];</span><br><span class="line">print_r($arr1+$arr2); <span class="comment">// ['a', 'b', 'c'],如果键名(索引)相同,使用左边的</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>==/===比较两个数组是否相同</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ==比较键名和键值是否相同,不比较类型和顺序</span></span><br><span class="line"><span class="comment">// === 在==的基础上，还要比较类型和顺序</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>!= / &lt;&gt; 不等,相当于==取反</p>
+</li>
+<li>!== 不全等,相当于===取反</li>
+</ul>
+<h2 id="获取数组的长度"><a href="#获取数组的长度" class="headerlink" title="获取数组的长度"></a>获取数组的长度</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count($arr);</span><br></pre></td></tr></table></figure>
+<h2 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h2><ul>
+<li>通过for循环遍历,但只能遍历下标连续的数组</li>
+<li><p>通过foreach遍历</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>($arr <span class="keyword">as</span> $value)&#123;&#125; <span class="comment">// 只需要键值,也可以按地址遍历&amp;value</span></span><br><span class="line"><span class="keyword">foreach</span>($arr <span class="keyword">as</span> $value): <span class="comment">// :和endforeach</span></span><br><span class="line"><span class="keyword">endforeach</span>;</span><br><span class="line"><span class="keyword">foreach</span>($arr <span class="keyword">as</span> $key=&gt;$value)&#123;&#125; <span class="comment">// 需要键名和键值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@符号无法抑制警告</p>
+</li>
+<li>后期(PHP7)foreach遍历时不再改变当前指针(current()可以测试),操作的是一个副本</li>
+</ul>
+<h2 id="数组相关的API"><a href="#数组相关的API" class="headerlink" title="数组相关的API"></a>数组相关的API</h2><ul>
+<li><p>创建数组操作</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">  range($min,$max,$step); <span class="comment">// 快速创建下标连续的索引数组</span></span><br><span class="line">  compact($name, $name...); <span class="comment">// 快速创建关联数组</span></span><br><span class="line">  array_fill($start, $num, $value); <span class="comment">// 用给定的值填充数组</span></span><br><span class="line">  array_fill_keys($keys,$value); <span class="comment">// 使用指定的键和值填充数组</span></span><br><span class="line">  array_combine($key, $values); <span class="comment">// 创建一个数组，用一个数组的值作为键名,另一个数组值作为值</span></span><br><span class="line">  ```  </span><br><span class="line">- 键值相关操作</span><br><span class="line">    ```php</span><br><span class="line">    count($arr); <span class="comment">// 返回数组的长度</span></span><br><span class="line">    array_keys($arr); <span class="comment">// 获取数组的键名作为下标连续的索引数组返回</span></span><br><span class="line">    array_values($arr); <span class="comment">// 取得数组键值作为下标连续的索引数组返回</span></span><br><span class="line">    array_filp($arr); <span class="comment">// 交换数组中键名和键值</span></span><br><span class="line">    in_array($serach, $arr); <span class="comment">// 是否是数组的某个元素</span></span><br><span class="line">    array_search($earch, $arr); <span class="comment">// 再数组中搜索给定的值,如果成功则返回首个相应的键名</span></span><br><span class="line">    array_key_exists($search, $arr); <span class="comment">// 检查数组中是否有指定键名或索引</span></span><br><span class="line">    array_reverse($arr); <span class="comment">// 数组倒置</span></span><br><span class="line">    shuffle($arr); <span class="comment">// 打乱数组元素</span></span><br><span class="line">    array_rand($arr); <span class="comment">// 随机取出数组的一个或多个单元</span></span><br><span class="line">    array_unique($arr); <span class="comment">// 数组去重</span></span><br><span class="line">    array_sum($arr); <span class="comment">// 统计数组中元素值的总和</span></span><br><span class="line">    array_product($arr); <span class="comment">// 计算数组中所有值的乘积</span></span><br><span class="line">    array_count_values($value); <span class="comment">// 统计数组中值出现的次数</span></span><br><span class="line">    extract($arr); <span class="comment">// 从数组中将变量导出到当前的符号表</span></span><br><span class="line">    array_pad($arr,$size,$value); <span class="comment">// 用值将数组填充到指定长度</span></span><br><span class="line">    ```  </span><br><span class="line">- 指针相关操作</span><br><span class="line">  ```php</span><br><span class="line">  key($arr); <span class="comment">// 得到当前指针所在位置元素的键名</span></span><br><span class="line">  current($arr)|pos($arr); <span class="comment">// 得到档期那指针所在元素的键值</span></span><br><span class="line">  next($arr); <span class="comment">// 数组指针下移动一位，返回当前指针所在位置元素的键值</span></span><br><span class="line">  prev($arr); <span class="comment">// 数组指针上移动一位,返回当前指针所在位置元素的键值</span></span><br><span class="line">  end($arr); <span class="comment">// 将数组指针移动到数组的末尾,并返回当前指针所在位置元素的键值</span></span><br><span class="line">  reset($arr); <span class="comment">// 将数组指针移动到数组的开始，并返回当前指针所在元素的键值</span></span><br><span class="line">  each($arr); <span class="comment">// 返回数组中当前的键值对,并将数组指针向下移动一位</span></span><br><span class="line">  <span class="keyword">list</span>($var,...); <span class="comment">// 将数组中元素的值赋给对应的变量</span></span><br><span class="line">  array_unshift($arr,$value..); <span class="comment">// 在数组开头插入一个或多个元素</span></span><br><span class="line">  array_shift($arr); <span class="comment">// 弹出数组第一个元素</span></span><br><span class="line">  array_push($arr,$value,...); <span class="comment">//在数组末尾压入一个/多个元素</span></span><br><span class="line">  array_pop($arr); <span class="comment">// 弹出数组最后一个元素</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组拆分与合并</p>
+<pre><code class="php">array_slice($arr, $offset); <span class="comment">// 从数组中取出一段</span>
+array_splice($arr, $offset) <span class="comment">// 去掉数组中某一部分并用其他值取代</span>
+array_merge($arr1,$arr2); <span class="comment">// 合并数组</span>
+array_chunk($arr, $size); <span class="comment">// 将一个数组分割成多个</span>
+</code></pre>
+</li>
+<li>数组交集与差集<pre><code class="php">array_diff($arr1,$arr2); <span class="comment">// 计算数组差集</span>
+array_diff_assoc($arr1,$arr2); <span class="comment">// 带索引检查计算数组差集</span>
+array_intersect($arr1,$arr2);<span class="comment">// 计算数组交集</span>
+array_intersect_assoc($arr1,$arr2); <span class="comment">// 带索引检查数组交集</span>
+</code></pre>
+</li>
+<li>数组排序<pre><code class="php">sort($arr); <span class="comment">// 对数组进行排序</span>
+rsort($arr); <span class="comment">// 对数组逆向排序(由高到低)</span>
+asort($arr); <span class="comment">// 对数组进行排序,并保持索引关系</span>
+arsort($arr); <span class="comment">// 对数组进行逆向排序并保持索引关系</span>
+ksort($arr); <span class="comment">// 对数组的键名进行升序排列</span>
+krsort($arr); <span class="comment">// 对数组的键名进行降序排列</span>
+natsort($arr); <span class="comment">// 用自然排序算法排序</span>
+natcasesort($arr); <span class="comment">// 用自然排序算法对数组进行不区分大小写字母的排序</span>
+array_multisort($arr); <span class="comment">// 对多个数组或多维数组进行排序</span>
+</code></pre>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php基础/" rel="tag">#php基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/7.PHP数据类型转换/" rel="next" title="PHP数据类型转换">
+                <i class="fa fa-chevron-left"></i> PHP数据类型转换
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/5.PHP的数据类型/" rel="prev" title="PHP的数据类型">
+                PHP的数据类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的定义"><span class="nav-number">1.</span> <span class="nav-text">数组的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的分类"><span class="nav-number">2.</span> <span class="nav-text">数组的分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的创建"><span class="nav-number">3.</span> <span class="nav-text">数组的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检测是否是数组"><span class="nav-number">4.</span> <span class="nav-text">检测是否是数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的操作"><span class="nav-number">5.</span> <span class="nav-text">数组的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">5.1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组运算"><span class="nav-number">5.2.</span> <span class="nav-text">数组运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取数组的长度"><span class="nav-number">5.3.</span> <span class="nav-text">获取数组的长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组的遍历"><span class="nav-number">5.4.</span> <span class="nav-text">数组的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组相关的API"><span class="nav-number">5.5.</span> <span class="nav-text">数组相关的API</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="特效," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="原生javascript实现链式操作，左右切换焦点图。">
+<meta name="keywords" content="特效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="焦点图切换">
+<meta property="og:url" content="http://yoursite.com/2016/11/04/cases/banner/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="原生javascript实现链式操作，左右切换焦点图。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="焦点图切换">
+<meta name="twitter:description" content="原生javascript实现链式操作，左右切换焦点图。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/04/cases/banner/"/>
+
+
+  <title> 焦点图切换 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                焦点图切换
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-04T15:19:59+08:00" content="2016-11-04">
+              2016-11-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/案例/" itemprop="url" rel="index">
+                    <span itemprop="name">案例</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>原生javascript实现链式操作，左右切换焦点图。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="HTML部分"><a href="#HTML部分" class="headerlink" title="HTML部分"></a>HTML部分</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, user-scalable=no,initial-scale=1"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Banner Test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pre"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"next"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"stitle"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"ttitle"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"banner"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width:640px; height:300px; background:red;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>   <span class="comment">&lt;!--若是图片直接替换li里面的内容--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width:640px; height:300px; background:green;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width:640px; height:300px; background:blue;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width:640px; height:300px; background:orange;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span>            </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="CSS部分"><a href="#CSS部分" class="headerlink" title="CSS部分"></a>CSS部分</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">*&#123;<span class="attribute">margin</span>:<span class="number">0</span>; <span class="attribute">padding</span>:<span class="number">0</span>; <span class="attribute">list-style-type</span>:none;&#125;</span><br><span class="line"><span class="selector-id">#container</span>&#123;<span class="attribute">width</span>:<span class="number">640px</span>; <span class="attribute">height</span>:<span class="number">300px</span>;<span class="attribute">overflow</span>:hidden; <span class="attribute">margin</span>:<span class="number">20px</span> auto; <span class="attribute">background</span>:<span class="number">#333</span>; <span class="attribute">position</span>:relative;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.banner</span>&#123;<span class="attribute">width</span>:<span class="number">99999px</span>; <span class="attribute">position</span>:absolute; <span class="attribute">left</span>:<span class="number">0</span>; <span class="attribute">top</span>:<span class="number">0</span>;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.banner</span> <span class="selector-tag">li</span>&#123;<span class="attribute">float</span>:left;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.pre</span>&#123;<span class="attribute">cursor</span>:pointer; <span class="attribute">width</span>:<span class="number">45px</span>; <span class="attribute">height</span>:<span class="number">45px</span>;<span class="attribute">background</span>:<span class="built_in">url</span>(Content/images/l.png); <span class="attribute">position</span>:absolute; <span class="attribute">left</span>:<span class="number">10px</span>; <span class="attribute">top</span>:<span class="number">130px</span>; <span class="attribute">z-index</span>:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.next</span>&#123;<span class="attribute">cursor</span>:pointer; <span class="attribute">width</span>:<span class="number">45px</span>; <span class="attribute">height</span>:<span class="number">45px</span>;<span class="attribute">background</span>:<span class="built_in">url</span>(Content/images/r.png); <span class="attribute">position</span>:absolute; <span class="attribute">right</span>:<span class="number">10px</span>; <span class="attribute">top</span>:<span class="number">130px</span>; <span class="attribute">z-index</span>:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.stitle</span>&#123;<span class="attribute">width</span>:<span class="number">640px</span>; <span class="attribute">height</span>:<span class="number">10px</span>; <span class="attribute">position</span>:absolute; <span class="attribute">bottom</span>:<span class="number">15px</span>; <span class="attribute">z-index</span>:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.stitle</span> <span class="selector-tag">ul</span>&#123;<span class="attribute">width</span>:<span class="number">120px</span>; <span class="attribute">margin</span>:<span class="number">0</span> auto;<span class="attribute">z-index</span>:<span class="number">2</span>;&#125;</span><br><span class="line">#container .stitle ul li&#123;width:10px; height:10px; margin:0 5px; float:left; background:#FFF; border-radius:10px; overflow:hidden; *display:inline; *zoom:1;&#125;</span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.stitle</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-class">.ttitle</span>&#123;<span class="attribute">background</span>:<span class="number">#69aaec</span>;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="JavaScript部分"><a href="#JavaScript部分" class="headerlink" title="JavaScript部分"></a>JavaScript部分</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">obj,name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(obj.currentStyle)&#123;                        <span class="comment">//IE  obj是载体，name是属性名 如 obj.currentStyle['width']  ===&gt;  obj.style.width</span></span><br><span class="line">        <span class="keyword">return</span> obj.currentStyle[name];</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;                                        <span class="comment">//其他　FF等</span></span><br><span class="line">        <span class="keyword">return</span> getComputedStyle(obj,<span class="literal">false</span>)[name];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;        </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">obj,att,add</span>)</span>&#123;                    <span class="comment">//链式运动        </span></span><br><span class="line">    clearInterval(obj.timer);</span><br><span class="line">    obj.timer = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cutt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(att==<span class="string">"opacity"</span>)&#123;</span><br><span class="line">            cutt = <span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(obj,att)));  <span class="comment">//取opacity值，本程序未用到</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cutt = <span class="built_in">Math</span>.round(<span class="built_in">parseInt</span>(getStyle(obj,att)));   <span class="comment">//其他属性值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> speed = (add-cutt)/<span class="number">4</span>;                                <span class="comment">//可以改变除数，以变更速度</span></span><br><span class="line">        speed = speed&gt;<span class="number">0</span>?<span class="built_in">Math</span>.ceil(speed):<span class="built_in">Math</span>.floor(speed);</span><br><span class="line">        <span class="keyword">if</span>(cutt == add)&#123;</span><br><span class="line">            clearInterval(obj.timer);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(att ==<span class="string">"opacity"</span>)&#123;</span><br><span class="line">                obj.style.opacity = (cutt + speed)/<span class="number">100</span>;</span><br><span class="line">                obj.style.filter = <span class="string">'alpha(opacity:'</span>+(cutt+speed)+<span class="string">')'</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                obj.style[att] = (cutt+speed)+<span class="string">"px"</span>;        <span class="comment">//位移视图显示</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,<span class="number">30</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">"container"</span>);          <span class="comment">//容器</span></span><br><span class="line">    <span class="keyword">var</span> pre = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"pre"</span>)[<span class="number">0</span>];        <span class="comment">//左箭头</span></span><br><span class="line">    <span class="keyword">var</span> next = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"next"</span>)[<span class="number">0</span>];        <span class="comment">//右箭头</span></span><br><span class="line">    <span class="keyword">var</span> banner = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"banner"</span>)[<span class="number">0</span>];  <span class="comment">//banner切换区ul</span></span><br><span class="line">    <span class="keyword">var</span> bannerLi = banner.getElementsByTagName(<span class="string">"li"</span>);             <span class="comment">//banner切换去ul li</span></span><br><span class="line">    <span class="keyword">var</span> stitle = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"stitle"</span>)[<span class="number">0</span>];  <span class="comment">//圆点 div</span></span><br><span class="line">    <span class="keyword">var</span> stitleLi = stitle.getElementsByTagName(<span class="string">"li"</span>);            <span class="comment">//圆点div ul li</span></span><br><span class="line">    <span class="keyword">var</span> now = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">tab</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;stitleLi.length; i++)&#123;                <span class="comment">//下方小圆点切换</span></span><br><span class="line">            stitleLi[i].className = <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        stitleLi[now].className = <span class="string">"ttitle"</span>;</span><br><span class="line">        startMove(banner,<span class="string">'left'</span>,-now*bannerLi[<span class="number">0</span>].offsetWidth);    <span class="comment">//调用banner切换函数</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j&lt;stitleLi.length; j++)&#123;</span><br><span class="line">        stitleLi[j].index = j;                        <span class="comment">//给属性赋值</span></span><br><span class="line">        stitleLi[j].onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                <span class="comment">//小圆点点击事件</span></span><br><span class="line">            now = <span class="keyword">this</span>.index;                       <span class="comment">//获取now值</span></span><br><span class="line">            tab();                                    <span class="comment">//样式切换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pre.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                       <span class="comment">//左箭头事件</span></span><br><span class="line">        now--;</span><br><span class="line">        <span class="keyword">if</span>(now==<span class="number">-1</span>)&#123;</span><br><span class="line">            now=bannerLi.length<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        tab();</span><br><span class="line">    &#125;    </span><br><span class="line">    next.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                        <span class="comment">//右箭头事件</span></span><br><span class="line">        now++;</span><br><span class="line">        <span class="keyword">if</span>(now==bannerLi.length)&#123;</span><br><span class="line">            now=<span class="number">0</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        tab();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> timer = setInterval(next.onclick, <span class="number">2000</span>);    <span class="comment">//定时右箭头事件</span></span><br><span class="line">    container.onmouseover = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                <span class="comment">//鼠标移入清除定时器</span></span><br><span class="line">        clearInterval(timer);</span><br><span class="line">    &#125;</span><br><span class="line">    container.onmouseout = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                <span class="comment">//鼠标移除重新设置定时器</span></span><br><span class="line">        timer = setInterval(next.onclick,<span class="number">2000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/特效/" rel="tag">#特效</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/04/algorithm/norepeat-combine/" rel="next" title="三位非重复组合">
+                <i class="fa fa-chevron-left"></i> 三位非重复组合
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/04/java/approach-words/" rel="prev" title="逼近的文字">
+                逼近的文字 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML部分"><span class="nav-number">1.</span> <span class="nav-text">HTML部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS部分"><span class="nav-number">2.</span> <span class="nav-text">CSS部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript部分"><span class="nav-number">3.</span> <span class="nav-text">JavaScript部分</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

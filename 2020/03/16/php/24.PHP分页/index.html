@@ -1,0 +1,669 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php高级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP分页数据查询及处理.">
+<meta name="keywords" content="php高级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP分页操作">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/24.PHP分页/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP分页数据查询及处理.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:42:35.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP分页操作">
+<meta name="twitter:description" content="PHP分页数据查询及处理.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/24.PHP分页/"/>
+
+
+  <title> PHP分页操作 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP分页操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP分页数据查询及处理.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是分页"><a href="#什么是分页" class="headerlink" title="什么是分页"></a>什么是分页</h1><p>对较多的记录按一定的数量,一定的条件进行分页展示。</p>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>从数据库查询出来的的记录,在一页不能完全展示.</p>
+<h1 id="分页的形式"><a href="#分页的形式" class="headerlink" title="分页的形式"></a>分页的形式</h1><ul>
+<li>直接展示记录的页数</li>
+<li>加载更多</li>
+<li>瀑布流的自动加载</li>
+</ul>
+<h1 id="分页的关键变量"><a href="#分页的关键变量" class="headerlink" title="分页的关键变量"></a>分页的关键变量</h1><ul>
+<li>current_page,当前所在页</li>
+<li>total_num,总记录数</li>
+<li>num,每页展示的记录数</li>
+</ul>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>分页不能超越极限范围.</p>
+<h1 id="分页示例"><a href="#分页示例" class="headerlink" title="分页示例"></a>分页示例</h1><p>1.查询总记录数<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询总条数:SELECT count(*) from tbl;假如是$result.count</span></span><br><span class="line">$total_num = $result.count;</span><br></pre></td></tr></table></figure></p>
+<p>2.设定每页显示条数<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$num = <span class="number">20</span>; <span class="comment">// 假如是20</span></span><br></pre></td></tr></table></figure></p>
+<p>3.计算出总页数<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$pages = ceil($total_num / $num);</span><br></pre></td></tr></table></figure></p>
+<p>4.返回当前页的数据<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$current_page = <span class="keyword">isset</span>($_GET(<span class="string">"current_page"</span>)) ? $_GET(<span class="string">"current_page"</span>) : <span class="number">1</span>; <span class="comment">// 不存在则默认第一页</span></span><br><span class="line">$limit = (($current_page - <span class="number">1</span>) * $num).<span class="string">","</span>.$num;</span><br><span class="line"><span class="comment">// 查询数据："SELECT * FROM tbl LIMIT ".$limit;</span></span><br></pre></td></tr></table></figure></p>
+<p>5.分页块<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$page = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span> ($current_page !=<span class="number">1</span> ) &#123; <span class="comment">// 是第一页,不展示</span></span><br><span class="line">    $page .= <span class="string">"&lt;a href='/action?current_page=1'&gt;首页&lt;/a&gt;"</span>;</span><br><span class="line">    $page .= <span class="string">"&lt;a href='/action?current_page="</span>.($current_page&gt;=<span class="number">2</span> ? $current_page<span class="number">-1</span> : <span class="number">1</span>).<span class="string">"'&gt;上一页&lt;/a&gt;"</span>; <span class="comment">// 左边不能越界</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">1</span>; i &lt;= $pages; $i++) &#123; <span class="comment">// 渲染页码</span></span><br><span class="line">    $page .= <span class="string">"&lt;a href='/action?current_page=$i'&gt;"</span>;</span><br><span class="line">    $page .= ($i == $current_page ? <span class="string">"&lt;font color=red&gt;"</span>.$i.<span class="string">"&lt;/font"</span>&gt; : $i); <span class="comment">// 高亮当前页码</span></span><br><span class="line">    $page .= <span class="string">"&lt;/a&gt;&amp;nbsp;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>($current_page != $pages) &#123; <span class="comment">// 是最后一页,不展示</span></span><br><span class="line">    $page .= <span class="string">"&lt;a href='/action?current_page="</span>.($current_page&lt;=($pages<span class="number">-1</span>) ? $current_page+<span class="number">1</span> : $pages).<span class="string">"'&gt;下一页&lt;/a&gt;"</span>; <span class="comment">// 右边不能越界</span></span><br><span class="line">    $page .= <span class="string">"&lt;a href='/action?current_page="</span>.$pages.<span class="string">"'&gt;尾页&lt;/a&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$page .= <span class="string">'| 总共'</span>.$total_num.<span class="string">'条记录,目前是在'</span>.$current_page.<span class="string">'页'</span>;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>如果要使用 … 5, 6, 7…的形式<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$page_len = <span class="number">7</span>; <span class="comment">// 假设默认只显示7个页码数</span></span><br><span class="line">$page_len_half = floor($page_len / <span class="number">2</span>);</span><br><span class="line">$i = <span class="number">1</span>; <span class="comment">// 初始页数</span></span><br><span class="line"><span class="keyword">if</span> ($current_page - $page_len_half &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    $i = $current_page - $page_len_half</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(; $i &lt;= ($page_len &gt;= $page ? $page : $current_page + $page_len_half); $i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>($current_page - $page_len_half &gt; <span class="number">1</span>) &#123; <span class="comment">// 显示左边的省略号</span></span><br><span class="line">      $page .= <span class="string">"&lt;span&gt;...&lt;/span&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 中间内容不变</span></span><br><span class="line">    <span class="keyword">if</span>($current_page + $page_len_half &lt; $pages) &#123; <span class="comment">// 显示右边省略号</span></span><br><span class="line">      $page .= <span class="string">"&lt;span&gt;...&lt;/span&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php高级/" rel="tag">#php高级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/25.PHP图像处理/" rel="next" title="PHP图像处理">
+                <i class="fa fa-chevron-left"></i> PHP图像处理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/23.PHP_MySQL之PDO/" rel="prev" title="PHP操作数据库(三) - PDO">
+                PHP操作数据库(三) - PDO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是分页"><span class="nav-number">1.</span> <span class="nav-text">什么是分页</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用场景"><span class="nav-number">2.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分页的形式"><span class="nav-number">3.</span> <span class="nav-text">分页的形式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分页的关键变量"><span class="nav-number">4.</span> <span class="nav-text">分页的关键变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意点"><span class="nav-number">5.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分页示例"><span class="nav-number">6.</span> <span class="nav-text">分页示例</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

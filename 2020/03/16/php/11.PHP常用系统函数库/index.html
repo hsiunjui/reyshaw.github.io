@@ -1,0 +1,674 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP中常用的系统函数库。">
+<meta name="keywords" content="php基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP系统函数库">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/11.PHP常用系统函数库/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP中常用的系统函数库。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:30:12.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP系统函数库">
+<meta name="twitter:description" content="PHP中常用的系统函数库。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/11.PHP常用系统函数库/"/>
+
+
+  <title> PHP系统函数库 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP系统函数库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP中常用的系统函数库。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="系统函数库"><a href="#系统函数库" class="headerlink" title="系统函数库"></a>系统函数库</h1><p>PHP内置的一些全局函数。</p>
+<h1 id="函数分类"><a href="#函数分类" class="headerlink" title="函数分类"></a>函数分类</h1><ul>
+<li>字符函数(见数据类型篇)</li>
+<li>数学函数(同上)</li>
+<li>数组函数(见数组篇)</li>
+<li>类型检测函数(同上)</li>
+<li><p>输出函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> $str...; <span class="comment">// 输出一个或多个字符串</span></span><br><span class="line">var_dump($var...); <span class="comment">// 打印变量的相关信息(结构信息:类型和值)</span></span><br><span class="line">print_r($var...); <span class="comment">// 用易于理解的格式打印变量</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间日期函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">date_default_timezone_set(); <span class="comment">// 设置默认时区, Asia/Hong_Kong, Asia/Shanghai;另外可以修改php的配置文件date.tiemzone</span></span><br><span class="line">date_default_timezone_get(); <span class="comment">// 获取时区, UTC默认; </span></span><br><span class="line">time(); <span class="comment">// Unix时间戳1970-1-1到现在经历的秒数</span></span><br><span class="line">date($str[, $time]); <span class="comment">// 格式化一个本地时间/日期, date("Y年m月d日 H时i分s秒", time() - 86400);昨天的这个时候,表示现在后面的参数可以不传</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   Y - 4位完整年份,2020</span></span><br><span class="line"><span class="comment"> *   y - 2位年份,20</span></span><br><span class="line"><span class="comment"> *   F - 月份,完整的文本格式, February</span></span><br><span class="line"><span class="comment"> *   M - 三个字母缩写表示的月份, Feb</span></span><br><span class="line"><span class="comment"> *   m - 数字表示的月份,有前导0, 02</span></span><br><span class="line"><span class="comment"> *   n - 数字表示的月份,无前导0, 2</span></span><br><span class="line"><span class="comment"> *   d - 月份中的第几天,有前导0, 09</span></span><br><span class="line"><span class="comment"> *   j - 月份中的第几天没有前导0, 9</span></span><br><span class="line"><span class="comment"> *   L - 星期几,完整的文本格式, Saturday</span></span><br><span class="line"><span class="comment"> *   D - 星期中的第几天,文本格式, 3个字母Sat</span></span><br><span class="line"><span class="comment"> *   w - 星期总的第几天,数字表示, 7</span></span><br><span class="line"><span class="comment"> *   H - 小时,24小时格式,有前导0, 08</span></span><br><span class="line"><span class="comment"> *   i - 有前导0的分钟数, 02</span></span><br><span class="line"><span class="comment"> *   s - 有前导0的秒数, 09</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">  <span class="comment">// $time - 一个秒数就是多少时间前的日期/时间</span></span><br><span class="line"> strtotime(); <span class="comment">// 将字符串转换成Unix时间戳, strtotime('-3 weeks'); 三个星期前的时间戳</span></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * dayname - sunday|monday|tuesday|wednesday|thursday|firday|saturday|sun|mon|tue|wed|thu|fri|sat</span></span><br><span class="line"><span class="comment">  * daytext - weekday | weekdays</span></span><br><span class="line"><span class="comment">  * number - [+|-][0-9]+</span></span><br><span class="line"><span class="comment">  * ordinal - first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|next|last|previous|this</span></span><br><span class="line"><span class="comment">  * reltext - next|last|previous|this</span></span><br><span class="line"><span class="comment">  * unit((sec|second|min|minute|hour|day|fortnight|forthnight|month|year)s?)|weeks|daytext</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="comment">// month时按30天来的</span></span><br><span class="line">  <span class="comment">// date("Y-m-d H:i:s", strtotime("last day of -1 month")); // 获取上一个月的最后一天</span></span><br><span class="line">  microtime($bool); <span class="comment">// 返回当前微秒数和Unix时间戳 0.78373000 1582951594, microtime(true); 1582951594.78373000,常用于计算程序执行的时间</span></span><br><span class="line">  uniqid($prefix); <span class="comment">// 生成唯一ID, 5e59edb0da7d6; md5(uniqid(microtime().mt_rand())) 生成一个32位的uuid</span></span><br><span class="line">  getdate(); <span class="comment">// 获取日期/时间信息,返回数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件操作函数(见文件操作篇)</p>
+</li>
+<li>错误处理函数(见错误级别篇)</li>
+<li>序列化<pre><code class="php">serialize($var); <span class="comment">// 产生一个可存储值的表示,返回字符串,此字符串包含了$var的字节流,可以存储在任何地方</span>
+unserilize(); <span class="comment">// 反序列化</span>
+json_encode(); <span class="comment">// 对变量进行json编码,返回字符串</span>
+json_decode(); <span class="comment">// 对json格式的字符串进行解码</span>
+</code></pre>
+</li>
+<li>编码<pre><code class="php">base64_encode(); <span class="comment">// 使用MIME base64对数据进行编码</span>
+base64_decode(); <span class="comment">// 对使用MIME base64编码的数据解码</span>
+</code></pre>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php基础/" rel="tag">#php基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/12.PHP类和对象/" rel="next" title="PHP类和对象">
+                <i class="fa fa-chevron-left"></i> PHP类和对象
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/10.PHP函数/" rel="prev" title="PHP函数">
+                PHP函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统函数库"><span class="nav-number">1.</span> <span class="nav-text">系统函数库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数分类"><span class="nav-number">2.</span> <span class="nav-text">函数分类</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技巧型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="对重复的业务逻辑进行节流控制，执行最后一次操作并取消其他操作，以提高性能。">
+<meta name="keywords" content="技巧型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="节流模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/throttler/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="对重复的业务逻辑进行节流控制，执行最后一次操作并取消其他操作，以提高性能。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="节流模式">
+<meta name="twitter:description" content="对重复的业务逻辑进行节流控制，执行最后一次操作并取消其他操作，以提高性能。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/throttler/"/>
+
+
+  <title> 节流模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                节流模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T16:13:04+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>对重复的业务逻辑进行节流控制，执行最后一次操作并取消其他操作，以提高性能。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="页面滚动"><a href="#页面滚动" class="headerlink" title="页面滚动"></a>页面滚动</h1><ul>
+<li>scroll事件会一直触发滚动事件，重复执行事件函数。创建节流器进行函数的节流。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width:800px; height: 4000px; background: red; margin:0 auto;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">obj, param</span>) </span>&#123;      <span class="comment">//初始化参数</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> param) &#123;</span></span><br><span class="line"><span class="undefined">            obj[i] = param[i] || param[i];</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> obj;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//节流器</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> throttle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> isClear = <span class="built_in">arguments</span>[<span class="number">0</span>], fn;         <span class="comment">//获取第一个参数</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="keyword">typeof</span> isClear === <span class="string">'boolean'</span>) &#123;           <span class="comment">//第一个参数时布尔类型，则表示是否清除定时器</span></span></span><br><span class="line"><span class="javascript">            fn = <span class="built_in">arguments</span>[<span class="number">1</span>];                                      <span class="comment">//获取第二函数参数</span></span></span><br><span class="line"><span class="javascript">            fn.__throttleID &amp;&amp; clearTimeout(fn.__throttleID);       <span class="comment">//函数的计时器句柄存在则清除定时器</span></span></span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> &#123;                                             <span class="comment">//第一个参数不是布尔类型（是函数）</span></span></span><br><span class="line"><span class="javascript">            fn = isClear;                                          <span class="comment">//获取到函数</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> param = <span class="built_in">arguments</span>[<span class="number">1</span>];                           <span class="comment">//获取到第二个参数</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> p = extend(&#123;                                    <span class="comment">//对执行时的参数适配默认值</span></span></span><br><span class="line"><span class="javascript">                context: <span class="literal">null</span>,                                            <span class="comment">//执行函数执行作用域</span></span></span><br><span class="line"><span class="javascript">                args: [],                                                    <span class="comment">//执行函数执行时的相关参数</span></span></span><br><span class="line"><span class="javascript">                time: <span class="number">300</span>                                                 <span class="comment">//执行函数延迟执行时间</span></span></span><br><span class="line"><span class="undefined">            &#125;, param);</span></span><br><span class="line"><span class="javascript">            <span class="built_in">arguments</span>.callee(<span class="literal">true</span>, fn);                     <span class="comment">//清除执行函数计时器句柄</span></span></span><br><span class="line"><span class="javascript">            fn.__throttleID = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;          <span class="comment">//为函数绑定计时器句柄，延迟执行函数</span></span></span><br><span class="line"><span class="javascript">                fn.apply(p.context, p.args);                                  <span class="comment">//执行函数</span></span></span><br><span class="line"><span class="undefined">            &#125;, p.time);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.addEventListener(<span class="string">'scroll'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;           <span class="comment">//滚动事件</span></span></span><br><span class="line"><span class="javascript">        throttle(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'test....'</span>);                                <span class="comment">//节流执行滚动事件，延迟连续触发</span></span></span><br><span class="line"><span class="undefined">        &#125;)</span></span><br><span class="line"><span class="javascript">    &#125;, <span class="literal">false</span>)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="二维码等的鼠标事件应用-使鼠标划入划出不显突兀"><a href="#二维码等的鼠标事件应用-使鼠标划入划出不显突兀" class="headerlink" title="二维码等的鼠标事件应用(使鼠标划入划出不显突兀)"></a>二维码等的鼠标事件应用(使鼠标划入划出不显突兀)</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"icon"</span> <span class="attr">style</span>=<span class="string">"width:200px; height: 200px; background: red"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> icon = <span class="built_in">document</span>.getElementById(<span class="string">'icon'</span>);</span></span><br><span class="line"><span class="javascript">    icon.addEventListener(<span class="string">'mouseenter'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        throttle(<span class="literal">true</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            that.style.background = <span class="string">'red'</span>;</span></span><br><span class="line"><span class="javascript">        &#125;);                                     <span class="comment">//清除显示红色背景方法计时器</span></span></span><br><span class="line"><span class="javascript">        throttle(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            that.style.background = <span class="string">'green'</span>;</span></span><br><span class="line"><span class="javascript">        &#125;);                                    <span class="comment">//延迟显示绿色背景浮层方法</span></span></span><br><span class="line"><span class="javascript">    &#125;, <span class="literal">false</span>);</span></span><br><span class="line"><span class="javascript">    icon.addEventListener(<span class="string">'mouseleave'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        throttle(<span class="literal">true</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            that.style.background = <span class="string">'green'</span>;</span></span><br><span class="line"><span class="javascript">        &#125;);                                     <span class="comment">//清除显示绿色背景方法计时器</span></span></span><br><span class="line"><span class="javascript">        throttle(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            that.style.background = <span class="string">'red'</span>;</span></span><br><span class="line"><span class="javascript">        &#125;);                                     <span class="comment">//延迟显示红色背景方法</span></span></span><br><span class="line"><span class="javascript">    &#125;, <span class="literal">false</span>);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="图片的延迟加载-只加载可视区的图片-延迟执行"><a href="#图片的延迟加载-只加载可视区的图片-延迟执行" class="headerlink" title="图片的延迟加载(只加载可视区的图片-延迟执行)"></a>图片的延迟加载(只加载可视区的图片-延迟执行)</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"width:800px;height: 1000px; position: relative;background: red;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/load.gif"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">data-src</span>=<span class="string">"images/1.jpg"</span> <span class="attr">style</span>=<span class="string">"position:absolute;bottom:0;"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">LazyLoad</span>(<span class="params">id</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.container = <span class="built_in">document</span>.getElementById(id);       <span class="comment">//图片容器</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.imgs = <span class="keyword">this</span>.getImgs();                                        <span class="comment">//缓存图片</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.init();                                                                   <span class="comment">//初始化</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    LazyLoad.prototype = &#123;</span></span><br><span class="line"><span class="undefined">        construtor: LazyLoad,</span></span><br><span class="line"><span class="javascript">        init: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.update();            <span class="comment">//加载当前视图图片</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.bindEvent();       <span class="comment">//绑定事件</span></span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        getImgs: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> arr = [];</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> imgs = <span class="keyword">this</span>.container.getElementsByTagName(<span class="string">'img'</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = imgs.length; i &lt; len; i++) &#123;      <span class="comment">//将获取的图片转成数组（兼容IE操作）</span></span></span><br><span class="line"><span class="undefined">                arr.push(imgs[i]);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> arr;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        update: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (!<span class="keyword">this</span>.imgs.length) &#123;        <span class="comment">//如果图片都加载完成返回</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> i = <span class="keyword">this</span>.imgs.length;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span> (--i; i &gt;= <span class="number">0</span>; i--) &#123;        <span class="comment">//遍历图片</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (<span class="keyword">this</span>.shouldShow(i)) &#123;       <span class="comment">//是否是可视区域的图片</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.imgs[i].src = <span class="keyword">this</span>.imgs[i].getAttribute(<span class="string">'data-src'</span>);     <span class="comment">//加载源图</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.imgs.slice(i, <span class="number">1</span>);                                                        <span class="comment">//清除缓存</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        shouldShow: <span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> img = <span class="keyword">this</span>.imgs[i],                                                                                                     <span class="comment">//当前图片</span></span></span><br><span class="line"><span class="javascript">                    scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop,   <span class="comment">//页面滚动条top值</span></span></span><br><span class="line"><span class="javascript">                    scrollBottom = scrollTop + <span class="built_in">document</span>.documentElement.clientHeight,                  <span class="comment">//可是范围内底部高</span></span></span><br><span class="line"><span class="javascript">                    imgTop = <span class="keyword">this</span>.pageY(img),                                                                                     <span class="comment">//图片的顶部位置</span></span></span><br><span class="line"><span class="javascript">                    imgBottom = imgTop + img.offsetHeight;          <span class="comment">//图片的底部位置，offsetHeight一般是 内容+padding(+滚动条宽度)</span></span></span><br><span class="line"><span class="javascript">            <span class="comment">//console.log('[scrollTop:'+scrollTop+'][scrollBottom:'+scrollBottom+'][imgTop:'+imgTop+'][imgBottom:'+imgBottom+']');</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (imgBottom &gt; scrollTop &amp;&amp; imgBottom &lt; scrollBottom || (imgTop &gt; scrollTop &amp;&amp; imgTop &lt; scrollBottom)) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> <span class="literal">true</span>;        <span class="comment">//图片位于客户区下方且 图片的下方小于滚动页面下方  或在可视区内</span></span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        pageY: <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (element.offsetParent) &#123;                     <span class="comment">//返回最近的祖先定位元素(position的)</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> element.offsetTop + <span class="keyword">this</span>.pageY(element.offsetParent);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> element.offsetTop;                   <span class="comment">//offsetTop一般获取相对于版面或有offsetTop属性指定的父元素的计算顶端位置</span></span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        on: <span class="function"><span class="keyword">function</span> (<span class="params">element, type, fn</span>) </span>&#123;          <span class="comment">//简单事件绑定</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (element.addEventListener) &#123;</span></span><br><span class="line"><span class="javascript">                element.addEventListener(type, fn, <span class="literal">false</span>);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent) &#123;</span></span><br><span class="line"><span class="javascript">                element.attachEvent(<span class="string">'on'</span> + type, fn);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="javascript">        bindEvent: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> that = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.on(<span class="built_in">window</span>, <span class="string">'resize'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;         <span class="comment">//窗口大小改变节流</span></span></span><br><span class="line"><span class="undefined">                throttle(that.update, &#123;context: that&#125;);</span></span><br><span class="line"><span class="undefined">            &#125;);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.on(<span class="built_in">window</span>, <span class="string">'scroll'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;         <span class="comment">//滚动事件节流</span></span></span><br><span class="line"><span class="undefined">                throttle(that.update, &#123;context: that&#125;);</span></span><br><span class="line"><span class="undefined">            &#125;)</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">new</span> LazyLoad(<span class="string">'container'</span>);          <span class="comment">//实例化</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="统计打包-当触发次数达到某一值时才发送请求"><a href="#统计打包-当触发次数达到某一值时才发送请求" class="headerlink" title="统计打包(当触发次数达到某一值时才发送请求)"></a>统计打包(当触发次数达到某一值时才发送请求)</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>test<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> LogPack = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> data = [],                          <span class="comment">//请求缓存数组</span></span></span><br><span class="line"><span class="javascript">                MaxNum = <span class="number">10</span>,              <span class="comment">//请求缓存最大值</span></span></span><br><span class="line"><span class="javascript">                itemSplitStr = <span class="string">'|'</span>,            <span class="comment">//统计项统计参数间隔符</span></span></span><br><span class="line"><span class="javascript">                keyValueSplitStr = <span class="string">'*'</span>,    <span class="comment">//统计项统计参数键值对间隔符</span></span></span><br><span class="line"><span class="javascript">                img = <span class="keyword">new</span> Image();       <span class="comment">//请求触发器，通过src属性实现简单的get请求</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">sendLog</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> logStr = <span class="string">''</span>,</span></span><br><span class="line"><span class="undefined">                    fireData = data.splice(0, MaxNum);</span></span><br><span class="line"><span class="javascript">            <span class="comment">//console.log(data);  []</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = fireData.length; i &lt; len; i++) &#123;</span></span><br><span class="line"><span class="javascript">                logStr += <span class="string">'log'</span> + i + <span class="string">'='</span>;              <span class="comment">//添加统计项顺序索引</span></span></span><br><span class="line"><span class="javascript">                <span class="comment">//console.log(logStr);</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">for</span> (<span class="keyword">var</span> j <span class="keyword">in</span> fireData[i]) &#123;            <span class="comment">//遍历统计项内统计参数</span></span></span><br><span class="line"><span class="javascript">                    logStr += j + keyValueSplitStr + fireData[i][j];        <span class="comment">//添加统计项键 + 分隔符 + 值</span></span></span><br><span class="line"><span class="javascript">                    logStr += itemSplitStr;                                    <span class="comment">//添加统计项统计参数间隔符</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="javascript">                logStr = logStr.replace(<span class="regexp">/\|$/</span>, <span class="string">''</span>) + <span class="string">'&amp;'</span>;                   <span class="comment">//统计多个统计项间隔符</span></span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            logStr += <span class="string">'logLength='</span> + len;                   <span class="comment">//添加统计项打包长度</span></span></span><br><span class="line"><span class="javascript">            img.src = <span class="string">'./images/1.jpg?'</span> + logStr;           <span class="comment">//请求触发器发送统计</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">param</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (!param) &#123;           <span class="comment">//无参数则发送统计</span></span></span><br><span class="line"><span class="undefined">                sendLog();</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">           <span class="comment">// console.log(data);</span></span></span><br><span class="line"><span class="javascript">            data.push(param);       <span class="comment">//添加统计项</span></span></span><br><span class="line"><span class="javascript">            data.length &gt;= MaxNum &amp;&amp; sendLog();  <span class="comment">//统计项大于请求缓存最大值则发送统计请求包</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(img.src);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)();</span></span><br><span class="line"><span class="javascript">    btn.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        LogPack(&#123;</span></span><br><span class="line"><span class="javascript">            btnId: <span class="keyword">this</span>.id,</span></span><br><span class="line"><span class="javascript">            context: <span class="keyword">this</span>.innerHTML,</span></span><br><span class="line"><span class="javascript">            type: <span class="string">'click'</span></span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">/*    点击10下输出:</span></span><br><span class="line"><span class="javascript">    http:<span class="comment">//localhost:63342/nodeproject/course/images/1.jpg</span></span></span><br><span class="line"><span class="undefined">    ?log0=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log1=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log2=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log3=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log4=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log5=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log6=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log7=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log8=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;log9=btnId*btn|context*test|type*click</span></span><br><span class="line"><span class="undefined">    &amp;logLength=10*/</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h1><pre><code>解决在页面中的一些简单交互造成事件重复触发的问题，
+屏蔽一些无意间触发的事件以及统计打包发送。 
+</code></pre><h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><pre><code>创建计时器，延迟程序执行。这也使得计时器中的回调函数异步执行。
+</code></pre><h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><pre><code>程序是否执行时可控的。程序是异步的。  
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技巧型模式/" rel="tag">#技巧型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/data-access-object/" rel="next" title="数据访问对象模式">
+                <i class="fa fa-chevron-left"></i> 数据访问对象模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/simple-template/" rel="prev" title="简单模板模式">
+                简单模板模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#页面滚动"><span class="nav-number">1.</span> <span class="nav-text">页面滚动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码等的鼠标事件应用-使鼠标划入划出不显突兀"><span class="nav-number">2.</span> <span class="nav-text">二维码等的鼠标事件应用(使鼠标划入划出不显突兀)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片的延迟加载-只加载可视区的图片-延迟执行"><span class="nav-number">3.</span> <span class="nav-text">图片的延迟加载(只加载可视区的图片-延迟执行)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#统计打包-当触发次数达到某一值时才发送请求"><span class="nav-number">4.</span> <span class="nav-text">统计打包(当触发次数达到某一值时才发送请求)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主要功能"><span class="nav-number">5.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心思想"><span class="nav-number">6.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优点"><span class="nav-number">7.</span> <span class="nav-text">优点</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

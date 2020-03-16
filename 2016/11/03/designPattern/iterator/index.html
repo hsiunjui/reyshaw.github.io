@@ -1,0 +1,705 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="行为型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="在不暴露对象内部结构的同时，可以顺序地访问聚合对象内部的元素。">
+<meta name="keywords" content="行为型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迭代器模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/iterator/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="在不暴露对象内部结构的同时，可以顺序地访问聚合对象内部的元素。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="迭代器模式">
+<meta name="twitter:description" content="在不暴露对象内部结构的同时，可以顺序地访问聚合对象内部的元素。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/iterator/"/>
+
+
+  <title> 迭代器模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                迭代器模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T15:49:09+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>在不暴露对象内部结构的同时，可以顺序地访问聚合对象内部的元素。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="元素迭代器"><a href="#元素迭代器" class="headerlink" title="元素迭代器"></a>元素迭代器</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> Iterator = <span class="function"><span class="keyword">function</span> (<span class="params">items, container</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(container) || <span class="built_in">document</span>,      <span class="comment">//获取父容器</span></span></span><br><span class="line"><span class="javascript">                items = container.getElementsByTagName(items),                      <span class="comment">//获取父容器下的元素</span></span></span><br><span class="line"><span class="javascript">                length = items.length,                 <span class="comment">//获取元素长度</span></span></span><br><span class="line"><span class="javascript">                index = <span class="number">0</span>;                                   <span class="comment">//默认索引值为0</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> splice = [].splice;                          <span class="comment">//缓存数组的splice方法</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">            first: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;                 <span class="comment">//获取第一个元素</span></span></span><br><span class="line"><span class="javascript">                index = <span class="number">0</span>;                              <span class="comment">//校正索引</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> items[index];               <span class="comment">//返回第一个元素</span></span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            last: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;                <span class="comment">//获取最后一个元素</span></span></span><br><span class="line"><span class="javascript">                index = length - <span class="number">1</span>;              <span class="comment">//校正当前索引</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> items[index];            <span class="comment">//返回最后一个元素</span></span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            pre: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;                <span class="comment">//获取前一个元素</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (--index &gt; <span class="number">0</span>) &#123;                  <span class="comment">//如果不是第一个元素</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> items[index];            <span class="comment">//索引减1,返回前一个</span></span></span><br><span class="line"><span class="javascript">                &#125; <span class="keyword">else</span> &#123;                               <span class="comment">//如果是第一个元素</span></span></span><br><span class="line"><span class="javascript">                    index = <span class="number">0</span>;                          <span class="comment">//校正索引</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> <span class="literal">null</span>;                         <span class="comment">//返回null</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            next: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;              <span class="comment">//获取后一个元素</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (++index &lt; length) &#123;            <span class="comment">//如果不是最后一个元素</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> items[index];                <span class="comment">//索引加1,返回后一个</span></span></span><br><span class="line"><span class="javascript">                &#125; <span class="keyword">else</span> &#123;                                  <span class="comment">//如果是最后一个</span></span></span><br><span class="line"><span class="javascript">                    index = length - <span class="number">1</span>;                  <span class="comment">//校正索引</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> <span class="literal">null</span>;                              <span class="comment">//返回null</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            get: <span class="function"><span class="keyword">function</span> (<span class="params">num</span>) </span>&#123;          <span class="comment">//获取某一个元素</span></span></span><br><span class="line"><span class="javascript">                index = num &gt;= <span class="number">0</span> ? num % length : num % length + length;     <span class="comment">//大于0正向获取，小于0反向获取</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> items[index];                    <span class="comment">//设置索引并返回指定元素</span></span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            dealEach: <span class="function"><span class="keyword">function</span> (<span class="params">fn</span>) </span>&#123;   <span class="comment">//对每一个元素执行某一个方法</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> args = splice.call(<span class="built_in">arguments</span>,<span class="number">1</span>);         <span class="comment">//第二个参数起为回调函数的参数</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span> ;i&lt;length;i++)&#123;</span></span><br><span class="line"><span class="javascript">                    fn.apply(items[i],args);                            <span class="comment">//使回调函数在每一个元素作用域执行一次</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            dealItem: <span class="function"><span class="keyword">function</span> (<span class="params">num,fn</span>) </span>&#123;         <span class="comment">//对某一个元素执行某一个方法</span></span></span><br><span class="line"><span class="javascript">                fn.apply(<span class="keyword">this</span>.get(num),splice.call(<span class="built_in">arguments</span>,<span class="number">2</span>));    <span class="comment">//在指定作用域中执行,参数大于2个后面将作为回调参数</span></span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            exclusive: <span class="function"><span class="keyword">function</span> (<span class="params">num,allFn,numFn</span>) </span>&#123;          <span class="comment">//排他方式处理某一个元素</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">this</span>.dealEach(allFn);               <span class="comment">//对所有元素执行回调函数</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(<span class="built_in">Object</span>.prototype.toString.call(num) === <span class="string">"[object Array]"</span> )&#123;      <span class="comment">//如果num为数组</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,len = num.length;i&lt;len;i++)&#123;          <span class="comment">//遍历数组</span></span></span><br><span class="line"><span class="javascript">                        <span class="keyword">this</span>.dealItem(num[i],numFn);                            <span class="comment">//执行排他函数</span></span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="javascript">                &#125;<span class="keyword">else</span>&#123;                  <span class="comment">//如果num不是数组</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">this</span>.dealItem(num,numFn);               <span class="comment">//直接执行排他函数</span></span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> demo = <span class="keyword">new</span> Iterator(<span class="string">'li'</span>,<span class="string">'demo'</span>);</span></span><br><span class="line"><span class="javascript">    <span class="comment">//获取元素</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(demo.first());              <span class="comment">//&lt;li&gt;1&lt;/li&gt;</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(demo.pre());               <span class="comment">//null</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(demo.next());             <span class="comment">//&lt;li&gt;2&lt;/li&gt;</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(demo.get(<span class="number">1000</span>));       <span class="comment">//&lt;li&gt;1&lt;/li&gt;</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//处理所有元素</span></span></span><br><span class="line"><span class="javascript">    demo.dealEach(<span class="function"><span class="keyword">function</span>(<span class="params">text,color</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.innerHTML = text;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.style.background = color;</span></span><br><span class="line"><span class="javascript">    &#125;,<span class="string">'test'</span>,<span class="string">'pink'</span>);                                                   <span class="comment">//文字变为test,背景变为了pink</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//排他方法处理第三个和第四个元素</span></span></span><br><span class="line"><span class="javascript">    demo.exclusive([<span class="number">2</span>,<span class="number">3</span>],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.innerHTML = <span class="string">'被排除的'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.style.background = <span class="string">'green'</span>;</span></span><br><span class="line"><span class="javascript">    &#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.innerHTML = <span class="string">'选中的'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.style.background = <span class="string">'red'</span>;</span></span><br><span class="line"><span class="javascript">    &#125;);         <span class="comment">//除了第三和第四个元素的文本为选中的且背景为红色外，其他的文本为被排除的，背景为绿色</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="数组迭代器"><a href="#数组迭代器" class="headerlink" title="数组迭代器"></a>数组迭代器</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eachArray = <span class="function"><span class="keyword">function</span> (<span class="params">arr, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">0</span>,                <span class="comment">//循环变量</span></span><br><span class="line">        len = arr.length;     <span class="comment">//数组长度</span></span><br><span class="line">    <span class="keyword">for</span> (; i &lt; len; i++) &#123;          <span class="comment">//遍历</span></span><br><span class="line">        fn.call(arr[i], i, arr[i]);         <span class="comment">//回调函数中第一个为索引，第二个为该索引对应的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">eachArray(arr, <span class="function"><span class="keyword">function</span> (<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">    arr[key] += value;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(arr);           <span class="comment">//[2,4,6,8]</span></span><br></pre></td></tr></table></figure>
+<h1 id="对象迭代器"><a href="#对象迭代器" class="headerlink" title="对象迭代器"></a>对象迭代器</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eachObject = <span class="function"><span class="keyword">function</span> (<span class="params">obj, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        fn.call(obj[i], i, obj[i]);     <span class="comment">// 与数组类似</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    one: <span class="number">1</span>,</span><br><span class="line">    two: <span class="number">2</span>,</span><br><span class="line">    three: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">eachObject(obj, <span class="function"><span class="keyword">function</span> (<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">    obj[key] += value;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(obj);           <span class="comment">// &#123; one: 2, two: 4, three: 6 &#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="同步变量迭代器"><a href="#同步变量迭代器" class="headerlink" title="同步变量迭代器"></a>同步变量迭代器</h1><ul>
+<li>问题为如果有对象A，要访问该对象b属性下面的c属性，不能直接A.b.c访问，而是A&amp;&amp;A.b&amp;&amp;A.b.c,这是便需要迭代校验。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步变量</span></span><br><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">    common: &#123;&#125;,              <span class="comment">//公共的</span></span><br><span class="line">    client: &#123;                     <span class="comment">//客户端</span></span><br><span class="line">        user: &#123;</span><br><span class="line">            username: <span class="string">'name'</span>,</span><br><span class="line">            uid: <span class="string">'123'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    server: &#123;&#125;                <span class="comment">//服务端</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//同步变量迭代取值器</span></span><br><span class="line"><span class="keyword">var</span> AGetter = <span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!A) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = A;                 <span class="comment">//获取同步变量A</span></span><br><span class="line">    key = key.split(<span class="string">'.'</span>);           <span class="comment">//解析属性层次序列</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = key.length; i &lt; len; i++) &#123;       <span class="comment">//迭代A对象属性</span></span><br><span class="line">        <span class="keyword">if</span> (result[key[i]] !== <span class="literal">undefined</span>) &#123;                           <span class="comment">//如果第i层属性存在</span></span><br><span class="line">            result = result[key[i]];                                          <span class="comment">//迭代该属性值(result层次变深)</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;                                                                <span class="comment">//如果不存在属性</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;                                                <span class="comment">//返回未定义</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;                  <span class="comment">//返回获取结果</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//console.log(AGetter('client.user.username'));       //name</span></span><br><span class="line"><span class="comment">//console.log(AGetter('server.lang.local'));              //undefined  因为server下没有lang属性</span></span><br><span class="line"><span class="comment">//同步变量迭代设值器</span></span><br><span class="line"><span class="keyword">var</span> ASetter = <span class="function"><span class="keyword">function</span> (<span class="params">key, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!A) &#123;                         <span class="comment">//如果A不存在则返回false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = A;</span><br><span class="line">    key = key.split(<span class="string">'.'</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = key.length; i &lt; len - <span class="number">1</span>; i++) &#123;       <span class="comment">//之所以是len-1是把i的最终结果放到了return里</span></span><br><span class="line">        <span class="built_in">console</span>.log(key[i]);</span><br><span class="line">        <span class="keyword">if</span> (result[key[i]] === <span class="literal">undefined</span>) &#123;         <span class="comment">//如果第i层属性对应的值不存在</span></span><br><span class="line">            result[key[i]] = &#123;&#125;;                                <span class="comment">//则定义为对象</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!(result[key[i]] <span class="keyword">instanceof</span> <span class="built_in">Object</span>)) &#123;        <span class="comment">//如果第i层属性对应的值不是一个对象</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'A.'</span> + key.splice(<span class="number">0</span>, i + <span class="number">1</span>).join(<span class="string">'.'</span>) + <span class="string">' is not Object'</span>);      <span class="comment">//抛出错误</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        result = result[key[i]];                <span class="comment">//迭代该属性值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result[key[i]] = val;            <span class="comment">//返回设置成功的属性值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(ASetter(<span class="string">'client.module.news.sports'</span>, <span class="string">'on'</span>));             <span class="comment">//on</span></span><br><span class="line"><span class="built_in">console</span>.log(ASetter(<span class="string">'client.user.username.sports'</span>, <span class="string">'on'</span>));           <span class="comment">// A.client.user.username is not Object</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="分支循环迭代"><a href="#分支循环迭代" class="headerlink" title="分支循环迭代"></a>分支循环迭代</h1><pre><code class="javascript"><span class="keyword">var</span> data = {};                      <span class="comment">//假设为canvas的context.getImageData(...) .data获取的像素数据</span>
+<span class="keyword">var</span> alpha = <span class="number">0.5</span>;                  <span class="comment">//透明度</span>
+<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = data.length; i &lt; len; i += <span class="number">4</span>) {
+    <span class="keyword">switch</span> (t) {
+        <span class="keyword">case</span> <span class="string">'red'</span>:                 <span class="comment">//红色滤镜</span>
+            data[i + <span class="number">1</span>] = <span class="number">0</span>;
+            data[i + <span class="number">2</span>] = <span class="number">0</span>;
+            data[i + <span class="number">3</span>] = alpha;
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="string">'gray'</span>:                <span class="comment">//灰色滤镜</span>
+            <span class="keyword">var</span> num = <span class="built_in">parseInt</span>((data[i] + data[i + <span class="number">1</span>] + data[i + <span class="number">2</span>]) / <span class="number">3</span>);
+            data[i] = num;
+            data[i + <span class="number">1</span>] = num;
+            data[i + <span class="number">2</span>] = num;
+            data[i + <span class="number">3</span>] = alpha;
+            <span class="keyword">break</span>;
+        <span class="comment">//其他滤镜省略...</span>
+        <span class="comment">//该方式的确定是每次遍历都需要进行分支判断，如果分支较大，则性能消耗也会很大</span>
+    }
+}
+<span class="comment">//将循环抽象成一个迭代器</span>
+<span class="keyword">var</span> Deal = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> method = {                  <span class="comment">//状态模式封装</span>
+        <span class="string">'default'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>{           <span class="comment">//默认类型</span>
+            <span class="keyword">return</span> method[<span class="string">'gary'</span>](i);
+        },
+        <span class="string">'red'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>{               <span class="comment">//红色滤镜</span>
+            data[i + <span class="number">1</span>] = <span class="number">0</span>;
+            data[i + <span class="number">2</span>] = <span class="number">0</span>;
+            data[i + <span class="number">3</span>] = alpha;
+        },
+        <span class="string">'gray'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>{              <span class="comment">//灰色滤镜</span>
+            data[i] = data[i + <span class="number">1</span>] = <span class="built_in">parseInt</span>(data[i + <span class="number">2</span>] = (data[i] + data[i + <span class="number">1</span>] + data[i + <span class="number">2</span>] / <span class="number">3</span>));
+            data[<span class="number">3</span>] = alpha;
+        }
+        <span class="comment">//其他滤镜省略...</span>
+    }
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">type</span>) </span>{                  <span class="comment">//通过给定类型返回对应滤镜算法，调用时需要传参</span>
+        <span class="keyword">return</span> method[type] || method[<span class="string">'default'</span>];
+    }
+})();
+<span class="comment">//迭代处理数据</span>
+<span class="function"><span class="keyword">function</span> <span class="title">eachData</span>(<span class="params">fn</span>) </span>{
+    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = data.length; i &lt; len; i += <span class="number">4</span>) {
+        fn(i);          <span class="comment">//处理一组像素数据</span>
+    }
+}
+</code></pre>
+<h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><pre><code>简化了代码中的循环语句，使代码结构清晰紧凑(这些简化的循环语句实质上隐形地移到了迭代器中)。
+这有效地解决了对象使用者与对象内部结构之间的耦合，同时也为我们提供了操作对象的一个统一接口。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/行为型模式/" rel="tag">#行为型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/memento/" rel="next" title="备忘录模式">
+                <i class="fa fa-chevron-left"></i> 备忘录模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/interperter/" rel="prev" title="解释器模式">
+                解释器模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#元素迭代器"><span class="nav-number">1.</span> <span class="nav-text">元素迭代器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组迭代器"><span class="nav-number">2.</span> <span class="nav-text">数组迭代器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象迭代器"><span class="nav-number">3.</span> <span class="nav-text">对象迭代器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步变量迭代器"><span class="nav-number">4.</span> <span class="nav-text">同步变量迭代器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分支循环迭代"><span class="nav-number">5.</span> <span class="nav-text">分支循环迭代</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优点"><span class="nav-number">6.</span> <span class="nav-text">优点</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="创建型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="通过对类的工厂抽象使其业务用于对产品类族的创建，而不负责创建某一类产品的实例。抽象工厂其实是一个类实现继承父类的方法，所以它的本质是一个方法，一般不需要实例化对象，故只需要一份。">
+<meta name="keywords" content="创建型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抽象工厂">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/abstract-factory/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="通过对类的工厂抽象使其业务用于对产品类族的创建，而不负责创建某一类产品的实例。抽象工厂其实是一个类实现继承父类的方法，所以它的本质是一个方法，一般不需要实例化对象，故只需要一份。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.726Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抽象工厂">
+<meta name="twitter:description" content="通过对类的工厂抽象使其业务用于对产品类族的创建，而不负责创建某一类产品的实例。抽象工厂其实是一个类实现继承父类的方法，所以它的本质是一个方法，一般不需要实例化对象，故只需要一份。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/abstract-factory/"/>
+
+
+  <title> 抽象工厂 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                抽象工厂
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T14:16:02+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>通过对类的工厂抽象使其业务用于对产品类族的创建，而不负责创建某一类产品的实例。抽象工厂其实是一个类实现继承父类的方法，所以它的本质是一个方法，一般不需要实例化对象，故只需要一份。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="JavaScript抽象类"><a href="#JavaScript抽象类" class="headerlink" title="JavaScript抽象类"></a>JavaScript抽象类</h1><ul>
+<li>在JavaScript中，抽象类一般不用来创建具体对象。抽象类中定义的方法只是显性的定义一些功能，但没有具体实现，也不允许直接调用。而一个对象是要具有一套完整的功能的，所有用抽象创建的对象也是”抽象的”。所以不能用它来创建一个真实的对象。一般用抽象类作为父类创建一些子类。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Car = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;          <span class="comment">// 定义抽象类</span></span><br><span class="line">Car.prototype = &#123;               <span class="comment">// 方法不能直接调用</span></span><br><span class="line">    <span class="keyword">constructor</span>:Car,</span><br><span class="line">    getPrice : function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    getSpeed : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;                                <span class="comment">// var car = new Car(); 也是抽象的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="抽象工厂方法"><a href="#抽象工厂方法" class="headerlink" title="抽象工厂方法"></a>抽象工厂方法</h1><ul>
+<li>其实质是在抽象方法内部实现子类到父类的继承，在其属性上挂载不同的抽象类 。<pre><code class="javascript"><span class="comment">//抽象工厂方法</span>
+<span class="keyword">var</span> VehicleFactory = <span class="function"><span class="keyword">function</span>(<span class="params">sbuType,superType</span>)</span>{
+  <span class="keyword">if</span>(<span class="keyword">typeof</span> VehicleFactory[superType] === <span class="string">'function'</span>){          <span class="comment">//判断抽象工厂中是否有该抽象类</span>
+      <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>{}                                                                  <span class="comment">//定义缓存类, 寄生式继承</span>
+      F.prototype = <span class="keyword">new</span> VehicleFactory[superType]();          <span class="comment">//这里是父类实例,而不是prototype,因为要继承父类属性和方法</span>
+      subType.constructor = subType;                                  <span class="comment">//修正子类构造指向</span>
+      subType.prototype = <span class="keyword">new</span> F();                                     <span class="comment">//子类原型继承父类</span>
+  }<span class="keyword">else</span>{
+      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'未创建该抽象类'</span>);                                  <span class="comment">//不存在该抽象类抛错</span>
+  }
+}
+<span class="comment">//小汽车抽象类</span>
+VehicleFactory.Car = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">this</span>.type = <span class="string">'car'</span>;
+}
+VehicleFactory.Car.prototype = {
+  <span class="keyword">constructor</span>:VehicleFactory.Car,
+  getPrice:function(){
+      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);
+  },
+  getSpeed : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);
+  }
+}
+<span class="comment">//公交车抽象类</span>
+VehicleFactory.Bus = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">this</span>.type = <span class="string">'bus'</span>;
+}
+VehicleFactory.Bus.prototype = {
+  <span class="keyword">constructor</span>:VehicleFactory.Bus,
+  getPrice:function(){
+      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);
+  },
+  getSpeed : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);
+  }
+}
+<span class="comment">//货车抽象类</span>
+VehicleFactory.Truck = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">this</span>.type = <span class="string">'truck'</span>;
+}
+VehicleFactory.Truck.prototype = {
+  <span class="keyword">constructor</span>:VehicleFactory.Truck,
+  getPrice:function(){
+      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);
+  },
+  getSpeed : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'抽象方法不能直接调用'</span>);
+  }
+}
+</code></pre>
+<h1 id="抽象工厂方法应用"><a href="#抽象工厂方法应用" class="headerlink" title="抽象工厂方法应用"></a>抽象工厂方法应用</h1><pre><code class="javascript"><span class="comment">//宝马汽车子类</span>
+<span class="keyword">var</span> BMW = <span class="function"><span class="keyword">function</span>(<span class="params">price,speed</span>)</span>{
+  <span class="keyword">this</span>.price = price;
+  <span class="keyword">this</span>.speed = speed;
+}
+VehicleFactory(BMW,<span class="string">'Car'</span>);      <span class="comment">//抽象工厂实现对Car抽象类的继承</span>
+BMW.prototype.getPrice = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{          <span class="comment">//覆写方法</span>
+  <span class="keyword">return</span> <span class="keyword">this</span>.price;
+}
+BMW.prototype.getSpeed = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{          <span class="comment">//覆写方法</span>
+  <span class="keyword">return</span> <span class="keyword">this</span>.speed;
+}
+<span class="comment">//宇通汽车子类</span>
+<span class="keyword">var</span> YUTONG = <span class="function"><span class="keyword">function</span>(<span class="params">price,passenger</span>)</span>{
+  <span class="keyword">this</span>.price = price;
+  <span class="keyword">this</span>.passenger = passenger;
+}
+VehicleFactory(YUTONG,<span class="string">'Bus'</span>);      <span class="comment">//抽象工厂实现对Bus抽象类的继承</span>
+YUTONG.prototype.getPrice = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{          <span class="comment">//覆写方法</span>
+  <span class="keyword">return</span> <span class="keyword">this</span>.price;
+}
+YUTONG.prototype.getPassengerNum = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="keyword">this</span>.passenger;
+}
+<span class="comment">//奔驰汽车子类</span>
+<span class="keyword">var</span> BenzTruck = <span class="function"><span class="keyword">function</span>(<span class="params">price,trainload</span>)</span>{
+  <span class="keyword">this</span>.price = price;
+  <span class="keyword">this</span>.trainload = trainload;
+}
+VehicleFactory(BenzTruck,<span class="string">'Truck'</span>);      <span class="comment">//抽象工厂实现对Truck抽象类的继承</span>
+BenzTruck.prototype.getPrice = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{          <span class="comment">//覆写方法</span>
+  <span class="keyword">return</span> <span class="keyword">this</span>.price;
+}
+BenzTruck.prototype.getTrainload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="keyword">this</span>.trainload;
+}
+<span class="keyword">var</span> bmw = <span class="keyword">new</span> BMW(<span class="number">1000000</span>,<span class="number">1000</span>);
+<span class="built_in">console</span>.log(bmw.type);              <span class="comment">//car</span>
+<span class="built_in">console</span>.log(bmw.getPrice());        <span class="comment">//1000000</span>
+</code></pre>
+</li>
+</ul>
+<h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><pre><code>可以判断子类的类别。通过重写父类的方法正确地得到结构。 适用于多分类多之类的状况。
+</code></pre><h1 id="应用情况"><a href="#应用情况" class="headerlink" title="应用情况"></a>应用情况</h1><pre><code>由于JavaScript中不支持抽象化创建于虚拟方法（ES6之前），这种模式引用较少。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/创建型模式/" rel="tag">#创建型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/factory-method/" rel="next" title="工厂方法模式">
+                <i class="fa fa-chevron-left"></i> 工厂方法模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/builder/" rel="prev" title="建造者模式">
+                建造者模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript抽象类"><span class="nav-number">1.</span> <span class="nav-text">JavaScript抽象类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象工厂方法"><span class="nav-number">2.</span> <span class="nav-text">抽象工厂方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象工厂方法应用"><span class="nav-number">3.</span> <span class="nav-text">抽象工厂方法应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优势"><span class="nav-number">4.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用情况"><span class="nav-number">5.</span> <span class="nav-text">应用情况</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

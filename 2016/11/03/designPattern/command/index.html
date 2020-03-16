@@ -1,0 +1,769 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="行为型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="将请求与实现解耦并封装成独立对象，从而使不同的请求对客户端的实现参数化。命令模式将创建模块的逻辑封装在一个对象里，这个对象提供一个参数化的请求接口，通过调用这个接口并传递一些参数实现调用命令对象内部中的一些方法。">
+<meta name="keywords" content="行为型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/command/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="将请求与实现解耦并封装成独立对象，从而使不同的请求对客户端的实现参数化。命令模式将创建模块的逻辑封装在一个对象里，这个对象提供一个参数化的请求接口，通过调用这个接口并传递一些参数实现调用命令对象内部中的一些方法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="命令模式">
+<meta name="twitter:description" content="将请求与实现解耦并封装成独立对象，从而使不同的请求对客户端的实现参数化。命令模式将创建模块的逻辑封装在一个对象里，这个对象提供一个参数化的请求接口，通过调用这个接口并传递一些参数实现调用命令对象内部中的一些方法。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/command/"/>
+
+
+  <title> 命令模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                命令模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T15:36:34+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>将请求与实现解耦并封装成独立对象，从而使不同的请求对客户端的实现参数化。命令模式将创建模块的逻辑封装在一个对象里，这个对象提供一个参数化的请求接口，通过调用这个接口并传递一些参数实现调用命令对象内部中的一些方法。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="命令对象"><a href="#命令对象" class="headerlink" title="命令对象"></a>命令对象</h1><pre><code class="javascript"><span class="keyword">var</span> viewCommand = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> tpl = {
+            product: [              <span class="comment">//展示图片结构模板</span>
+                <span class="string">'&lt;div&gt;'</span>,
+                <span class="string">'&lt;img src=""/&gt;'</span>,
+                <span class="string">'&lt;p&gt;&lt;/p&gt;'</span>,
+                <span class="string">'&lt;/div&gt;'</span>
+            ].join(<span class="string">''</span>),                         <span class="comment">//最终是字符串&lt;div&gt;&lt;img src=""/&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span>
+            title: [                 <span class="comment">//展示标题结构模板</span>
+                <span class="string">'&lt;div class="title"&gt;'</span>,
+                <span class="string">'&lt;div class="main"&gt;'</span>,
+                <span class="string">'&lt;h2&gt;&lt;/h2&gt;'</span>,
+                <span class="string">'&lt;p&gt;&lt;/p&gt;'</span>,
+                <span class="string">'&lt;/div&gt;'</span>,
+                <span class="string">'&lt;/div&gt;'</span>
+            ].join(<span class="string">''</span>)                      <span class="comment">//join('')表示按空字符串链接数组</span>
+        },
+        html = <span class="string">''</span>;                  <span class="comment">//格式化字符串缓存字符串</span>
+    <span class="function"><span class="keyword">function</span> <span class="title">formatString</span>(<span class="params">str, obj</span>) </span>{                   <span class="comment">//替换''之间的字符</span>
+        <span class="keyword">return</span> str.replace(<span class="regexp">/\ --&gt;title</span>
+<span class="regexp">            return obj[key];</span>
+<span class="regexp">        })</span>
+<span class="regexp">    }</span>
+<span class="regexp">    var Action = {</span>
+<span class="regexp">        create: function (data, view) {                 /</span><span class="regexp">/创建方法,data是数据，view是模板(title/</span>product)
+            <span class="keyword">if</span> (data.length) {                          <span class="comment">//如果是数组</span>
+                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = data.length; i &lt; len; i++) {
+                    html += formatString(tpl[view], data[i]);       <span class="comment">//用数据去格式化模板，并缓存</span>
+                }
+            } <span class="keyword">else</span> {                              <span class="comment">//如果不是数组,可能是对象</span>
+                html += formatString(tpl[view], data);              <span class="comment">//格式化并缓存</span>
+            }
+        },
+        display: <span class="function"><span class="keyword">function</span> (<span class="params">container, data, view</span>) </span>{         <span class="comment">//展示方法, 参数为页面节点,数据,视图</span>
+            <span class="keyword">if</span> (data) {                         <span class="comment">//如果传入数据则先去创建，不传数据就直接去拿原来的html直接展示。</span>
+                <span class="keyword">this</span>.create(data, view);        <span class="comment">//创建视图</span>
+            }
+            <span class="built_in">document</span>.getElementById(container).innerHTML = html;        <span class="comment">//插入页面</span>
+            html = <span class="string">''</span>;                              <span class="comment">//清空缓存</span>
+        }
+    };
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">excute</span>(<span class="params">msg</span>) </span>{
+        msg.param = <span class="built_in">Object</span>.prototype.toString.call(msg.param) === <span class="string">'[object Array]'</span> ? msg.param : [msg.param];<span class="comment">//若非数组转化为数组</span>
+        Action[msg.command].apply(Action, msg.param);           <span class="comment">//执行命令</span>
+    };
+})();
+<span class="comment">//测试数据</span>
+<span class="keyword">var</span> productData = [
+        {
+            src: <span class="string">'command/02.jpg'</span>,
+            text: <span class="string">'绽放的桃花'</span>
+        },
+        {
+            src: <span class="string">'command/03.jpg'</span>,
+            text: <span class="string">'阳光下的温馨'</span>
+        },
+        {
+            src: <span class="string">'command/04.jpg'</span>,
+            text: <span class="string">'镜头前的绿色'</span>
+        }
+    ],
+    titleData = [
+        {
+            title: <span class="string">'夏日里的一片温馨'</span>,
+            tips: <span class="string">'乱乱的温情带给人们家的感受。'</span>
+        }
+    ];
+<span class="comment">//调用</span>
+viewCommand({               <span class="comment">//展示一个标题模块</span>
+    command: <span class="string">'display'</span>,        <span class="comment">//去调用Action的display方法，因param是数组，直接将'titlebox',titleData,'title'传给了display</span>
+    param: [<span class="string">'titlebox'</span>, titleData, <span class="string">'title'</span>]    <span class="comment">//有数据，会调用create方法，把数据和模板给它组装赋给html,最后又display展示</span>
+});
+viewCommand({               <span class="comment">//创建一个图片,这里只是纯粹创建了一个模块，并不会展示到页面上。</span>
+    command: <span class="string">'create'</span>,
+    param: [
+        {
+            src: <span class="string">'command/01.jpg'</span>,
+            text: <span class="string">'迎着朝阳的野菊花'</span>
+        }, <span class="string">'product'</span>]
+});
+viewCommand({               <span class="comment">//创建多个图片，调用display会先拿到原来的html在拼接，完成展示后才清空</span>
+    command: <span class="string">'display'</span>,
+    param: [<span class="string">'productbox'</span>, productData, <span class="string">'product'</span>]
+});
+</code></pre>
+<h1 id="Canvas解耦-屏蔽canvas上下文引用的耦合"><a href="#Canvas解耦-屏蔽canvas上下文引用的耦合" class="headerlink" title="Canvas解耦(屏蔽canvas上下文引用的耦合)"></a>Canvas解耦(屏蔽canvas上下文引用的耦合)</h1><pre><code class="javascript"><span class="keyword">var</span> CanvasCommand = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>),         <span class="comment">//获取canvas</span>
+        ctx = canvas.getContext(<span class="string">'2d'</span>);                      <span class="comment">//获取上下文，缓存在了对象内部，只能通过接口访问</span>
+    <span class="keyword">var</span> Action = {
+        fillStyle: <span class="function"><span class="keyword">function</span> (<span class="params">c</span>) </span>{                               <span class="comment">//填充颜色</span>
+            ctx.fillStyle = c;
+        },
+        fillRect: <span class="function"><span class="keyword">function</span> (<span class="params">x, y, width, height</span>) </span>{      <span class="comment">//绘制矩形</span>
+            ctx.fillRect(x, y, width, height);
+        }
+    }
+    <span class="keyword">return</span> {
+        excute: <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>{
+            <span class="keyword">if</span> (!msg) {                     <span class="comment">//没有指令则返回</span>
+                <span class="keyword">return</span>;
+            }
+            <span class="keyword">if</span> (msg.length) {           <span class="comment">//命令是一个数组</span>
+                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = msg.length; i &lt; len; i++) {
+                    <span class="built_in">arguments</span>.callee(msg[i]);           <span class="comment">//将数组元素作为参数重新调用，将走else的流程</span>
+                }
+            } <span class="keyword">else</span> {                         <span class="comment">//执行单个命令</span>
+                msg.param = <span class="built_in">Object</span>.prototype.toString.call(msg.param) === <span class="string">'[object Array]'</span> ? msg.param : [msg.param];<span class="comment">//非数组转化为数组</span>
+                Action[msg.command].apply(Action, msg.param);               <span class="comment">//内部调用执行</span>
+            }
+        }
+    }
+})()
+<span class="comment">//调用，传入数组</span>
+CanvasCommand.excute([
+    {<span class="attr">command</span>: <span class="string">'fillStyle'</span>, <span class="attr">param</span>: <span class="string">'red'</span>},
+    {<span class="attr">command</span>: <span class="string">'fillRect'</span>, <span class="attr">param</span>: [<span class="number">20</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">100</span>]}
+]);
+</code></pre>
+<h1 id="主要特征与功能"><a href="#主要特征与功能" class="headerlink" title="主要特征与功能"></a>主要特征与功能</h1><pre><code>封装功能，并提供简单而高效的API以提高团队开发的效率。 
+其将执行的命令封装，解决命令的发起者与执行者之间的耦合。
+</code></pre><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>没执行一次操作都要调用一次命令对象，增加了系统的复杂度，需酌情使用。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/行为型模式/" rel="tag">#行为型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/chain-of-responsibility/" rel="next" title="职责链模式">
+                <i class="fa fa-chevron-left"></i> 职责链模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/visitor/" rel="prev" title="访问者模式">
+                访问者模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命令对象"><span class="nav-number">1.</span> <span class="nav-text">命令对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Canvas解耦-屏蔽canvas上下文引用的耦合"><span class="nav-number">2.</span> <span class="nav-text">Canvas解耦(屏蔽canvas上下文引用的耦合)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主要特征与功能"><span class="nav-number">3.</span> <span class="nav-text">主要特征与功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺点"><span class="nav-number">4.</span> <span class="nav-text">缺点</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

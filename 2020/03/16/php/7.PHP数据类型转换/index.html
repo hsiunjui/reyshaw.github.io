@@ -1,0 +1,675 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP中各种数据类型之间的相互转换规则.">
+<meta name="keywords" content="php基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP数据类型转换">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/7.PHP数据类型转换/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP中各种数据类型之间的相互转换规则.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:27:07.606Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP数据类型转换">
+<meta name="twitter:description" content="PHP中各种数据类型之间的相互转换规则.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/7.PHP数据类型转换/"/>
+
+
+  <title> PHP数据类型转换 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP数据类型转换
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP中各种数据类型之间的相互转换规则.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="类型转换定义"><a href="#类型转换定义" class="headerlink" title="类型转换定义"></a>类型转换定义</h1><p>不同类型数据之间进行比较或者是参与运算的时候,按照统一的类型来进行。</p>
+<h1 id="类转转换的种类"><a href="#类转转换的种类" class="headerlink" title="类转转换的种类"></a>类转转换的种类</h1><ul>
+<li><p>自动转换(隐式转换,程序根据上下文环境自动进行)</p>
+<ul>
+<li><p>其他类型转换为数值型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">true</span>=&gt;<span class="number">1</span>; <span class="keyword">false</span> =&gt; <span class="number">0</span>; <span class="comment">// 布尔-&gt;数值</span></span><br><span class="line"><span class="keyword">null</span>=&gt;<span class="number">0</span>; <span class="comment">// null-&gt;数值</span></span><br><span class="line">string <span class="comment">// 非法数值开头-&gt;0;合法数值开头,取到第一个合法数值为止(注意科学计数法的表示,如'2e2bs')</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他类型转换为字符串型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="number">123</span>=&gt;<span class="string">'123'</span>; <span class="comment">// 数值-&gt;字符串</span></span><br><span class="line">  <span class="keyword">true</span>=&gt;<span class="string">'1'</span>; <span class="keyword">false</span>=&gt;<span class="string">''</span>; <span class="comment">// 布尔-&gt;字符串</span></span><br><span class="line">  <span class="keyword">null</span>=&gt;<span class="string">''</span>; <span class="comment">// null-&gt;字符串</span></span><br><span class="line">  <span class="keyword">array</span>()=&gt;<span class="string">'Array'</span>; <span class="comment">// 数组-&gt;字符串</span></span><br><span class="line">  resouce()=&gt;<span class="string">'Resource id #3'</span>; <span class="comment">// 资源-&gt;字符串</span></span><br><span class="line">  object <span class="comment">// 对象不能直接转换成字符串,需要重写toString()方法</span></span><br><span class="line">  ``` </span><br><span class="line">- 其他类型转换为布尔型 </span><br><span class="line">  ```php</span><br><span class="line">  <span class="number">0</span>=&gt;<span class="keyword">false</span>; <span class="number">0.0</span>=&gt;<span class="keyword">false</span>; <span class="comment">// 数值型-&gt;布尔</span></span><br><span class="line">  <span class="string">''</span>=&gt;<span class="keyword">false</span>; <span class="string">'0'</span>=&gt;<span class="keyword">false</span>; <span class="string">"0"</span>=&gt;<span class="keyword">false</span>; <span class="comment">// 字符串-&gt;布尔</span></span><br><span class="line">  <span class="keyword">null</span>=&gt;<span class="keyword">false</span>; <span class="comment">// null-&gt;布尔</span></span><br><span class="line">  <span class="keyword">array</span>()=&gt;<span class="keyword">false</span>; <span class="comment">// 数组=&gt;布尔,只有空数组才会转换为false</span></span><br><span class="line">  <span class="comment">// 除上述6种情况+布尔false外(总共7种false),其他都为true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>强制转换(显式转换)</p>
+<ul>
+<li>临时转换(不改变变量本身)<ul>
+<li>(变量类型)$(变量名),如 (int)false  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">      (int)$var; (integer)$var; <span class="comment">// 转为整型,浮点转整型会舍掉小数部分</span></span><br><span class="line">      (float)$var; (double)$var;(real)$var; <span class="comment">// 转为浮点型</span></span><br><span class="line">      (string)$var; <span class="comment">// 转为字符型</span></span><br><span class="line">      (bool)$var; (boolean)$var; <span class="comment">// 转为布尔</span></span><br><span class="line">      (<span class="keyword">unset</span>)$var; <span class="comment">// 转为null</span></span><br><span class="line">      (<span class="keyword">array</span>)$var; <span class="comment">// 转为数组,如$a = 1;(array)$a;会转成一个元素的数组，null会转为空数组, 不要把资源或对象转成数组,即使可以</span></span><br><span class="line">      (object)$var; <span class="comment">// 转成对象,如$a=1.1;(object)$a;会转成StdClass中public 'scalar' =&gt; float 1.1</span></span><br><span class="line">      ```  </span><br><span class="line">  - 通过系统函数进行转换</span><br><span class="line">      ```php</span><br><span class="line">      intval($var); (integer)$var; <span class="comment">// 转为整型,浮点转整型会舍掉小数部分</span></span><br><span class="line">      floatvalval($var); doubleval($var); <span class="comment">// 转为浮点型</span></span><br><span class="line">      strval($var); <span class="comment">// 转为字符型</span></span><br><span class="line">      boolval($var); <span class="comment">// 转为布尔</span></span><br><span class="line">      ```   </span><br><span class="line">- 永久转换(会改变变量的类型)</span><br><span class="line">  ```php</span><br><span class="line">  settype($var, $type) <span class="comment">//通过该函数来设置，可以使用gettype($var)来获取类型，但不建议使用,因为后期可能会废弃</span></span><br><span class="line">  <span class="comment">// $type可能的值为boolean(bool),integer(int),float,string,array,object,null</span></span><br><span class="line">  <span class="comment">// 如果不能转换则会报警告，原来的类型不变,如settype($var, 'king'),king类型并不存在</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="类型检测"><a href="#类型检测" class="headerlink" title="类型检测"></a>类型检测</h1><ul>
+<li>不建议使用gettype($var)检测类型,后面可能废弃</li>
+<li>可以通过以下方式来检测数据类型  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">is_int($var); <span class="comment">// 是否是整型</span></span><br><span class="line">is_float($var); is_double($var); is_real($var); <span class="comment">// 是否是浮点型</span></span><br><span class="line">is_string($var); <span class="comment">// 是否是字符串</span></span><br><span class="line">is_bool($var); <span class="comment">// 是否是布尔值</span></span><br><span class="line">is_scalar($var); <span class="comment">// 是否是标量类型</span></span><br><span class="line">is_null($var); <span class="comment">// 是否是空</span></span><br><span class="line">is_array($var); <span class="comment">// 是否是数组</span></span><br><span class="line">is_object($var); <span class="comment">// 是否是对像</span></span><br><span class="line">is_resource($var); <span class="comment">// 是否是资源</span></span><br><span class="line">is_numeric($var); <span class="comment">// 是否是数值型或字符串形式的数值型</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php基础/" rel="tag">#php基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/8.PHP的运算符/" rel="next" title="PHP运算符">
+                <i class="fa fa-chevron-left"></i> PHP运算符
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/6.PHP的数组/" rel="prev" title="PHP的数组">
+                PHP的数组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类型转换定义"><span class="nav-number">1.</span> <span class="nav-text">类型转换定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类转转换的种类"><span class="nav-number">2.</span> <span class="nav-text">类转转换的种类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类型检测"><span class="nav-number">3.</span> <span class="nav-text">类型检测</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

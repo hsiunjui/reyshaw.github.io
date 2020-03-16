@@ -1,0 +1,659 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="架构型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="web widget指的是一块可以在任意页面中执行的代码块。Widget模式是指借用web widget思想将页面分解成部件，针对部件开发，最终组合成完整的页面。">
+<meta name="keywords" content="架构型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Widget模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/widget/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="web widget指的是一块可以在任意页面中执行的代码块。Widget模式是指借用web widget思想将页面分解成部件，针对部件开发，最终组合成完整的页面。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Widget模式">
+<meta name="twitter:description" content="web widget指的是一块可以在任意页面中执行的代码块。Widget模式是指借用web widget思想将页面分解成部件，针对部件开发，最终组合成完整的页面。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/widget/"/>
+
+
+  <title> Widget模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Widget模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T16:46:12+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>web widget指的是一块可以在任意页面中执行的代码块。Widget模式是指借用web widget思想将页面分解成部件，针对部件开发，最终组合成完整的页面。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="模板引擎模块"><a href="#模板引擎模块" class="headerlink" title="模板引擎模块"></a>模板引擎模块</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要引用异步模块管理器F</span></span><br><span class="line">F.module(<span class="string">'lib/template'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _TplEngine = <span class="function"><span class="keyword">function</span> (<span class="params">str, data</span>) </span>&#123;   <span class="comment">//模板引擎，处理数据与编译模板接口(模板容器id或模板字符串，渲染数据)</span></span><br><span class="line">            <span class="keyword">if</span> (data <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;                  <span class="comment">//如果数据是数组</span></span><br><span class="line">                <span class="keyword">var</span> html = <span class="string">''</span>,</span><br><span class="line">                    i = <span class="number">0</span>,</span><br><span class="line">                    len = data.length;</span><br><span class="line">                <span class="keyword">for</span> (; i &lt; len; i++) &#123;                               <span class="comment">//缓存模板渲染结果</span></span><br><span class="line">                    html += _getTpl(str)(data[i]);              <span class="comment">//或者html+=arguments.callee(str,data[i])</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//console.log(html);</span></span><br><span class="line">                <span class="keyword">return</span> html;                                <span class="comment">//返回最终结果</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> _getTpl(str)(data);      <span class="comment">//非数组(一般是对象),直接返回渲染结果</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        _getTpl = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;             <span class="comment">//获取模板</span></span><br><span class="line">            <span class="keyword">var</span> ele = <span class="built_in">document</span>.getElementById(str);             <span class="comment">//通过id获取元素</span></span><br><span class="line">            <span class="keyword">if</span> (ele) &#123;</span><br><span class="line">                <span class="keyword">var</span> html = <span class="regexp">/^(textarea|input)$/i</span>.test(ele.nodeName) ? ele.value : ele.innerHTML;    <span class="comment">//值或内容</span></span><br><span class="line">                <span class="keyword">return</span> _compileTpl(html);        <span class="comment">//返回编译后内容</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> _compileTpl(str);           <span class="comment">//编译字符串模板</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        _dealTpl = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;   <span class="comment">//处理模板</span></span><br><span class="line">            <span class="keyword">var</span> _left = <span class="string">'&#123;%'</span>,                    <span class="comment">//左分隔符</span></span><br><span class="line">                _right = <span class="string">'%&#125;'</span>;                   <span class="comment">//右分隔符</span></span><br><span class="line">            <span class="comment">//console.log('编译前：');</span></span><br><span class="line">            <span class="comment">//console.log(str);</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">String</span>(str)</span><br><span class="line">                .replace(<span class="regexp">/&amp;lt;/g</span>, <span class="string">'&lt;'</span>)            <span class="comment">//转义标签内的&lt;,如在模板中a&lt;b需写成a &amp;lt; b</span></span><br><span class="line">                .replace(<span class="regexp">/&amp;gt;/g</span>, <span class="string">'&gt;'</span>)          <span class="comment">//转义标签内的&gt;</span></span><br><span class="line">                .replace(<span class="regexp">/[\r\t\n]/g</span>, <span class="string">''</span>)         <span class="comment">//过滤换行，制表符，回车符</span></span><br><span class="line">                .replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(_left + <span class="string">'=(.*?)'</span> + _right, <span class="string">'g'</span>), <span class="string">"',typeof($1) === 'undefined'?'':$1,'"</span>)    <span class="comment">//替换内容</span></span><br><span class="line">                .replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(_left,<span class="string">'g'</span>),<span class="string">"');"</span>)                                      <span class="comment">//替换左分隔符</span></span><br><span class="line">                .replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(_right,<span class="string">'g'</span>),<span class="string">"template_array.push('"</span>);   <span class="comment">//替换右分隔符</span></span><br><span class="line">        &#125;,</span><br><span class="line">        _compileTpl = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123; <span class="comment">//编译执行</span></span><br><span class="line">           <span class="keyword">var</span> fnBody = <span class="string">"var template_array = [];"</span>+            <span class="comment">//模板容器组</span></span><br><span class="line">            <span class="string">"var fn = (function(data)&#123;"</span>+                                <span class="comment">//闭包，模板容器组添加成员</span></span><br><span class="line">                <span class="string">"var template_key='';"</span>+                                 <span class="comment">//渲染数据变量的执行函数体</span></span><br><span class="line">                <span class="string">"for(key in data)&#123;"</span>+                                        <span class="comment">//遍历渲染数据</span></span><br><span class="line">                    <span class="string">"template_key+=('var '+key +'data[\"'+key+'\"];');"</span>+        <span class="comment">//为渲染数据变量的执行函数体添加复制语句</span></span><br><span class="line">                <span class="string">"&#125;"</span>+</span><br><span class="line">                <span class="string">"eval(template_key);"</span>+                                  <span class="comment">//执行渲染数据变量函数</span></span><br><span class="line">                <span class="string">"template_array.push('"</span>+_dealTpl(str)+<span class="string">"');"</span>+    <span class="comment">//为模板容器添加成员</span></span><br><span class="line">                <span class="string">"template_key = null;"</span>+                             <span class="comment">//释放渲染数据变量函数</span></span><br><span class="line">            <span class="string">"&#125;)(templateData);"</span>+                                     <span class="comment">//为闭包传入数据</span></span><br><span class="line">            <span class="string">"fn = null;"</span>+                                                  <span class="comment">//释放闭包</span></span><br><span class="line">            <span class="string">"return template_array.join('');"</span>;                  <span class="comment">//返回渲染后的模板容器组，并拼接成字符串</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'templateDate'</span>,fnBody);             <span class="comment">//返回函数</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> _TplEngine;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="页面模板编写即调用"><a href="#页面模板编写即调用" class="headerlink" title="页面模板编写即调用"></a>页面模板编写即调用</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo_tag"</span> <span class="attr">class</span>=<span class="string">"template"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"tag_cloud"</span>&gt;</span></span><br><span class="line">        &#123;% for(var i =0,len = tagCloud.length;i<span class="tag">&lt;<span class="name">len;i++)&#123;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">var</span> <span class="attr">ctx</span> = <span class="string">tagCloud[i];</span></span></span><br><span class="line"><span class="tag">        %&#125;</span></span><br><span class="line">        &lt;a href="#" class="tag_item &#123;% if(ctx['is_selected'])&#123; %&#125; selected &#123;% &#125; %&#125;" title="&#123;%= ctx['title'] %&#125;"&gt;&#123;%=ctx["text"]%&#125;&lt;/a&gt;</span><br><span class="line">        &#123;%</span><br><span class="line">            &#125;</span><br><span class="line">        %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span>test<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> data = &#123;</span></span><br><span class="line"><span class="undefined">        tagCloud:[</span></span><br><span class="line"><span class="javascript">            &#123;<span class="attr">is_selected</span>:<span class="literal">true</span>,<span class="attr">title</span>:<span class="string">'这是一本设计模式的书'</span>,<span class="attr">text</span>:<span class="string">'设计模式'</span>&#125;,</span></span><br><span class="line"><span class="javascript">            &#123;<span class="attr">is_selected</span>:<span class="literal">false</span>,<span class="attr">title</span>:<span class="string">'这是一本HTML的书'</span>,<span class="attr">text</span>:<span class="string">'HTML'</span>&#125;,</span></span><br><span class="line"><span class="javascript">            &#123;<span class="attr">is_selected</span>:<span class="literal">null</span>,<span class="attr">title</span>:<span class="string">'这是一本CSS的书'</span>,<span class="attr">text</span>:<span class="string">'CSS'</span>&#125;,</span></span><br><span class="line"><span class="javascript">            &#123;<span class="attr">is_selected</span>:<span class="string">''</span>,<span class="attr">title</span>:<span class="string">'这是一本JS的书'</span>,<span class="attr">text</span>:<span class="string">'JS'</span>&#125;</span></span><br><span class="line"><span class="undefined">        ]</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    F.module([<span class="string">'lib/template'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">template</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> str = template(<span class="string">'demo_tag'</span>,data);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">'test'</span>).innerHTML=str;          </span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="组件的两大部分"><a href="#组件的两大部分" class="headerlink" title="组件的两大部分"></a>组件的两大部分</h1><pre><code>一个完整的组件应该包含该模块的完整的视图和一套完整的功能。
+组件需要做两件事,第一是创建视图，第二是添加相应的功能 .
+</code></pre><h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><pre><code>第一：处理数据； 
+第二：获取模板；  
+第三：处理模板； 
+第四：编译执行；
+</code></pre><h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><pre><code>使页面开发模块化，页面(组件)均可独立开发，
+降低相互之间因功能或视图创建的耦合性影响。同时也方便与组件的管理及复用。 
+</code></pre><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>将页面视图与交互逻辑模块化的同时也将视图与创建视图所需的数据以及组件之间的交互逻辑耦合在一起了。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/架构型模式/" rel="tag">#架构型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/asynchronous-module-definition/" rel="next" title="异步模块模式">
+                <i class="fa fa-chevron-left"></i> 异步模块模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/model-view-controller/" rel="prev" title="MVC模式">
+                MVC模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模板引擎模块"><span class="nav-number">1.</span> <span class="nav-text">模板引擎模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面模板编写即调用"><span class="nav-number">2.</span> <span class="nav-text">页面模板编写即调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件的两大部分"><span class="nav-number">3.</span> <span class="nav-text">组件的两大部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现原理"><span class="nav-number">4.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优点"><span class="nav-number">5.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺点"><span class="nav-number">6.</span> <span class="nav-text">缺点</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

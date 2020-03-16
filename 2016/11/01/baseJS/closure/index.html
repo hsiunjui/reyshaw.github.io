@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js高级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="闭包是指可以访问函数局部变量的函数，其本质上还是是一个函数。">
+<meta name="keywords" content="js高级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript闭包">
+<meta property="og:url" content="http://yoursite.com/2016/11/01/baseJS/closure/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="闭包是指可以访问函数局部变量的函数，其本质上还是是一个函数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/closure-1.png">
+<meta property="og:image" content="http://yoursite.com/images/closure-2.png">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript闭包">
+<meta name="twitter:description" content="闭包是指可以访问函数局部变量的函数，其本质上还是是一个函数。">
+<meta name="twitter:image" content="http://yoursite.com/images/closure-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/01/baseJS/closure/"/>
+
+
+  <title> JavaScript闭包 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript闭包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-01T17:41:03+08:00" content="2016-11-01">
+              2016-11-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/客户端JS/" itemprop="url" rel="index">
+                    <span itemprop="name">客户端JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>闭包是指可以访问函数局部变量的函数，其本质上还是是一个函数。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="函数的作用域链："><a href="#函数的作用域链：" class="headerlink" title="函数的作用域链："></a>函数的作用域链：</h1><ul>
+<li><p>当调用一个函数的时候，会为这个函数创建一个SCOPE属性，这个属性保存了所有的上下文使用的变量。当在某个函数中调用新函数时，这个新函数依然会有一个作用域来保存原有函数的SCOPE和自己新增的SCOPE,这样便形成了一个链式结构。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">'red'</span>;                      <span class="comment">// 全局变量</span></span><br><span class="line"><span class="keyword">var</span> showColor = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;             <span class="comment">// 全局函数,打印变量值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.color);    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>)</span>&#123;                 <span class="comment">// 全局函数</span></span><br><span class="line">    <span class="keyword">var</span> anotherColor = <span class="string">'blue'</span>;          <span class="comment">// 局部变量</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swapColor</span>(<span class="params"></span>)</span>&#123;               <span class="comment">// 局部函数（闭包,交换变量值）</span></span><br><span class="line">        <span class="keyword">var</span> tempColor = anotherColor;</span><br><span class="line">        anotherColor = color;</span><br><span class="line">        color = tempColor;</span><br><span class="line">    &#125;</span><br><span class="line">    swapColor();                        <span class="comment">// 局部调用</span></span><br><span class="line">&#125;</span><br><span class="line">changeColor();                          <span class="comment">// 全局调用，内存图从这里开始，保存了全局的变量环境和自身的变量环境</span></span><br><span class="line">showColor();                            <span class="comment">// 全局调用，保存了全局，上级和自身的变量环境</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内存示意<br>  <img src="/images/closure-1.png" alt="闭包内存"></p>
+</li>
+</ul>
+<h1 id="闭包的影响"><a href="#闭包的影响" class="headerlink" title="闭包的影响"></a>闭包的影响</h1><ul>
+<li><p>扩大了某些局部变量的作用域范围。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compareObjectFunction</span>(<span class="params">prop</span>)</span>&#123;               <span class="comment">//  按照属性大小返回不同的值,可结合sort排序</span></span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">obj1,obj2</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(obj1[prop] &gt; obj2[prop])&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span>(obj1[prop] &lt; obj2[prop])&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">name</span>:<span class="string">'Leon'</span>,<span class="attr">age</span>:<span class="number">23</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> o2 = &#123;<span class="attr">name</span>:<span class="string">'Ada'</span>,<span class="attr">age</span>:<span class="number">28</span>&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    var arr = [o1,o2];</span></span><br><span class="line"><span class="comment">    arr.sort(compareObjectFunction('name'));</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> compare = compareObjectFunction(<span class="string">'age'</span>);  <span class="comment">// 在java等语言中，prop已经被释放了不能再访问, 此时的compare是一个函数</span></span><br><span class="line"><span class="keyword">var</span> rel = compare(o1,o2);                                   <span class="comment">// 在这里prop依然可以范围,可见扩大了prop局部变量的作用范围</span></span><br><span class="line"><span class="built_in">console</span>.log(rel);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内存示意<br><img src="/images/closure-2.png" alt="闭包内存"></p>
+</li>
+</ul>
+<h1 id="创建闭包函数的问题"><a href="#创建闭包函数的问题" class="headerlink" title="创建闭包函数的问题"></a>创建闭包函数的问题</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fns = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">        fns[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                <span class="comment">//  定义后fns中每个函数都是return i,而不是具体的值</span></span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fns;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> fs = fn1();                             <span class="comment">// 这里调用后,i既然存在其值是10</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;fs.length;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(fs[i]());                   <span class="comment">// 输出10行10，而不是0-9</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>原因：这是因为每次 return i 的时候都是取的fun1中for时定义的i,此i的值为10</li>
+<li><p>解决方案：是再定义闭包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> tf = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">        fns[num] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            retrun num;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     tf(i);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缺陷：但这样内存消耗是巨大的，所以闭包要慎用</p>
+</li>
+</ul>
+<h1 id="闭包中this的问题"><a href="#闭包中this的问题" class="headerlink" title="闭包中this的问题"></a>闭包中this的问题</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'zhangshan'</span>;</span><br><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">    name:<span class="string">'lisi'</span>,</span><br><span class="line">    say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> resultSay = Person.say();           <span class="comment">// 此时 resultSay是一个函数</span></span><br><span class="line"><span class="keyword">var</span> resultName =  resultSay();          <span class="comment">// 相当于 Person.say()();    输出zhangsan</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>原因：Person.say() 调用后this 就 指向 了window，而resultSay()相当于是执行了return window.name;</li>
+<li>解决方案：用临时变量保存上下文信息，在类中的say方法改为<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> that.name;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="块级作用域-匿名函数自执行"><a href="#块级作用域-匿名函数自执行" class="headerlink" title="块级作用域(匿名函数自执行)"></a>块级作用域(匿名函数自执行)</h1><pre><code class="javascript">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>;i++){
+    <span class="comment">// 如果不加匿名函数自执行,在外部是可以访问到i的值的,因为JavaScript中只有函数作用域,没有块级作用域(ES6之前)</span>
+    }    
+})();
+<span class="built_in">console</span>.log(i);     <span class="comment">// 此时已经无法访问i的值了</span>
+</code></pre>
+<h1 id="私有成员变量"><a href="#私有成员变量" class="headerlink" title="私有成员变量"></a>私有成员变量</h1><pre><code class="javascript"><span class="keyword">var</span> Person;
+(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="keyword">var</span> name = <span class="string">''</span>;                      <span class="comment">// 定义局部变量，封装到内部而不用this索引</span>
+    Person = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>{
+        name = value;
+    }
+    Person.prototype.setName = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>{     <span class="comment">// 通过set,get方法提供对外访问接口</span>
+        name = value;
+    }
+    Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> name;
+    }
+})();
+<span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'Leon'</span>);        <span class="comment">// 构造</span>
+person.setName(<span class="string">'Lucy'</span>);                 <span class="comment">// 设值</span>
+<span class="built_in">console</span>.log(person. getName());         <span class="comment">// 取值</span>
+</code></pre>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js高级/" rel="tag">#js高级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/01/baseJS/inherit/" rel="next" title="JavaScript继承">
+                <i class="fa fa-chevron-left"></i> JavaScript继承
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/01/baseJS/func-obj/" rel="prev" title="Function与Object">
+                Function与Object <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数的作用域链："><span class="nav-number">1.</span> <span class="nav-text">函数的作用域链：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包的影响"><span class="nav-number">2.</span> <span class="nav-text">闭包的影响</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建闭包函数的问题"><span class="nav-number">3.</span> <span class="nav-text">创建闭包函数的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包中this的问题"><span class="nav-number">4.</span> <span class="nav-text">闭包中this的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#块级作用域-匿名函数自执行"><span class="nav-number">5.</span> <span class="nav-text">块级作用域(匿名函数自执行)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#私有成员变量"><span class="nav-number">6.</span> <span class="nav-text">私有成员变量</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

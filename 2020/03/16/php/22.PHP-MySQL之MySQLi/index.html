@@ -1,0 +1,693 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php高级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP使用MySQLi方式对数据库的增删改查操作.">
+<meta name="keywords" content="php高级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP操作数据库(二) - MySQLi">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/22.PHP-MySQL之MySQLi/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP使用MySQLi方式对数据库的增删改查操作.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:41:09.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP操作数据库(二) - MySQLi">
+<meta name="twitter:description" content="PHP使用MySQLi方式对数据库的增删改查操作.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/22.PHP-MySQL之MySQLi/"/>
+
+
+  <title> PHP操作数据库(二) - MySQLi | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP操作数据库(二) - MySQLi
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP使用MySQLi方式对数据库的增删改查操作.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="MySQLi"><a href="#MySQLi" class="headerlink" title="MySQLi"></a>MySQLi</h1><p>是一种永久连接,可以减少与服务器连接的次数(但可能会造成一些内存浪费),减轻服务器压力,但只支持MySQL数据库.</p>
+<h1 id="面向过程的步骤"><a href="#面向过程的步骤" class="headerlink" title="面向过程的步骤"></a>面向过程的步骤</h1><p>1.连接数据库<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$connect = mysqli_connect(<span class="string">'host'</span>,<span class="string">'username'</span>,<span class="string">'password'</span>,<span class="string">'database'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>2.执行SQL语句,mysqli_query()</p>
+<ul>
+<li><p>查询,返回结果集或false</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mysqli_query($connect, 'set names utf8'); // 设置字符集</span></span><br><span class="line">$sql = <span class="string">'SELECT * FROM tbl'</span>;</span><br><span class="line">$result = mysqli_query($connect, $sql);</span><br><span class="line"><span class="comment">// 获取结果集</span></span><br><span class="line">mysqli_fetch_all($reuslt, MYSQL_NUM); <span class="comment">// 结果默认是索引数组,MYSQL_ASSOC, MYSQL_BOTH, 还可以使用mysqli_fetch_assoc等其他方法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增删改,返回布尔值</p>
+</li>
+</ul>
+<p>3.关闭数据库<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_close($connect);</span><br></pre></td></tr></table></figure></p>
+<h1 id="面向对象的步骤"><a href="#面向对象的步骤" class="headerlink" title="面向对象的步骤"></a>面向对象的步骤</h1><p>1.连接数据库<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$mysqli = <span class="keyword">new</span> mysqli(<span class="string">'host'</span>,<span class="string">'username'</span>,<span class="string">'password'</span>,<span class="string">'database'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>2.执行SQL语句</p>
+<ul>
+<li><p>查询,返回结果集或者是false</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$mysqli-&gt;query(<span class="string">"set names utf8"</span>); <span class="comment">// 设置字符集</span></span><br><span class="line">$sql = <span class="string">"SELECT * FROM tbl"</span>;</span><br><span class="line">$result = $mysqli-&gt;query($sql); <span class="comment">// object, mysql_result</span></span><br><span class="line"><span class="comment">// 处理结果集</span></span><br><span class="line">$data = $result-&gt;fetch_array(MYSQL_BOTH); <span class="comment">// 这里是$result对象,返回一条数据,可以修改返回方式,还可以使用fetch_all,fetch_assoc等方法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增删改,返回布尔值</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// $mysqli-&gt;query只检查语法问题,不判断如id存不存在等问题</span></span><br><span class="line">$mysqli-&gt;affected_rows; <span class="comment">// sql执行影响的条数</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="MySQLi事务控制"><a href="#MySQLi事务控制" class="headerlink" title="MySQLi事务控制"></a>MySQLi事务控制</h1><p>事务就是将多个逻辑工作组合成一个执行单元的数据库操作(一起成功/失败)。</p>
+<ul>
+<li><p>开启事务(默认是关闭的)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$mysqli-&gt;autocommit(<span class="keyword">false</span>); <span class="comment">// 默认自动提交,事务开启,必须要手动回滚或者提交</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事务回滚</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$mysqli-&gt;rollback();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事务提交</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  $mysqli-&gt;commit();</span><br><span class="line">  ``` </span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQLi预处理</span></span><br><span class="line">预处理是先提交SQL语句到服务端,执行预编译,客户端执行SQL语句时,只需上传参数即可,如果涉及多次读取或存储,效率高于普通SQL执行效率。  </span><br><span class="line">- 增删改</span><br><span class="line">  * 用?代替参数</span><br><span class="line">    ```php</span><br><span class="line">    $sql = <span class="string">"INSERT INTO tbl(name, money) VALUES(?,?)"</span>; <span class="comment">// ?占位</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>创建预编译对象</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  $stmt = $mysqli-&gt;prepare($sql); <span class="comment">// object, mysqli_stmt</span></span><br><span class="line">  ```    </span><br><span class="line">* 参数赋值</span><br><span class="line">  ```php</span><br><span class="line">  $name = <span class="string">"test"</span>;</span><br><span class="line">  $money = <span class="number">100</span>;</span><br><span class="line">  $stmt-&gt;bind_param(<span class="string">'si'</span>,$name,$money); <span class="comment">// string-s,int-i,bool-b,double-d...</span></span><br><span class="line">  <span class="comment">// 这个步骤可以多次重复使用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    $result = $stmt-&gt;execute();</span><br><span class="line">    ``` </span><br><span class="line">- 查询</span><br><span class="line">  * 用?代替参数(<span class="string">"SELECT * FROM tbl WHERE id=?"</span>)</span><br><span class="line">  * 创建预编译对象</span><br><span class="line">  * 参数赋值</span><br><span class="line">  * 绑定结果集</span><br><span class="line">    ```php</span><br><span class="line">    $stmt-&gt;bind_reuslt($id,$name,$money); <span class="comment">// 跟数据库字段一致</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行(这里接收不到返回值)</p>
+</li>
+<li>取出结果集<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$result = $stmp-&gt;fetch(); <span class="comment">// 取一条,需要循环取出</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php高级/" rel="tag">#php高级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/23.PHP_MySQL之PDO/" rel="next" title="PHP操作数据库(三) - PDO">
+                <i class="fa fa-chevron-left"></i> PHP操作数据库(三) - PDO
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/21.PHP-MySQL之MySQL方式/" rel="prev" title="PHP操作数据库(一) - MySQL">
+                PHP操作数据库(一) - MySQL <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQLi"><span class="nav-number">1.</span> <span class="nav-text">MySQLi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向过程的步骤"><span class="nav-number">2.</span> <span class="nav-text">面向过程的步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象的步骤"><span class="nav-number">3.</span> <span class="nav-text">面向对象的步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQLi事务控制"><span class="nav-number">4.</span> <span class="nav-text">MySQLi事务控制</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

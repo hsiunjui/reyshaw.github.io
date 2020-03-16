@@ -1,0 +1,685 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="创建型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="简单工厂又称为静态工厂方法，由一个工厂对象决定创建某一种产品对象类的实例。主要用来创建同一类对象。">
+<meta name="keywords" content="创建型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单工厂">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/simple-factory/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="简单工厂又称为静态工厂方法，由一个工厂对象决定创建某一种产品对象类的实例。主要用来创建同一类对象。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单工厂">
+<meta name="twitter:description" content="简单工厂又称为静态工厂方法，由一个工厂对象决定创建某一种产品对象类的实例。主要用来创建同一类对象。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/simple-factory/"/>
+
+
+  <title> 简单工厂 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                简单工厂
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T14:02:15+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>简单工厂又称为静态工厂方法，由一个工厂对象决定创建某一种产品对象类的实例。主要用来创建同一类对象。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="基于面向对象的登录检测"><a href="#基于面向对象的登录检测" class="headerlink" title="基于面向对象的登录检测"></a>基于面向对象的登录检测</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   用户名密码输入格式检测类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> LoginAlert = <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.content = text;</span><br><span class="line">&#125;</span><br><span class="line">LoginAlert.prototype.show =<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.content);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//检测用户名--当用户输入超出16位时调用</span></span><br><span class="line"><span class="keyword">var</span> loginAlert = <span class="keyword">new</span> LoginAlert(<span class="string">'用户名不能超出16位...'</span>);</span><br><span class="line">loginAlert.show();                                  <span class="comment">//输出用户名不能超出16位...</span></span><br><span class="line"><span class="comment">//检测密码（可以实现复用）-- 当密码输入错误的时候调用</span></span><br><span class="line"><span class="keyword">var</span> passwordAlert = <span class="keyword">new</span> LoginAlert(<span class="string">'密码不正确...'</span>);</span><br><span class="line">passwordAlert.show();                               <span class="comment">//输出密码不正确...</span></span><br><span class="line"><span class="comment">//以上代码可以做到复用，但是在用户名不存在，在提示框中添加一个注册按钮便不能复用了，这时需要定义一个新的类</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   用户名不存在创建注册按钮类 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> LoginConfirm = <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.content = text;</span><br><span class="line">&#125;</span><br><span class="line">LoginConfirm.prototype.show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.content);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'在这里创建和显示注册按钮...'</span>);           <span class="comment">//额外的功能</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> loginFailConfirm = <span class="keyword">new</span> LoginConfirm(<span class="string">'用户名不存在...'</span>);</span><br><span class="line">loginFailConfirm.show();                    <span class="comment">// 输出用户名不存在...并创建和显示出注册的按钮（功能需要封装）</span></span><br><span class="line"><span class="comment">//但登录成功后需要显示提示语，以上代码又不可以复用，又需要定义个新的类</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *    登录成功后显示提示信息类</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="keyword">var</span> LoginPrompt = <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.content = text;</span><br><span class="line">&#125;</span><br><span class="line">LoginPrompt.prototype.show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.content);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'在这里创建显示欢迎信息...'</span>);           <span class="comment">// 额外功能</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> loginSuccessPrompt = <span class="keyword">new</span> LoginPrompt(<span class="string">'登录成功...'</span>);</span><br><span class="line">loginSuccessPrompt.show();                  <span class="comment">//输出登录成功...并显示相应的欢迎功能（功能需要封装）</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   缺点：每调用一个功能都要找到相应的类及方法。</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h1 id="简单工厂-返回类的实例"><a href="#简单工厂-返回类的实例" class="headerlink" title="简单工厂(返回类的实例)"></a>简单工厂(返回类的实例)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   登录检测工厂类，可以很好地实现复用</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="keyword">var</span> LoginFactory = <span class="function"><span class="keyword">function</span>(<span class="params">type,content</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(type)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'alert'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> LoginAlert(content);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'confirm'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> LoginConfirm(content);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'prompt'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> LoginPrompt(content);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//基于工厂的调用,这样不用关心里面实现的细节</span></span><br><span class="line"><span class="keyword">var</span> loginAlert1 = <span class="keyword">new</span> LoginFactory(<span class="string">'alert'</span>,<span class="string">'用户名不能超出16位...'</span>);</span><br><span class="line">loginAlert1.show();</span><br><span class="line"><span class="keyword">var</span> loginConfirm1 = <span class="keyword">new</span> LoginFactory(<span class="string">'confirm'</span>,<span class="string">'用户名不存在...'</span>);</span><br><span class="line">loginConfirm1.show();</span><br><span class="line"><span class="keyword">var</span> loginPrompt1 = <span class="keyword">new</span> LoginFactory(<span class="string">'prompt'</span>,<span class="string">'登录成功...'</span>);</span><br><span class="line">loginPrompt1.show();</span><br></pre></td></tr></table></figure>
+<h1 id="简单工厂-类似寄生式继承的方式创建"><a href="#简单工厂-类似寄生式继承的方式创建" class="headerlink" title="简单工厂(类似寄生式继承的方式创建)"></a>简单工厂(类似寄生式继承的方式创建)</h1><pre><code class="javascript"><span class="comment">/**</span>
+<span class="comment"> *  定义简单工厂创建方法</span>
+<span class="comment"> */</span> 
+<span class="keyword">var</span> createPop =  <span class="function"><span class="keyword">function</span>(<span class="params">type,text</span>)</span>{
+    <span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();       <span class="comment">//创建一个对象，并对对象拓展属性和方法</span>
+    o.content = text;
+    o.show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="built_in">console</span>.log(o.content);
+        <span class="keyword">if</span>(type == <span class="string">'alert'</span>){        <span class="comment">// 方法里面区别对待</span>
+            <span class="comment">//警示框</span>
+            <span class="built_in">console</span>.log(<span class="string">'alert...'</span>);
+        }
+        <span class="keyword">if</span>(type == <span class="string">'confirm'</span>){
+            <span class="comment">//用户名不存在的时候</span>
+            <span class="built_in">console</span>.log(<span class="string">'confirm...'</span>);
+        }
+        <span class="keyword">if</span>(type == <span class="string">'prompt'</span>){
+            <span class="comment">//登录成功欢迎语</span>
+            <span class="built_in">console</span>.log(<span class="string">'prompt...'</span>);
+        }
+    }
+    <span class="keyword">return</span> o;
+}
+<span class="comment">//基于工厂方法的调用</span>
+<span class="keyword">var</span> loginAlert2 = createPop(<span class="string">'alert'</span>,<span class="string">'用户名不能超过16位...'</span>);
+loginAlert2.show();
+<span class="keyword">var</span> loginConfirm2 = createPop(<span class="string">'confirm'</span>,<span class="string">'用户名不存在...'</span>);
+loginConfirm2.show();
+<span class="keyword">var</span> loginPrompt2 = createPop(<span class="string">'prompt'</span>,<span class="string">'登录成功...'</span>);
+loginPrompt2.show();
+</code></pre>
+<h1 id="两种工厂方式的区别"><a href="#两种工厂方式的区别" class="headerlink" title="两种工厂方式的区别"></a>两种工厂方式的区别</h1><pre><code>    通过类实例化对象创建的工厂中，通过类创建的对象，如果这些类继承同一父类，那么他们的父
+类的原型上的方法是可以共用的。而通过寄生方式创建的对象都是一个新的个体，所以他们的方法就
+不能共用了。 
+</code></pre><h1 id="简单工厂模式适用的场景"><a href="#简单工厂模式适用的场景" class="headerlink" title="简单工厂模式适用的场景"></a>简单工厂模式适用的场景</h1><pre><code>通常是创建单一对象时适用。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/创建型模式/" rel="tag">#创建型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/01/baseJS/polymorphism/" rel="next" title="多态">
+                <i class="fa fa-chevron-left"></i> 多态
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/factory-method/" rel="prev" title="工厂方法模式">
+                工厂方法模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于面向对象的登录检测"><span class="nav-number">1.</span> <span class="nav-text">基于面向对象的登录检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单工厂-返回类的实例"><span class="nav-number">2.</span> <span class="nav-text">简单工厂(返回类的实例)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单工厂-类似寄生式继承的方式创建"><span class="nav-number">3.</span> <span class="nav-text">简单工厂(类似寄生式继承的方式创建)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两种工厂方式的区别"><span class="nav-number">4.</span> <span class="nav-text">两种工厂方式的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单工厂模式适用的场景"><span class="nav-number">5.</span> <span class="nav-text">简单工厂模式适用的场景</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

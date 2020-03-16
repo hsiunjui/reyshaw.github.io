@@ -1,0 +1,651 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技巧型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="抽象和封装对数据源的访问与存储，DAO通过对数据源链接的管理方便对数据的访问与存储。">
+<meta name="keywords" content="技巧型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据访问对象模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/data-access-object/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="抽象和封装对数据源的访问与存储，DAO通过对数据源链接的管理方便对数据的访问与存储。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据访问对象模式">
+<meta name="twitter:description" content="抽象和封装对数据源的访问与存储，DAO通过对数据源链接的管理方便对数据的访问与存储。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/data-access-object/"/>
+
+
+  <title> 数据访问对象模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据访问对象模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T16:08:41+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>抽象和封装对数据源的访问与存储，DAO通过对数据源链接的管理方便对数据的访问与存储。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="本地存储DAO-执行环境为chrome浏览器"><a href="#本地存储DAO-执行环境为chrome浏览器" class="headerlink" title="本地存储DAO(执行环境为chrome浏览器)"></a>本地存储DAO(执行环境为chrome浏览器)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> BaseLocalStorage = <span class="function"><span class="keyword">function</span> (<span class="params">preId, timeSign</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.preId = preId;                         <span class="comment">//本地存储数据库前缀</span></span><br><span class="line">       <span class="keyword">this</span>.timeSign = timeSign || <span class="string">'|-|'</span>;     <span class="comment">//时间戳与存储数据之间的拼接符</span></span><br><span class="line">   &#125;</span><br><span class="line">   BaseLocalStorage.prototype = &#123;</span><br><span class="line">       <span class="keyword">constructor</span>: BaseLocalStorage,</span><br><span class="line">       status: &#123;                               <span class="comment">//操作状态</span></span><br><span class="line">           SUCCESS: <span class="number">0</span>,</span><br><span class="line">           FAILURE: <span class="number">1</span>,</span><br><span class="line">           OVERFLOW: <span class="number">2</span>,</span><br><span class="line">           TIMEOUT: <span class="number">3</span>,</span><br><span class="line">       &#125;,</span><br><span class="line">       storage: localStorage || <span class="built_in">window</span>.localStorage,      <span class="comment">//本地存储方法</span></span><br><span class="line">       getKey: <span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;                                        <span class="comment">//获取本地数据库真实字段</span></span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">this</span>.preId + key;                                            <span class="comment">//前缀+字段名</span></span><br><span class="line">       &#125;,</span><br><span class="line">       set: <span class="function"><span class="keyword">function</span> (<span class="params">key, value, callback, time</span>) </span>&#123;            <span class="comment">//添加数据</span></span><br><span class="line">           <span class="keyword">var</span> status = <span class="keyword">this</span>.status.SUCCESS;                       <span class="comment">//默认操作状态为为成功</span></span><br><span class="line">           key = <span class="keyword">this</span>.getKey(key);                                          <span class="comment">//获取真实的key值</span></span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               time = <span class="keyword">new</span> <span class="built_in">Date</span>(time).getTime() || time.getTime();         <span class="comment">//获取时间戳</span></span><br><span class="line">           &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">               time = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime() + <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">31</span>; <span class="comment">//时间戳有误，默认为1个月</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.storage.setItem(key, time + <span class="keyword">this</span>.timeSign + value);     <span class="comment">//存入本地值key为前缀+key,value为时间戳+分隔符+value</span></span><br><span class="line">           &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">               status = <span class="keyword">this</span>.status.OVERFLOW;                                       <span class="comment">//存储溢出，返回溢出状态</span></span><br><span class="line">           &#125;</span><br><span class="line">           callback &amp;&amp; callback(<span class="keyword">this</span>, status, key, value);               <span class="comment">//有回调则执行回调方法</span></span><br><span class="line">       &#125;,</span><br><span class="line">       get: <span class="function"><span class="keyword">function</span> (<span class="params">key, callback</span>) </span>&#123;                    <span class="comment">//获取数据</span></span><br><span class="line">           <span class="keyword">var</span> status = <span class="keyword">this</span>.status.SUCCESS,           <span class="comment">//默认为成功状态</span></span><br><span class="line">                   key = <span class="keyword">this</span>.getKey(key),                      <span class="comment">//获取真是的key</span></span><br><span class="line">                   value = <span class="literal">null</span>,                                       <span class="comment">//默认值为null</span></span><br><span class="line">                   timeSign = <span class="keyword">this</span>.timeSign.length,       <span class="comment">//时间戳与存储数据之间的拼接符长度</span></span><br><span class="line">                   that = <span class="keyword">this</span>,                                         <span class="comment">//缓存当前对象</span></span><br><span class="line">                   index,                                                <span class="comment">//事件戳与存储数据之间的拼接符位置</span></span><br><span class="line">                   time,                                                  <span class="comment">//时间戳</span></span><br><span class="line">                   result;                                                <span class="comment">//最终获取数据</span></span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               value = that.storage.getItem(key);        <span class="comment">//获取字段对应的数据字符串(时间戳+分隔符+value)</span></span><br><span class="line">           &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">               result = &#123;</span><br><span class="line">                   status: that.status.FAILURE,             <span class="comment">//置为失败状态</span></span><br><span class="line">                   value: <span class="literal">null</span>                                          <span class="comment">//值置为null</span></span><br><span class="line">               &#125;</span><br><span class="line">               callback &amp;&amp; callback(<span class="keyword">this</span>, result.status, result.value);      <span class="comment">//有回调执行回调</span></span><br><span class="line">               <span class="keyword">return</span> result;                                                                      <span class="comment">//返回结果对象</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (value) &#123;                          <span class="comment">//如果成功获取字符串</span></span><br><span class="line">               index = value.indexOf(<span class="keyword">this</span>.timeSign);           <span class="comment">//时间戳与存储数据之间的拼接起始位置</span></span><br><span class="line">               time = +value.slice(<span class="number">0</span>, index);                        <span class="comment">//获取时间戳</span></span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">Date</span>(time).getTime() &gt; <span class="keyword">new</span> <span class="built_in">Date</span>().getTime() || time == <span class="number">0</span>) &#123;         <span class="comment">//如果时间未过期</span></span><br><span class="line">                   value = value.slice(index + timeSign);                 <span class="comment">//获取数据结果</span></span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;                                                         <span class="comment">//如果时间过期</span></span><br><span class="line">                   value = <span class="literal">null</span>;                                                   <span class="comment">//值置为null</span></span><br><span class="line">                   status = that.status.TIMEOUT;                      <span class="comment">//状态为超时</span></span><br><span class="line">                   that.remove(key);                                           <span class="comment">//删除该字段</span></span><br><span class="line">               &#125;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;                                            <span class="comment">//未获取到数据字符串</span></span><br><span class="line">               status = that.status.FAILURE;         <span class="comment">//状态置为失败</span></span><br><span class="line">           &#125;</span><br><span class="line">           result = &#123;</span><br><span class="line">               status: status,</span><br><span class="line">               value: value</span><br><span class="line">           &#125;</span><br><span class="line">           callback &amp;&amp; callback(<span class="keyword">this</span>, result.status, result.value);      <span class="comment">//执行回调</span></span><br><span class="line">           <span class="keyword">return</span> result;                                                                      <span class="comment">//返回状态对象</span></span><br><span class="line">       &#125;,</span><br><span class="line">       remove: <span class="function"><span class="keyword">function</span> (<span class="params">key, callback</span>) </span>&#123;           <span class="comment">//删除数据</span></span><br><span class="line">           <span class="keyword">var</span> status = <span class="keyword">this</span>.status.FAILURE,               <span class="comment">//默认状态置为失败</span></span><br><span class="line">                   key = <span class="keyword">this</span>.getKey(key)                        <span class="comment">//获取实际数据字段名称</span></span><br><span class="line">           value = <span class="literal">null</span>;                                                <span class="comment">//设置默认数据结果为空</span></span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               value = <span class="keyword">this</span>.storage.getItem(key);   <span class="comment">//获取字段对应的数据</span></span><br><span class="line">           &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">'获取数据失败'</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (value) &#123;                                 <span class="comment">//如果数据存在</span></span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="keyword">this</span>.storage.removeItem(key);         <span class="comment">//删除数据</span></span><br><span class="line">                   status = <span class="keyword">this</span>.status.SUCCESS;       <span class="comment">//设置操作成功</span></span><br><span class="line">               &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">                   <span class="built_in">console</span>.log(<span class="string">'删除失败'</span>);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           callback &amp;&amp; callback(<span class="keyword">this</span>, status, status &gt; <span class="number">0</span> ? <span class="literal">null</span> : value.slice(value.indexOf(<span class="keyword">this</span>.timeSign) + <span class="keyword">this</span>.timeSign.length));<span class="comment">//回调</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">var</span> Ls = <span class="keyword">new</span> BaseLocalStorage(<span class="string">'LS_'</span>);</span><br><span class="line">   Ls.set(<span class="string">'a'</span>,<span class="string">'xiaoming'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;        <span class="comment">//未传Time,默认一个月</span></span><br><span class="line">       <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);                     <span class="comment">//[BaseLocalStorage, 0, "LS_a", "xiaoming"]</span></span><br><span class="line">   &#125;);                                                     <span class="comment">//    LS_a       1462887262598|-|xiaoming</span></span><br><span class="line">   <span class="keyword">var</span> getter = Ls.get(<span class="string">'a'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);                    <span class="comment">//[BaseLocalStorage, 0, "xiaoming"]</span></span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="built_in">console</span>.log(getter.value);                <span class="comment">//xiaoming</span></span><br><span class="line">   Ls.remove(<span class="string">'a'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;           <span class="comment">//删除已有的记录</span></span><br><span class="line">       <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);                    <span class="comment">// [BaseLocalStorage, 0, "xiaoming"]</span></span><br><span class="line">   &#125;);</span><br><span class="line">   Ls.remove(<span class="string">'a'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;           <span class="comment">//删除不存在的记录</span></span><br><span class="line">     <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);                      <span class="comment">//[BaseLocalStorage, 1, null]</span></span><br><span class="line">   &#125;)</span><br><span class="line">   getter = Ls.get(<span class="string">'a'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;     <span class="comment">//获取不存的记录</span></span><br><span class="line">       <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);                    <span class="comment">//[BaseLocalStorage, 1, null]</span></span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="built_in">console</span>.log(getter.value);              <span class="comment">//null</span></span><br></pre></td></tr></table></figure>
+<h1 id="Nodejs中的DAO操作"><a href="#Nodejs中的DAO操作" class="headerlink" title="Nodejs中的DAO操作"></a>Nodejs中的DAO操作</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  数据连接配置模块 config.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    DB: &#123;                        <span class="comment">//数据配置对象</span></span><br><span class="line">        db: <span class="string">'demo'</span>,               <span class="comment">//数据库名称</span></span><br><span class="line">        host: <span class="string">'localhost'</span>,       <span class="comment">//主机名</span></span><br><span class="line">        port: <span class="string">'8008'</span>               <span class="comment">//端口号</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  数据操作模块 db.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> mongodb = <span class="built_in">require</span>(<span class="string">'mongodb'</span>);   <span class="comment">//引入mongodb模块</span></span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">'./config'</span>).DB;     <span class="comment">//引入数据配置模块</span></span><br><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> mongodb.Db(</span><br><span class="line">    config.db,                         <span class="comment">//数据库名称</span></span><br><span class="line">    <span class="keyword">new</span> mongodb.Server(</span><br><span class="line">        config.host,                        <span class="comment">//主机名</span></span><br><span class="line">        config.port,                         <span class="comment">//端口号</span></span><br><span class="line">        &#123;<span class="attr">auto_reconnet</span>: <span class="literal">true</span>&#125;         <span class="comment">//自动连接</span></span><br><span class="line">    ),</span><br><span class="line">    &#123;<span class="attr">safe</span>: <span class="literal">true</span>&#125;                      <span class="comment">//安全模式</span></span><br><span class="line">);</span><br><span class="line">exports.DB = <span class="function"><span class="keyword">function</span> (<span class="params">col</span>) </span>&#123;        <span class="comment">//数据数据访问对象</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        insert: <span class="function"><span class="keyword">function</span> (<span class="params">data, success, fail</span>) </span>&#123;        <span class="comment">//插入数据项</span></span><br><span class="line">            connect(col, <span class="function"><span class="keyword">function</span> (<span class="params">col, db</span>) </span>&#123;               <span class="comment">//打开数据库操作col集合</span></span><br><span class="line">                col.insert(data, <span class="function"><span class="keyword">function</span> (<span class="params">err, docs</span>) </span>&#123;         <span class="comment">//向集合中插入数据</span></span><br><span class="line">                    <span class="keyword">if</span> (err) &#123;                                      <span class="comment">//失败，跑出错误</span></span><br><span class="line">                        fail &amp;&amp; fail(err);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;                                        <span class="comment">//成功，执行成功回调</span></span><br><span class="line">                        success &amp;&amp; success(docs);</span><br><span class="line">                    &#125;</span><br><span class="line">                    db.close();                         <span class="comment">//关闭数据库</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        remove: <span class="function"><span class="keyword">function</span> (<span class="params">data, success, fail</span>) </span>&#123;                          <span class="comment">//删除数据项</span></span><br><span class="line">            connect(col, <span class="function"><span class="keyword">function</span> (<span class="params">col, db</span>) </span>&#123;</span><br><span class="line">                col.remove(data, <span class="function"><span class="keyword">function</span> (<span class="params">err, len</span>) </span>&#123;                          <span class="comment">//在集合中删除数据</span></span><br><span class="line">                    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                        fail &amp;&amp; fail(err);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        success &amp;&amp; success(len);</span><br><span class="line">                    &#125;</span><br><span class="line">                    db.close();</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        update: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;                                                  <span class="comment">//更新数据项</span></span><br><span class="line">            connect(col, <span class="function"><span class="keyword">function</span> (<span class="params">con, doc, success, fail</span>) </span>&#123;</span><br><span class="line">                col.update(con, doc, <span class="function"><span class="keyword">function</span> (<span class="params">err, len</span>) </span>&#123;                   <span class="comment">//在集合中更新数据</span></span><br><span class="line">                    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                        fail &amp;&amp; fail(err);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        success &amp;&amp; success(len);</span><br><span class="line">                    &#125;</span><br><span class="line">                    db.close();</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        find: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            connect(col, <span class="function"><span class="keyword">function</span> (<span class="params">col, db</span>) </span>&#123;                           <span class="comment">//查找数据</span></span><br><span class="line">                col.find(con).toArray(<span class="function"><span class="keyword">function</span> (<span class="params">err, docs</span>) </span>&#123;               <span class="comment">//在集合中查找数据</span></span><br><span class="line">                    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                        fail &amp;&amp; fail(err);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        success &amp;&amp; success(docs);</span><br><span class="line">                    &#125;</span><br><span class="line">                    db.close();</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params">col, fn</span>) </span>&#123;     <span class="comment">//连接数据库  col集合名  fn操作方法</span></span><br><span class="line">    d.open(<span class="function"><span class="keyword">function</span> (<span class="params">err, db</span>) </span>&#123;     <span class="comment">//打开数据库</span></span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="keyword">throw</span> err;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            db.collection(col, <span class="function"><span class="keyword">function</span> (<span class="params">err, col</span>) </span>&#123;        <span class="comment">//操作集合</span></span><br><span class="line">                <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> err;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    fn &amp;&amp; fn.call(col, db);             <span class="comment">//执行操作</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 数据测试模块 test.js</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> DB = <span class="built_in">require</span>(<span class="string">'./db'</span>).DB;        <span class="comment">//引用数据访问对象模块</span></span><br><span class="line"><span class="keyword">var</span> user = DB(<span class="string">'user'</span>);              <span class="comment">//操作user集合</span></span><br><span class="line"><span class="comment">//插入数据</span></span><br><span class="line">user.insert(&#123;<span class="attr">name</span>: <span class="string">'xiaobai'</span>, <span class="attr">nick</span>: <span class="string">'small white'</span>&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">docs</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(docs);      <span class="comment">//[&#123;name:'xiaobai',nick:'small white',_id:xxxxxxx&#125;]     _id为数据项的索引值</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//查找</span></span><br><span class="line">user.find(&#123;<span class="attr">name</span>:<span class="string">'xiaobai'</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">doc</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(doc);       <span class="comment">//[&#123;name:'xiaobai',nick:'small white',_id:xxxxxxx&#125;]</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//更新操作</span></span><br><span class="line">user.update(&#123;<span class="attr">name</span>:<span class="string">'xiaobai'</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">'xiaobai'</span>,<span class="attr">nick</span>:<span class="string">'small'</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">len</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(len);       <span class="comment">//1</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//删除操作</span></span><br><span class="line">user.remove(&#123;<span class="attr">name</span>:<span class="string">'xiaobai'</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">len</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(len);           <span class="comment">//1         (删除数据的长度)</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><pre><code>对前端存储的管理，统一使用方式。封装数据库操作，解耦数据库层与业务逻辑层。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技巧型模式/" rel="tag">#技巧型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/entrust/" rel="next" title="委托模式">
+                <i class="fa fa-chevron-left"></i> 委托模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/throttler/" rel="prev" title="节流模式">
+                节流模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本地存储DAO-执行环境为chrome浏览器"><span class="nav-number">1.</span> <span class="nav-text">本地存储DAO(执行环境为chrome浏览器)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nodejs中的DAO操作"><span class="nav-number">2.</span> <span class="nav-text">Nodejs中的DAO操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用场景"><span class="nav-number">3.</span> <span class="nav-text">应用场景</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

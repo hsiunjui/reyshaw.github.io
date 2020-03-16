@@ -1,0 +1,986 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="标签," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="HTML标签可以拥有属性。属性提供了有关HTML元素的更多的信息,总是以名称/值对的形式出现。">
+<meta name="keywords" content="标签">
+<meta property="og:type" content="article">
+<meta property="og:title" content="标签的基本属性">
+<meta property="og:url" content="http://yoursite.com/2016/10/20/html/base-attr/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="HTML标签可以拥有属性。属性提供了有关HTML元素的更多的信息,总是以名称/值对的形式出现。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="标签的基本属性">
+<meta name="twitter:description" content="HTML标签可以拥有属性。属性提供了有关HTML元素的更多的信息,总是以名称/值对的形式出现。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/20/html/base-attr/"/>
+
+
+  <title> 标签的基本属性 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                标签的基本属性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T21:15:40+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>HTML标签可以拥有属性。属性提供了有关HTML元素的更多的信息,总是以名称/值对的形式出现。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="通用属性"><a href="#通用属性" class="headerlink" title="通用属性"></a>通用属性</h1><table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>属性说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>当前元素唯一标识符</td>
+</tr>
+<tr>
+<td>class</td>
+<td>css类，样式标识</td>
+</tr>
+<tr>
+<td>style</td>
+<td>当前元素内联样式</td>
+</tr>
+<tr>
+<td>title</td>
+<td>当前元素工具提示文本</td>
+</tr>
+<tr>
+<td>tagIndex</td>
+<td>定义当前元素的焦点顺序</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>定义元素内文本的主要语言</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>布尔值，应用在不该显示的元素上</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>设置文本方向</td>
+</tr>
+<tr>
+<td>spellcheck</td>
+<td>元素的文本是否有拼写检查</td>
+</tr>
+<tr>
+<td>contextMenu</td>
+<td>作为上下文菜单显示的menu元素的ID</td>
+</tr>
+<tr>
+<td>contentEditable</td>
+<td>元素内容是否可编辑</td>
+</tr>
+<tr>
+<td>accessKey</td>
+<td>键盘快捷键</td>
+</tr>
+<tr>
+<td>draggable</td>
+<td>拖动源元素上的一个布尔属性，用于拖放API</td>
+</tr>
+<tr>
+<td>dropzone</td>
+<td>放置目标元素上的一个属性，用于拖放API</td>
+</tr>
+</tbody>
+</table>
+<h1 id="下面这些元素只支持通用的属性"><a href="#下面这些元素只支持通用的属性" class="headerlink" title="下面这些元素只支持通用的属性"></a>下面这些元素只支持通用的属性</h1><pre><code>head  title  noscript  br   hr  
+header  nav  footer  article  section   aside   div 
+ul   dl  dt   dd  tr  thead  tbody  tfoot 
+h1~h6  address  p  span  strong  small  i  em  s  b  mark  abbr
+code  pre  sup  sub  samp  kbd  bdo   bdi   var   cite   caption  var  dfn
+figcaption  figure  datalist  summary  hgroup  legend
+rt  rp  ruby
+</code></pre><h1 id="除通用属性外-还有自己的个别属性"><a href="#除通用属性外-还有自己的个别属性" class="headerlink" title="除通用属性外,还有自己的个别属性"></a>除通用属性外,还有自己的个别属性</h1><table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>属性说明</th>
+<th>适用标签 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>href</td>
+<td>超文本引用</td>
+<td>a  area  base  link</td>
+</tr>
+<tr>
+<td>target</td>
+<td>规定在何处打开链接</td>
+<td>a  area  base  link  form</td>
+</tr>
+<tr>
+<td>src</td>
+<td>规定资源的URL</td>
+<td>img audio video source embed iframe script track input</td>
+</tr>
+<tr>
+<td>width/height</td>
+<td>规定宽度/高度</td>
+<td>canvas embed iframe input img object video</td>
+</tr>
+<tr>
+<td>type</td>
+<td>指定类型</td>
+<td>input button style script link source object embed menu area a command</td>
+</tr>
+<tr>
+<td>label</td>
+<td>规定更短版本的选项</td>
+<td>option optgroup menu command track</td>
+</tr>
+<tr>
+<td>media</td>
+<td>为不同媒介类型规定不同样式</td>
+<td>style source link area a</td>
+</tr>
+<tr>
+<td>name</td>
+<td>规定名称</td>
+<td>input button textarea form select object param iframe fieldset map meta output keygen ins</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>规定是否是禁用状态</td>
+<td>input button textarea select option optgroup fieldset command keygen</td>
+</tr>
+<tr>
+<td>checked</td>
+<td>规定是否被选中</td>
+<td>input command</td>
+</tr>
+<tr>
+<td>readonly/placeholder</td>
+<td>规定是否是只读/预制提示文本</td>
+<td>input textarea</td>
+</tr>
+<tr>
+<td>form</td>
+<td>规定隶属哪个表单</td>
+<td>input button textarea select label fieldset progressoutput object meter keygen</td>
+</tr>
+<tr>
+<td>value</td>
+<td>指定值</td>
+<td>input button option li param progress meter</td>
+</tr>
+<tr>
+<td>cite</td>
+<td>指定引用来源</td>
+<td>blockquote del ins q</td>
+</tr>
+<tr>
+<td>required</td>
+<td>必填项</td>
+<td>input textarea select</td>
+</tr>
+<tr>
+<td>alt</td>
+<td>备用文本</td>
+<td>img input area</td>
+</tr>
+<tr>
+<td>autofocus</td>
+<td>自动获取焦点</td>
+<td>input button textarea select keygen</td>
+</tr>
+<tr>
+<td>autocomplete</td>
+<td>自动补全</td>
+<td>input form</td>
+</tr>
+<tr>
+<td>rel/hreflang</td>
+<td>当前与链接文档间的关系/指定被链接文档的语言</td>
+<td>link area a </td>
+</tr>
+<tr>
+<td>span</td>
+<td>规定col元素应该横跨的列数</td>
+<td>col colgroup</td>
+</tr>
+<tr>
+<td>size</td>
+<td>指定长度</td>
+<td>input select </td>
+</tr>
+<tr>
+<td>sizes</td>
+<td>被链接资源的尺寸</td>
+<td>link</td>
+</tr>
+<tr>
+<td>maxlength</td>
+<td>规定最大长度</td>
+<td>input textarea</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>指定编码</td>
+<td>meta script</td>
+</tr>
+<tr>
+<td>min</td>
+<td>指定最小值</td>
+<td>input meter</td>
+</tr>
+<tr>
+<td>max</td>
+<td>指定最大值</td>
+<td>input meter progress</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>是否被选中option</td>
+</tr>
+<tr>
+<td>action/enctype/method/ novalidate/accept-charset</td>
+<td>表单提交路径/表单发送前对数据的编码/表单提交方式/规定不对输入框进行校验/服务器接收表单处理的字符集</td>
+<td>form</td>
+</tr>
+<tr>
+<td>formaction/formenctype/ formmethod/formnovalidate/ formtarget</td>
+<td>form的action属性/enctype属性/method属性/novalidate属性/target属性</td>
+<td>input button</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>元素中的日期/时间</td>
+<td>time ins del</td>
+</tr>
+<tr>
+<td>colspan/rowspan/headers</td>
+<td>纵排合并的单元格/横排和平的单元格/规定表头与单元格相关联</td>
+<td>th td</td>
+</tr>
+<tr>
+<td>preload/autoplay/loop/controls</td>
+<td>是否在页面载入后加载/时候自动播放/是否循环/是否显示控制面板</td>
+<td>audio video</td>
+</tr>
+<tr>
+<td>icon/radiogroup</td>
+<td>定义命令图标/定义命令组</td>
+<td>command</td>
+</tr>
+<tr>
+<td>open</td>
+<td>规定其可见性</td>
+<td>details</td>
+</tr>
+<tr>
+<td>manifest</td>
+<td>文档缓存manifest的位置</td>
+<td>html</td>
+</tr>
+<tr>
+<td>srcdoc/sandbox/seamless</td>
+<td>显示的页面的HTML内容/规定一系列额外限制/规定像文档的一部分</td>
+<td>iframe</td>
+</tr>
+<tr>
+<td>usemap/ismap</td>
+<td>定义为客户端图像映射/定义为服务器端图形映射</td>
+<td>img</td>
+</tr>
+<tr>
+<td>for</td>
+<td>绑定对象</td>
+<td>label output</td>
+</tr>
+<tr>
+<td>accept/dirname/list/pattern/step</td>
+<td>规定文件上传类型/设置提交方向性控制/引用数据列表/正则表达式规则/设置步长</td>
+<td>input</td>
+</tr>
+<tr>
+<td>challenge/keytype</td>
+<td>keygen的值在提交时询问/生成RSA密钥</td>
+<td>keygen</td>
+</tr>
+<tr>
+<td>http-equiv/content</td>
+<td>把content关联到http头/http-equiv与name元信息</td>
+<td>meta</td>
+</tr>
+<tr>
+<td>low/high/optimum</td>
+<td>被界定为低的值/被界定为高的值/界定最佳度量值</td>
+<td>meter</td>
+</tr>
+<tr>
+<td>data</td>
+<td>对象使用资源URL</td>
+<td>object</td>
+</tr>
+<tr>
+<td>reversed/start</td>
+<td>指定降序/指定有序列表开始点</td>
+<td>ol</td>
+</tr>
+<tr>
+<td>async/defer</td>
+<td>规定异步执行脚本/延迟执行脚本</td>
+<td>script</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>允许一个以上的值</td>
+<td>input select</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>对表格的描述</td>
+<td>table</td>
+</tr>
+<tr>
+<td>cols/rows/wrap</td>
+<td>文本区内可见宽度/文本区内可见高度/文本区域换行模式</td>
+<td>textarea</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>下载中/播放前显示的图像</td>
+<td>video</td>
+</tr>
+<tr>
+<td>pubdate</td>
+<td>指示发布日期</td>
+<td>time</td>
+</tr>
+<tr>
+<td>default/kind/srclang</td>
+<td>规定默认轨道/轨道的文本类型/轨道语言</td>
+<td>track</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/标签/" rel="tag">#标签</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/html/tag-define/" rel="next" title="HTML标签的分类">
+                <i class="fa fa-chevron-left"></i> HTML标签的分类
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/20/html/event-attr/" rel="prev" title="标签的事件属性">
+                标签的事件属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用属性"><span class="nav-number">1.</span> <span class="nav-text">通用属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下面这些元素只支持通用的属性"><span class="nav-number">2.</span> <span class="nav-text">下面这些元素只支持通用的属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#除通用属性外-还有自己的个别属性"><span class="nav-number">3.</span> <span class="nav-text">除通用属性外,还有自己的个别属性</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

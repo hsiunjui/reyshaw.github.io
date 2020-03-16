@@ -1,0 +1,657 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="结构型模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="又称为部分-整体模式，将对象组合成树形结构以表示”部分整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。">
+<meta name="keywords" content="结构型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组合模式">
+<meta property="og:url" content="http://yoursite.com/2016/11/03/designPattern/composite/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="又称为部分-整体模式，将对象组合成树形结构以表示”部分整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T11:12:16.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="组合模式">
+<meta name="twitter:description" content="又称为部分-整体模式，将对象组合成树形结构以表示”部分整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/03/designPattern/composite/"/>
+
+
+  <title> 组合模式 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                组合模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-03T15:01:54+08:00" content="2016-11-03">
+              2016-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>又称为部分-整体模式，将对象组合成树形结构以表示”部分整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="新闻模块的组合方式"><a href="#新闻模块的组合方式" class="headerlink" title="新闻模块的组合方式"></a>新闻模块的组合方式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 新闻模块</span></span><br><span class="line"><span class="comment"> * 实现图标或标题/图片和标题/类别与标题等组合显示</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//虚拟新闻父类</span></span><br><span class="line"><span class="keyword">var</span> News = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.children = [];                 <span class="comment">//子组件容器</span></span><br><span class="line">    <span class="keyword">this</span>.element = <span class="literal">null</span>;             <span class="comment">//当前组件元素</span></span><br><span class="line">&#125;</span><br><span class="line">News.prototype = &#123;</span><br><span class="line">    <span class="keyword">constructor</span>: News,</span><br><span class="line">    init: function () &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请重写init方法'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    add: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请重写add方法'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    getElement: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请重写getElement方法'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**寄生式继承方法**/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritObject</span>(<span class="params">o</span>) </span>&#123;          <span class="comment">//原型式继承</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123; &#125;                                    <span class="comment">//过渡函数</span></span><br><span class="line">    F.prototype = o;                                 <span class="comment">//过渡函数的原型经常父对象o</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();                                  <span class="comment">//返回过渡对象实例</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">subClass, superClass</span>) </span>&#123;     <span class="comment">//最终继承方法</span></span><br><span class="line">    <span class="keyword">var</span> p = inheritObject(superClass.prototype);                    <span class="comment">//复制父类原型副本</span></span><br><span class="line">    p.constructor = subClass;                                                 <span class="comment">//修正构造函数</span></span><br><span class="line">    subClass.prototype = p;                                                   <span class="comment">//设置子类原型</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**-----创建容器类-------**/</span></span><br><span class="line"><span class="comment">//顶层容器类       ---相当于是添加ul框</span></span><br><span class="line"><span class="keyword">var</span> Container = <span class="function"><span class="keyword">function</span> (<span class="params">id, parent</span>) </span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);                        <span class="comment">//继承News类</span></span><br><span class="line">    <span class="keyword">this</span>.id = id;                               <span class="comment">//模块id</span></span><br><span class="line">    <span class="keyword">this</span>.parent = parent;                <span class="comment">//模块父容器</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(Container, News);               <span class="comment">//寄生式继承父类方法</span></span><br><span class="line">Container.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;                  <span class="comment">//构建方法</span></span><br><span class="line">    <span class="keyword">this</span>.element = <span class="built_in">document</span>.createElement(<span class="string">'ul'</span>);         <span class="comment">//创建ul作为当前组件</span></span><br><span class="line">    <span class="keyword">this</span>.element.id = <span class="keyword">this</span>.id;                                          <span class="comment">//为创建的组件赋id值</span></span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="string">'new-container'</span>;            <span class="comment">//为创建组件添加样式</span></span><br><span class="line">&#125;</span><br><span class="line">Container.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;       <span class="comment">//添加子元素方法</span></span><br><span class="line">    <span class="keyword">this</span>.children.push(child);                                              <span class="comment">//在子元素容器中插入子元素</span></span><br><span class="line">    <span class="keyword">this</span>.element.appendChild(child.getElement());           <span class="comment">//插入当前组件元素树中</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;                                                                  <span class="comment">//返回容器</span></span><br><span class="line">&#125;</span><br><span class="line">Container.prototype.getElement = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;                                        <span class="comment">//返回当前组件</span></span><br><span class="line">&#125;</span><br><span class="line">Container.prototype.show = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;           <span class="comment">//显示方法</span></span><br><span class="line">    <span class="keyword">this</span>.parent.appendChild(<span class="keyword">this</span>.element);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//下一层级的行成员  --相当于排布ul里面的li元素</span></span><br><span class="line"><span class="keyword">var</span> Item = <span class="function"><span class="keyword">function</span> (<span class="params">classname</span>) </span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.classname = classname || <span class="string">''</span>;                         <span class="comment">//添加样式</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(Item, News);</span><br><span class="line">Item.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);         <span class="comment">//创建li标签</span></span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="keyword">this</span>.classname;            <span class="comment">//添加样式</span></span><br><span class="line">&#125;</span><br><span class="line">Item.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.children.push(child);                                       <span class="comment">//模型添加</span></span><br><span class="line">    <span class="keyword">this</span>.element.appendChild(child.getElement());     <span class="comment">//视图添加</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;                                                            <span class="comment">//返回当前组件</span></span><br><span class="line">&#125;</span><br><span class="line">Item.prototype.getElement = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//新闻组合体   ---相当于排布div元素(即在li里面排布div)</span></span><br><span class="line"><span class="keyword">var</span> Newsgroup = <span class="function"><span class="keyword">function</span> (<span class="params">classname</span>) </span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.classname = classname || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(Newsgroup, News);</span><br><span class="line">Newsgroup.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element.createElement(<span class="string">'div'</span>);                  <span class="comment">//创建div容器</span></span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="keyword">this</span>.classname;    <span class="comment">//添加样式</span></span><br><span class="line">&#125;</span><br><span class="line">Newsgroup.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element.push(child);</span><br><span class="line">    <span class="keyword">this</span>.element.appendChild(child.getElement());</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">Newsgroup.prototype.getElement = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**----创建新闻类，该类成员不能拥有子成员---**/</span></span><br><span class="line"><span class="comment">//图片新闻类   --a标签内插入了一个图片</span></span><br><span class="line"><span class="keyword">var</span> ImageNews = <span class="function"><span class="keyword">function</span> (<span class="params">url, href, classname</span>) </span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.url = url || <span class="string">''</span>;                                   <span class="comment">//图片src属性的路径</span></span><br><span class="line">    <span class="keyword">this</span>.href = href || <span class="string">'#'</span>;                            <span class="comment">//a标签的链接</span></span><br><span class="line">    <span class="keyword">this</span>.classname = classname || <span class="string">'normal'</span>;     <span class="comment">//class样式</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(ImageNews,News);</span><br><span class="line">ImageNews.prototype.init = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);             <span class="comment">//创建a标签</span></span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();                                              <span class="comment">//创建图像</span></span><br><span class="line">    img.src = url;</span><br><span class="line">    <span class="keyword">this</span>.element.appendChild(img);                                                <span class="comment">//把图像添加到a标签内</span></span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="string">'image-news '</span> + <span class="keyword">this</span>.classname;    <span class="comment">//设置样式</span></span><br><span class="line">    <span class="keyword">this</span>.element.href = href;</span><br><span class="line">&#125;</span><br><span class="line">ImageNews.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//由于是最终基类，不能添加子成员</span></span><br><span class="line">&#125;</span><br><span class="line">ImageNews.prototype.getElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//图标类   --icon图标加标题形式</span></span><br><span class="line"><span class="keyword">var</span> IconNews = <span class="function"><span class="keyword">function</span>(<span class="params">text,href,type</span>)</span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.text = text || <span class="string">''</span>;                           <span class="comment">//标题</span></span><br><span class="line">    <span class="keyword">this</span>.href = href || <span class="string">'#'</span>;                        <span class="comment">//icon链接</span></span><br><span class="line">    <span class="keyword">this</span>.type = type || <span class="string">'video'</span>;                <span class="comment">//icon类型样式</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(IconNews,News);</span><br><span class="line">IconNews.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span><br><span class="line">    <span class="keyword">this</span>.element.innerHTML = <span class="keyword">this</span>.text;</span><br><span class="line">    <span class="keyword">this</span>.element.href = <span class="keyword">this</span>.href;</span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="string">'icon '</span>+<span class="keyword">this</span>.type;</span><br><span class="line">&#125;</span><br><span class="line">IconNews.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//由于是最终基类，不能添加子成员</span></span><br><span class="line">&#125;</span><br><span class="line">IconNews.prototype.getElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//纯文字新闻类</span></span><br><span class="line"><span class="keyword">var</span> EasyNews = <span class="function"><span class="keyword">function</span>(<span class="params">text,href</span>)</span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.text = text || <span class="string">''</span>;               <span class="comment">//标题</span></span><br><span class="line">    <span class="keyword">this</span>.href = href || <span class="string">'#'</span>;            <span class="comment">//链接</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(EasyNews,News);</span><br><span class="line">EasyNews.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element.createElement(<span class="string">'a'</span>);</span><br><span class="line">    <span class="keyword">this</span>.element.innerHTML = <span class="keyword">this</span>.text;</span><br><span class="line">    <span class="keyword">this</span>.element.href = <span class="keyword">this</span>.href;</span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="string">'text'</span>;</span><br><span class="line">&#125;</span><br><span class="line">EasyNews.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//由于是最终基类，不能添加子成员</span></span><br><span class="line">&#125;</span><br><span class="line">EasyNews.prototype.getElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//分类新闻类         --有分类和标题的</span></span><br><span class="line"><span class="keyword">var</span> TypeNews = <span class="function"><span class="keyword">function</span>(<span class="params">text,href,type,pos</span>)</span>&#123;</span><br><span class="line">    News.call(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.text = text || <span class="string">''</span>;               <span class="comment">//标题</span></span><br><span class="line">    <span class="keyword">this</span>.href = href || <span class="string">'#'</span>;            <span class="comment">//链接</span></span><br><span class="line">    <span class="keyword">this</span>.type = type || <span class="string">''</span>;            <span class="comment">//分类</span></span><br><span class="line">    <span class="keyword">this</span>.pos = pos || <span class="string">'left'</span>;         <span class="comment">//分类的位置</span></span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(TypeNews,News);</span><br><span class="line">TypeNews.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.element = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.pos === <span class="string">'left'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.element.innerHTML = <span class="string">'['</span>+<span class="keyword">this</span>.type+<span class="string">'] '</span>+<span class="keyword">this</span>.text;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.element.innerHTML = <span class="keyword">this</span>.text + <span class="string">' ['</span>+<span class="keyword">this</span>.type+<span class="string">']'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.element.href = <span class="keyword">this</span>.href;</span><br><span class="line">    <span class="keyword">this</span>.element.className = <span class="string">'text'</span>;</span><br><span class="line">&#125;</span><br><span class="line">TypeNews.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//由于是最终基类，不能添加子成员</span></span><br><span class="line">&#125;</span><br><span class="line">TypeNews.prototype.getElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.element;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建板块</span></span><br><span class="line"><span class="keyword">var</span> news1 = <span class="keyword">new</span> Container(<span class="string">'news'</span>,<span class="built_in">document</span>.body);</span><br><span class="line">new1.add(</span><br><span class="line">    <span class="keyword">new</span> Item(<span class="string">'normal1'</span>)                         <span class="comment">//添加容器</span></span><br><span class="line">        .add(</span><br><span class="line">            <span class="keyword">new</span> IconNews(<span class="string">'梅西不拿金球也伟大'</span>,<span class="string">'#'</span>,video)             <span class="comment">//添加内容</span></span><br><span class="line">        )</span><br><span class="line">)</span><br><span class="line">.add(<span class="keyword">new</span> Item(<span class="string">'normal'</span>).add(<span class="keyword">new</span> IconNews(<span class="string">'保护强国强队用意明显'</span>,<span class="string">'#'</span>,<span class="string">'live'</span>)))</span><br><span class="line">.add(<span class="keyword">new</span> Item(<span class="string">'normal'</span>).add(<span class="keyword">new</span> ImageNews(<span class="string">'img/1.jpg'</span>,<span class="string">'#'</span>,<span class="string">'small'</span>))</span><br><span class="line">                       .add(<span class="keyword">new</span> EasyNews(<span class="string">'从240斤胖子成功变形男'</span>,<span class="string">'#'</span>))</span><br><span class="line">                       .add(<span class="keyword">new</span> EasyNews(<span class="string">'五大雷人跑步机'</span>,<span class="string">'#'</span>)))</span><br><span class="line">.add(<span class="keyword">new</span> Item(<span class="string">'normal'</span>).add(<span class="keyword">new</span> TypeNews(<span class="string">'AK47不愿为费城打球'</span>,<span class="string">'#'</span>,<span class="string">'NBA'</span>,<span class="string">'left'</span>)))</span><br><span class="line">.add(<span class="keyword">new</span> Item(<span class="string">'normal'</span>).add(<span class="keyword">new</span> TypeNews(<span class="string">'火炮彪6三分创新高'</span>,<span class="string">'#'</span>,<span class="string">'CBA'</span>,<span class="string">'right'</span>)))</span><br><span class="line">.show();</span><br></pre></td></tr></table></figure>
+<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><pre><code>抽象一个虚拟父类，类中有两个属性，子成员的集合及自身，类中有三个方法初始化，
+添加和提供对外访问接口。所有的容器（ul,li,div）抽象为容器类，主要用于添加具体的新闻类。
+所有的新闻条目(带图片，带图标，带分类，横排组合的)抽象为具体新闻基类，以实现不同的组合。
+最后通过添加容器，容器添加新闻条目及组合的面向对象的方式实现。
+</code></pre><h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><pre><code>可以实现不同类型的组合及显示方式的变换，提供了一个清晰的组成结构，
+模糊了简单的对象与组合对象的区别，便于对数据的管理和使用维护。
+</code></pre><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><pre><code>代码量较大，对于资源有一定的开销，要根据具体情况决定是否使用。
+</code></pre><h1 id="其他适用场景"><a href="#其他适用场景" class="headerlink" title="其他适用场景"></a>其他适用场景</h1><pre><code>表单创建过程中，对各个容器及控件的组合使用。 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/结构型模式/" rel="tag">#结构型模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/bridge/" rel="next" title="桥接模式">
+                <i class="fa fa-chevron-left"></i> 桥接模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/03/designPattern/flyweight/" rel="prev" title="享元模式">
+                享元模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新闻模块的组合方式"><span class="nav-number">1.</span> <span class="nav-text">新闻模块的组合方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现原理"><span class="nav-number">2.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优点"><span class="nav-number">3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺点"><span class="nav-number">4.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他适用场景"><span class="nav-number">5.</span> <span class="nav-text">其他适用场景</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

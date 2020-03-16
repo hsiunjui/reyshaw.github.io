@@ -1,0 +1,686 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php高级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PHP中文件及目录的相关操作及示例常用功能示例.">
+<meta name="keywords" content="php高级">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP文件操作">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/php/18.PHP文件操作/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="PHP中文件及目录的相关操作及示例常用功能示例.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-16T12:36:29.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP文件操作">
+<meta name="twitter:description" content="PHP中文件及目录的相关操作及示例常用功能示例.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/php/18.PHP文件操作/"/>
+
+
+  <title> PHP文件操作 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP文件操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
+              2020-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>PHP中文件及目录的相关操作及示例常用功能示例.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="目录API"><a href="#目录API" class="headerlink" title="目录API"></a>目录API</h1><ul>
+<li><p>磁盘信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">disk_total_space($directory); <span class="comment">// 目录的磁盘总大小</span></span><br><span class="line">disk_free_space($directory); <span class="comment">// 磁盘可用大小</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目录操作</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">is_dir($path); <span class="comment">// 是否是目录,DIRECTORY_SEPERATOR 操作符分隔符</span></span><br><span class="line">getcwd(); <span class="comment">// 获取当前工作目录</span></span><br><span class="line">mkdir($path, $mode, $recursive); <span class="comment">// 创建目录,$mode文件权限(0777),$recursive(是否递归创建)</span></span><br><span class="line">scandir($path); <span class="comment">// 列出路径中的文件和目录</span></span><br><span class="line">glob($pattern); <span class="comment">// 寻找与模式匹配的文件路径 glob('a/*.html'); a目录下的所有html文件</span></span><br><span class="line">opendir($path); <span class="comment">// 打开目录句柄</span></span><br><span class="line">readdir($path); <span class="comment">// 从目录句柄中读取条目,返回文件或目录名</span></span><br><span class="line">rewinddir($resouce); <span class="comment">// 倒回目录句柄</span></span><br><span class="line">rename($oldname,$newname); <span class="comment">// 同文件的rename, 目录拷贝要通过封装函数来实现</span></span><br><span class="line">closedir($resouce); <span class="comment">//关闭目录句柄</span></span><br><span class="line">rmdir($path); <span class="comment">// 删除目录(目录必须时空的，且有删除权限)</span></span><br><span class="line"><span class="comment">// FILE_IGNORE_NEW_LINE / FILE_SKIP_EMPTY_LINE</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="文件API"><a href="#文件API" class="headerlink" title="文件API"></a>文件API</h1><ul>
+<li><p>文件基本信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">filetype($f); <span class="comment">// 文件类型 file/dir...</span></span><br><span class="line">filesize($f); <span class="comment">// 文件大小(字节数)</span></span><br><span class="line">filectime($f); <span class="comment">// 文件创建时间(时间戳)</span></span><br><span class="line">filemtime($f); <span class="comment">// 文件修改时间(时间戳)</span></span><br><span class="line">fileatime($f); <span class="comment">// 文件最后访问时间(时间戳)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件路径相关</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pathinfo($f); <span class="comment">// 返回路径相关信息(数组),第二个参数可以传常量PATHINFO_EXTENSION, PATHINFO_DIRNAME,PATHINFO_BASENAME,PATHINFO_FILENAME</span></span><br><span class="line">basename($f); <span class="comment">// 返回路径中的文件名部分包括扩展名,第二个参数可以决定是否去掉后缀</span></span><br><span class="line">dirname($f); <span class="comment">// 返回路劲中的目录</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件检测</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   is_file($f); <span class="comment">// 是否是文件,且文件要存在</span></span><br><span class="line">   file_exists($f); <span class="comment">//文件或目录是否存在</span></span><br><span class="line">  ```  </span><br><span class="line">- 文件权限</span><br><span class="line">  ```php</span><br><span class="line">  is_readable($f); <span class="comment">// 是否可读</span></span><br><span class="line">  is_writeable($f); is_writable($f); <span class="comment">// 是否可写</span></span><br><span class="line">  is_executable($f); <span class="comment">// 是否可执行</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件操作</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch($f); <span class="comment">// 创建文件,设定文件的访问和修改时间</span></span><br><span class="line">unlink($f); <span class="comment">// 删除文件(删除不存在的文件会报警告)</span></span><br><span class="line">rename($f, $newname); <span class="comment">// 重命名、剪切文件,文件不存在会报警告(如果$newname包含目录则会被剪切)</span></span><br><span class="line">copy($f, $dest); <span class="comment">// 复制文件,$dest不存在会报警告,可以远程拷贝(allow_url_open=On)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">file($f); <span class="comment">// 把整个文件读入一个数组中,可以读取远程文件</span></span><br><span class="line">file_get_contents($f); <span class="comment">// 读取一个文件</span></span><br><span class="line">fopen($f, $mode); <span class="comment">// 单开文件r读,w写,a追加,b二进制,返回一个资源</span></span><br><span class="line">fread($handler, $size); <span class="comment">// 读取内容,读$size个内容,游标会向后移动</span></span><br><span class="line">ftell($handler, $num); <span class="comment">// 返回/设置文件指针读写的位置</span></span><br><span class="line">fseek($handler, $num); <span class="comment">// 重置指针到指定位置</span></span><br><span class="line">rewind($handler); <span class="comment">// 把指针重置到文档开头</span></span><br><span class="line">ftruncate($handler, $size); <span class="comment">// 将文件截断到指定长度(会改变原来文件内容)</span></span><br><span class="line">fgetc($handler); <span class="comment">// 读取一个字符,注意中文是乱码的</span></span><br><span class="line">fgets($handler); <span class="comment">// 读取一行</span></span><br><span class="line">fgetss($handler); <span class="comment">// 读取一行,但过滤掉html标记,相当于strip_tags(fgets($h))</span></span><br><span class="line">feof($handler); <span class="comment">// 检测是否到了文件末尾</span></span><br><span class="line">fgetcsv($handler); <span class="comment">// 读取csv文件,读取一行并返回数组</span></span><br><span class="line">fputcsv($handler,$row); <span class="comment">// 写入一行</span></span><br><span class="line">fwrite($handler, $text, $size);fputs($handler,$text, $size);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1.以r+, w形式打开的,指针在开始,如果文件有内容会覆盖</span></span><br><span class="line"><span class="comment"> * 2.写一次,指针会移动相应的长度</span></span><br><span class="line"><span class="comment"> * 3.PHP_EOL 是换行符</span></span><br><span class="line"><span class="comment"> * 4.以w形式打开的,若文件不存在则会创建</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line">fclose($handler); <span class="comment">// 关闭文件</span></span><br><span class="line">file_put_contents($f, $data); <span class="comment">// 写入文件(每执行一次都会覆盖),文件不存在会创建,写二维数组($data)需要序列化,或转成json格式</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="常用封装示例"><a href="#常用封装示例" class="headerlink" title="常用封装示例"></a>常用封装示例</h1><ul>
+<li><p>创建一个文件</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_file</span><span class="params">(string $filename)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (file_exists($filename)) &#123; <span class="comment">// 检测文件是否存在</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"该文件已存在"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!file_exists(dirname($filename)))&#123; <span class="comment">// 检测目录是否存在</span></span><br><span class="line">        mkdir(dirname($filename), <span class="number">0777</span>, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(touch($filename))&#123; <span class="comment">// 创建文件</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"创建成功!"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"创建过程出错!"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// create_file($_GET['create_filename']); // 调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件下载</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">download_file</span><span class="params">(string $filename)</span> </span>&#123;</span><br><span class="line">    $exts = [<span class="string">"jpg"</span>,<span class="string">"jpeg"</span>,<span class="string">"png"</span>,<span class="string">"gif"</span>,<span class="string">"zip"</span>,<span class="string">"html"</span>, <span class="string">"rar"</span>, <span class="string">"txt"</span>];</span><br><span class="line">    <span class="comment">// var_dump($filename, is_file($filename), is_readable($filename));</span></span><br><span class="line">    <span class="keyword">if</span> (!is_file($filename) || !is_readable($filename)) &#123; <span class="comment">// 检测是否是文件且可读</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"不是文件或不可读"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));</span><br><span class="line">    <span class="keyword">if</span> (!in_array($ext, $exts)) &#123; <span class="comment">// 是否是指定类型</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"文件类型不允许"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $filesize = filesize($filename);</span><br><span class="line">    header(<span class="string">'Content-Type:application/octet-stream'</span>); <span class="comment">// 告诉浏览器输出字节流i</span></span><br><span class="line">    header(<span class="string">'Accept-Ranges:bytes'</span>); <span class="comment">// 返回大小按字节计算</span></span><br><span class="line">    header(<span class="string">'Accept-Length:'</span>.$filesize); <span class="comment">// 返回的文件大小</span></span><br><span class="line">    header(<span class="string">'Content-Disposition:attachment;filename=my_'</span>.basename($filename)); <span class="comment">// 文件作为附件处理和下载完的名称</span></span><br><span class="line">    $read_buffer = <span class="number">1024</span>; <span class="comment">// 酶促读取1024个字节</span></span><br><span class="line">    <span class="comment">// $sum_buffer = 0; // 防止最有一次不足1024(好像有点多余)</span></span><br><span class="line">    $handler = fopen($filename, <span class="string">'rb'</span>);</span><br><span class="line">    <span class="comment">// echo fread($handler, $filesize); 一次读完</span></span><br><span class="line">    <span class="keyword">while</span>(!feof($handler)) &#123; <span class="comment">// 没到末尾就一直读 &amp;&amp; $sum_buffer &lt; $filesize</span></span><br><span class="line">        <span class="keyword">echo</span> fread($handler, $read_buffer); <span class="comment">// $sum_buffter += $read_buffer;</span></span><br><span class="line">    &#125;</span><br><span class="line">    fclose($handler);</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// download_file($_GET['download_filename']); // 调用</span></span><br><span class="line">  ```    </span><br><span class="line">- 文件上传</span><br><span class="line">  ```php</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">upload</span><span class="params">(array $fileinfo)</span> </span>&#123;</span><br><span class="line">    $exts = [<span class="string">'jpg'</span>,<span class="string">'jpeg'</span>,<span class="string">'png'</span>,<span class="string">'gif'</span>]; <span class="comment">// 允许上传的文件类型</span></span><br><span class="line">    $maxSize = <span class="number">2097152</span>; <span class="comment">// 上传的最大大小</span></span><br><span class="line">    $imageFlag = <span class="keyword">true</span>; <span class="comment">// 是否做真实图片校验</span></span><br><span class="line">    $uploadPath = <span class="string">'./upload'</span>;</span><br><span class="line">    define(<span class="string">"UPLOAD_ERRS"</span>, [</span><br><span class="line">        <span class="string">'upload_max_filesize'</span> =&gt; <span class="string">'超出php.ini中upload_max_filesize的值'</span>,</span><br><span class="line">        <span class="string">'form_max_size'</span> =&gt; <span class="string">'超过表单MAX_FILE_SIZE的值'</span>,</span><br><span class="line">        <span class="string">'upload_file_partial'</span> =&gt; <span class="string">'文件部分被上传'</span>,</span><br><span class="line">        <span class="string">'no_upload_file_selected'</span> =&gt; <span class="string">'没有选择上传文件'</span>,</span><br><span class="line">        <span class="string">'upload_system_error'</span> =&gt; <span class="string">'系统错误'</span>,</span><br><span class="line">        <span class="string">'not_allowed_ext'</span> =&gt; <span class="string">'不允许的文件类型'</span>,</span><br><span class="line">        <span class="string">'exceed_max_size'</span> =&gt; <span class="string">'超出允许上传大小的最大值'</span>,</span><br><span class="line">        <span class="string">'not_true_image'</span> =&gt; <span class="string">'不是真实的图片'</span>,</span><br><span class="line">        <span class="string">'not_http_post'</span> =&gt; <span class="string">'不是http post请求'</span>,</span><br><span class="line">        <span class="string">'move_error'</span> =&gt; <span class="string">'移动文件出错'</span></span><br><span class="line">    ]);</span><br><span class="line">    <span class="keyword">if</span>($fileinfo[<span class="string">'error'</span>] === UPLOAD_ERR_OK) &#123; <span class="comment">// 文件上传是否有误</span></span><br><span class="line">        $ext = strtolower(pathinfo($fileinfo[<span class="string">'name'</span>], PATHINFO_EXTENSION));</span><br><span class="line">        <span class="keyword">if</span> (!in_array($ext, $exts)) &#123; <span class="comment">// 是否是合法文件类型</span></span><br><span class="line">            <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'not_allowed_ext'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ($fileinfo[<span class="string">'size'</span>] &gt; $maxSize) &#123; <span class="comment">// 文件大小是否合法</span></span><br><span class="line">            <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'exceed_max_size'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>($imageFlag) &#123; <span class="comment">// 是否是图片</span></span><br><span class="line">            <span class="keyword">if</span>(!@getimagesize($fileinfo[<span class="string">'tmp_name'</span>]))&#123; <span class="comment">// 不是真实图片</span></span><br><span class="line">                <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'not_true_image'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!is_uploaded_file($fileinfo[<span class="string">'tmp_name'</span>])) &#123; <span class="comment">// 是否是通过http post方式上传的</span></span><br><span class="line">            <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'not_http_post'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 是合法的上传时</span></span><br><span class="line">        <span class="keyword">if</span>(!is_dir($uploadPath)) &#123; <span class="comment">// 检测目录是否存在r_dump($)</span></span><br><span class="line">            mkdir($uploadPath, <span class="number">0777</span>, <span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        $uniName = md5(uniqid(microtime(<span class="keyword">true</span>), <span class="keyword">true</span>)).<span class="string">'.'</span>.$ext; <span class="comment">// 生成唯一文件名</span></span><br><span class="line">        $dest = $uploadPath.DIRECTORY_SEPARATOR.$uniName;</span><br><span class="line">        <span class="keyword">if</span>(@!move_uploaded_file($fileinfo[<span class="string">'tmp_name'</span>], $dest)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'move_error'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"文件上传成功!"</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span>($fileinfo[<span class="string">'error'</span>]) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'upload_max_filesize'</span>]; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'form_max_size'</span>]; <span class="keyword">break</span>; </span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>: <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'upload_file_partial'</span>]; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>: <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'no_upload_file_selected'</span>]; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">echo</span> UPLOAD_ERRS[<span class="string">'upload_system_error'</span>]; <span class="keyword">break</span>; <span class="comment">// 6,7,8</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// upload($_FILES['upload_fileinfo']); // 调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件压缩</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">zip_file</span><span class="params">(string $filename)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!is_file($filename)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>; <span class="comment">//  echo "文件不存在";</span></span><br><span class="line">    &#125;</span><br><span class="line">    $zip = <span class="keyword">new</span> ZipArchive();</span><br><span class="line">    $zipName = basename($filename).<span class="string">'.zip'</span>;</span><br><span class="line">    <span class="keyword">if</span>($zip-&gt;open($zipName, ZipArchive::CREATE|ZipArchive::OVERWRITE))&#123; <span class="comment">// 不存在会创建,存在则覆盖</span></span><br><span class="line">        $zip-&gt;addFile($filename);</span><br><span class="line">        $zip-&gt;close(); <span class="comment">// // 如果要添加多个文件,可以参数...files,内部foreach以此添加 </span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>; <span class="comment">// echo "压缩成功";</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>; <span class="comment">// echo "压缩失败";</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件解压 </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unzip_file</span><span class="params">(string $zipName, $dest)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!is_file($zipName)) &#123; <span class="comment">// 检测要解压的文件是否存在</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>; <span class="comment">// echo "文件不存在";</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!is_dir($dest))&#123; <span class="comment">// 目录是否存在</span></span><br><span class="line">        mkdir($dest, <span class="number">0777</span>, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $zip = <span class="keyword">new</span> ZipArchive();</span><br><span class="line">    <span class="keyword">if</span>($zip-&gt;open($zipName))&#123;</span><br><span class="line">        $zip-&gt;extractTo($dest); <span class="comment">// 解压到指定目录</span></span><br><span class="line">        $zip-&gt;close();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;  <span class="comment">// echo "解压缩成功"; </span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>; <span class="comment">// echo "解压缩失败";</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php高级/" rel="tag">#php高级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/php/19.PHP错误与异常/" rel="next" title="PHP错误与异常">
+                <i class="fa fa-chevron-left"></i> PHP错误与异常
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/php/17.PHP会话控制/" rel="prev" title="PHP会话控制">
+                PHP会话控制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录API"><span class="nav-number">1.</span> <span class="nav-text">目录API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件API"><span class="nav-number">2.</span> <span class="nav-text">文件API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用封装示例"><span class="nav-number">3.</span> <span class="nav-text">常用封装示例</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
