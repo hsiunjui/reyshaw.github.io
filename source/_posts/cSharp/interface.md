@@ -1,7 +1,7 @@
 ---
 title: c#的接口
 date: 2016-12-2 14:30:25
-categories: ASP.NET
+categories: C#
 tags: c#高级
 ---
 >c#中接口的定义及特性。

@@ -1,0 +1,30 @@
+---
+title: centOS8的安装
+date: 2020-03-16 19:51:26
+tags: 安装
+categories: linux
+---
+>centOS在虚拟机上的安装
+
+<!--more-->
+# 下载centos 8
+> [centos8官方下载地址](http://isoredirect.centos.org/centos/8/isos/x86_64/CentOS-8.1.1911-x86_64-dvd1.iso)
+:该链接是一个下载列表，选择[第一个](http://mirrors.cn99.com/centos/8.1.1911/isos/x86_64/CentOS-8.1.1911-x86_64-dvd1.iso)直接下载,大概7个G,下载完文件名为CentOS-8.1.1911-x86_64-dvd1.iso。
+# 创建虚拟机(若有)
+    * 打开vmware,点击创建新的虚拟机
+    * 自定义(高级)(C),下一步
+    * 稍后安装操作系统(S),下一步
+    * Linux(L)->CentOS 7 64位,下一步
+    * 填写虚拟机名称,选择存储位置(D:\software\centos8)[非必须],下一步
+    * 自定义硬件，内存2G,处理器1个/内核2个,新CD/DVD(IDE)->使用ISO映像文件(选择contos的iso包),网络适配器->桥接模式,关闭
+    * 完成
+
+# 安装centos
+    * 选择Install CentOS Linux 8
+    * 选择语言，continue
+    * 软件选择->最小化安装,安装目标位置->本地标准磁盘,网络->以太网->打开,时间日期->亚洲上海,开始安装
+    * 设置根密码(root),也可创建用户(未创建)
+    * 重启虚拟机完成安装
+
+# 创建及修改日志
+> 创建：2020/01/20 00:00:59

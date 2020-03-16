@@ -1,7 +1,7 @@
 ---
 title: c#的流程控制
 date: 2016-11-29 16:25:35
-categories: ASP.NET
+categories: C#
 tags: c#基础
 ---
 >c#语言中的分支及循环。

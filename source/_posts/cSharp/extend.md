@@ -1,7 +1,7 @@
 ---
 title: c#的继承
 date: 2016-12-2 09:26:45
-categories: ASP.NET
+categories: C#
 tags: c#高级
 ---
 >c#中父类、子类、继承等相关概念。

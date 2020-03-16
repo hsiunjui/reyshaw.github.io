@@ -1,7 +1,7 @@
 ---
 title: c#的抽象类
 date: 2016-12-2 10:24:44
-categories: ASP.NET
+categories: C#
 tags: c#高级
 ---
 >有关抽象类的相关概念。

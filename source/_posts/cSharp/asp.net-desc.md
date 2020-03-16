@@ -1,7 +1,7 @@
 ---
 title: .Net概述
 date: 2016-11-29 10:04:10
-categories: ASP.NET
+categories: C#
 tags: c#基础
 ---
 >有关.Net开发的相关准备工作。

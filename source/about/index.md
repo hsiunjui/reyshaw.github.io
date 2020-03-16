@@ -5,15 +5,15 @@ type: "about"
 ---
 ## 基本信息
 ```
-    - 英文名： feiker
+    - 英文名： rey shaw
     - 性别： 男
     - 出生年月： 1989-10-19
     - 学历：大专
     - 专业经验： 5年
     - 籍贯： 四川省
     - 状态：在菲，在职
-    - Email: feiker.xr@gmail.com
-    - Tel: +63 0995 746 8611
+    - Email: rey.w.shaw@gmail.com
+    - Tel: +63 0919 566 3355
     - QQ: 12497149
 ```
 ## 求职意向

@@ -1,7 +1,7 @@
 ---
 title: C#的面向对象
 date: 2016-12-1 15:21:52
-categories: ASP.NET
+categories: C#
 tags: c#高级
 ---
 >c#中的类和对象的相关概念。

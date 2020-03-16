@@ -1,7 +1,7 @@
 ---
 title: c#的数据类型扩展
 date: 2016-11-29 15:59:49
-categories: ASP.NET
+categories: C#
 tags: c#基础
 ---
 >c#语言中的常量、枚举、数组、结构体。

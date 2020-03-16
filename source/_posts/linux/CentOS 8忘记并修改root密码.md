@@ -1,0 +1,32 @@
+---
+title: centOS修改root密码
+date: 2020-03-16 19:51:26
+tags: linux命令
+categories: linux
+---
+>忘记centOS的密码,并执行修改root管理员密码的操作.
+
+<!--more-->
+# 修改root密码
+```bash
+1. 启动centos8,在启动界面按向下方向键选择第二项(救援模式)
+2. 按e键进入编辑模式
+3. 在kernel=...quiet这一行尾部追加[ rd.break]
+4. 按ctrl+x键
+5. mount | grep sysroot #会显示ro->read only
+6. monut -o remount, rw /sysroot #以读写权限重写挂载
+7. mount | grep sysroot  #再次查看,已经是rw-> read and write
+8. chroot /sysroot #切换系统根目录
+9. passwd #设置密码
+10. 输入新密码
+11. 确认新密码
+12. touch /.autorelabel #让文件系统强制重新relabeling
+13. exit
+14. logout
+15. 等待relabeling完成，自动重启后用新密码登录
+```
+# 参考
+> [centos8 修改root密码](https://blog.csdn.net/dyb2010fly/article/details/103592854) 
+
+# 创建及修改时间
+> 创建时间：2020/01/20 01:34:49

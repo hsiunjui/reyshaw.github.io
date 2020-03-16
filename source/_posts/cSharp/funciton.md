@@ -1,7 +1,7 @@
 ---
 title: c#的方法
 date: 2016-11-29 17:32:48
-categories: ASP.NET
+categories: C#
 tags: c#基础
 ---
 >c#语言中的函数或者方法调用。

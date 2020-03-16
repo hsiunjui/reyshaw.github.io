@@ -1,7 +1,7 @@
 ---
 title: c#的变量与数据类型
 date: 2016-11-29 11:33:30
-categories: ASP.NET
+categories: C#
 tags: c#基础
 ---
 >c#语言中的变量与数据类型。
