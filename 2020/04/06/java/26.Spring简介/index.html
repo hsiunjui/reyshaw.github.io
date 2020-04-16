@@ -1,0 +1,1013 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java EE," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Spring的IOC和AOP,JdbcTemplate和事务控制;">
+<meta name="keywords" content="Java EE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring简介">
+<meta property="og:url" content="http://yoursite.com/2020/04/06/java/26.Spring简介/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="Spring的IOC和AOP,JdbcTemplate和事务控制;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-08T10:55:48.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring简介">
+<meta name="twitter:description" content="Spring的IOC和AOP,JdbcTemplate和事务控制;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/06/java/26.Spring简介/"/>
+
+
+  <title> Spring简介 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-04-06T23:32:16+08:00" content="2020-04-06">
+              2020-04-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Spring的IOC和AOP,JdbcTemplate和事务控制;</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><p>Spring是一个开源框架,它是Java SE/EE的一站式框架。它使用的是基本的JavaBean来完成以前只可能由EJB完成的事情。它提供了Java三层结构每一层的解决方案。</p>
+<h1 id="Spring的优点"><a href="#Spring的优点" class="headerlink" title="Spring的优点"></a>Spring的优点</h1><ul>
+<li>方便解耦,简化开发(维护所有对象的创建和依赖关系)</li>
+<li>AOP编程支持(权限拦截/运行监控)</li>
+<li>声明式事务管理(通过配置完成,无需编码)</li>
+<li>方便程序测试</li>
+<li>方便集成各种优秀框架</li>
+<li>降低Java EE API使用难度</li>
+</ul>
+<h1 id="Spring模块"><a href="#Spring模块" class="headerlink" title="Spring模块"></a>Spring模块</h1><ul>
+<li>Core Container<ul>
+<li>Beans</li>
+<li>Core</li>
+<li>Context</li>
+<li>SpEL</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>AOP</li>
+<li>Aspects</li>
+<li>Instrumentation</li>
+<li>Messaging</li>
+</ul>
+<ul>
+<li>Data Access/Integration<ul>
+<li>JDBC</li>
+<li>ORM</li>
+<li>OXM</li>
+<li>JMS</li>
+<li>Transactions</li>
+</ul>
+</li>
+<li>WEB<ul>
+<li>WebSocket</li>
+<li>Servlet</li>
+<li>Web</li>
+<li>Protlet</li>
+</ul>
+</li>
+</ul>
+<h1 id="Spring使用步骤"><a href="#Spring使用步骤" class="headerlink" title="Spring使用步骤"></a>Spring使用步骤</h1><ul>
+<li>下载jar包添加到项目<ul>
+<li>spring-core</li>
+<li>spring-context</li>
+<li>spring-bean</li>
+<li>spring-expression</li>
+<li>commons-logging</li>
+<li>log4j</li>
+</ul>
+</li>
+<li>在resourecs文件下创建applicationContext.xml<ul>
+<li>bean 添加加id/name, class属性<ul>
+<li>id/name</li>
+<li>class</li>
+<li>scope(singleton/prototype(getBean创建新实例)/request/session)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建Spring工厂</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext app = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过工厂获取类的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.getBean(<span class="string">"beanId"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Spring-IOC-Inverse-Of-Control-控制反转"><a href="#Spring-IOC-Inverse-Of-Control-控制反转" class="headerlink" title="Spring IOC(Inverse Of Control - 控制反转)"></a>Spring IOC(Inverse Of Control - 控制反转)</h1><p>将原本创建对象的控制权交给spring框架.其原理是 工厂+反射+配置文件</p>
+<ul>
+<li>工厂 ApplicationContenxt (BeanFactory旧版)<ul>
+<li>ClassPathXmlApplicationContext</li>
+<li>FileSystemApplicationContext</li>
+</ul>
+</li>
+<li>Bean的生命周期(要实现接口,配置)<ol>
+<li>instantiate 对象实例化</li>
+<li>Populate properties 设置属性</li>
+<li>BeanNameAware’s setBeanName() 设置Bean的名称id</li>
+<li>BeanFactroyAware’s setBeanFactroy 了解工厂信息</li>
+<li>Pre-initialization BeanPostProcessors 初始化前方法</li>
+<li>initialingBean’s afterPropertiesSet() 属性设置后的方法</li>
+<li>Call custom init-method 初始化(配置)</li>
+<li>Post-initialization BeanPostProcessors 初始化后的方法</li>
+<li>Bean isReay to Use -&gt; Container is Shutdown 执行业务方法</li>
+<li>DisposableBean’s destroy 执行spring的销毁方法</li>
+<li>Call custom destroy-method 销毁(配置)</li>
+</ol>
+</li>
+<li>Bean管理方式<ul>
+<li>xml方式<ul>
+<li>使用类构造器实例化(无参,默认)</li>
+<li>使用静态工厂方法实例化(简单工厂 factory-method)</li>
+<li>使用实例工厂方法实例化(工厂方法,&lt;bean工厂&gt;,&lt;bean本类,factroy-bean, factory-method&gt;) </li>
+</ul>
+</li>
+<li>注解方式<ul>
+<li>开启注解扫描 context:component-scan (applicationContext.xml配置)</li>
+<li>bean注解 @Component(“compName”) Repository(DAO)/Service/Controller</li>
+<li>属性注解@Value(“xxx”)/@Autowired-@Qualifier(“xxx”)/@Resource(name=”xxxx”)</li>
+<li>生命周期注解 @PostConstuct/@PreDestroy</li>
+<li>作用范围 @Scope</li>
+</ul>
+</li>
+<li>混合方式<ul>
+<li>context:annotation-config</li>
+<li>一般bean用xml配置,属性用注解注入</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="DI-Dependency-Injection-依赖注入"><a href="#DI-Dependency-Injection-依赖注入" class="headerlink" title="DI (Dependency Injection)依赖注入"></a>DI (Dependency Injection)依赖注入</h1><p>spring在创建这个对象的过程中,将这个对象依赖的属性注入进去.</p>
+<ul>
+<li>构造函数注入<ul>
+<li>constructor-arg标签</li>
+</ul>
+</li>
+<li>属性setter方法注入<ul>
+<li>property标签<ul>
+<li>list/set/map/props标签-&gt;value/entry/prop标签注入集合类的的属性</li>
+</ul>
+</li>
+<li>p命名空间方式(spring&gt;=2.5)</li>
+<li>SpEl(#{表达式})</li>
+</ul>
+</li>
+<li>接口注入(不常用)</li>
+</ul>
+<h1 id="AOP-Aspect-Oriented-Programming面向切面编程"><a href="#AOP-Aspect-Oriented-Programming面向切面编程" class="headerlink" title="AOP(Aspect Oriented Programming面向切面编程)"></a>AOP(Aspect Oriented Programming面向切面编程)</h1><p>通过预编译方式和运行期动态代理实现程序功能的统一维护的技术。AOP是OOP的延续,函数式编程的一种衍生范型。AOP采用横向抽取机制,取代了传统纵向继承性体系重复性代码。主要用于：</p>
+<ul>
+<li>性能监视</li>
+<li>事务管理</li>
+<li>安全检查</li>
+<li>缓存</li>
+</ul>
+<h2 id="相关jar包"><a href="#相关jar包" class="headerlink" title="相关jar包"></a>相关jar包</h2><ul>
+<li>spring-aop(注解)</li>
+<li>aopallince(apo联盟)</li>
+</ul>
+<h2 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h2><ul>
+<li>连接点JoinPoint,那些(可以)被拦截到的点。(在Spring中,这些点指方法,spring只支持方法类型的连接点)</li>
+<li>切入点PointCut,要对哪些连接点进行拦截定义(实际拦截点)</li>
+<li>通知/增强Advice,拦截到连接点后要做的事情(具体方法)<ul>
+<li>前置通知(MethodBeforeAdvice,通过实现接口,下同)<ul>
+<li>定义接口和接口实现类</li>
+<li>创建类实现MethodBeforeAdvice接口</li>
+<li>配置上面两个类的bean</li>
+<li>配置代理对象bean ProxyFactoryBean<ul>
+<li>property(target/proxyInterface/InterceptorNames)</li>
+</ul>
+<ul>
+<li>自动创建代理<ul>
+<li>BeanNameAutoProxyCreator 基于Bean名称<ul>
+<li>配置beanNames属性</li>
+</ul>
+</li>
+<li>DefaultAdvisorAutoProxyCreator 根据Advisor本身包含信息</li>
+<li>AnnotationAwareAspectJAutoProxyCreator 基于Bean中AspectJ注解自动代理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后置通知(AfterReturningAdvice)</li>
+<li>异常通知(ThrowsAdvice)</li>
+<li>最终通知()</li>
+<li>环绕通知(MethodInterceptor)</li>
+</ul>
+</li>
+<li>引介Introduction,一种特殊通知(InterductionInterceptor),在不修改类代码前提下,可以在运行期为类动态地添加一些方法和Field.</li>
+<li>目标对象Target,代理的目标对象</li>
+<li>织入Weaving,把增强应用到目标对象来创建新的代理的过程。Spring采用动态代理织入,而AspectJ采用编译器织入和类装载器织入。</li>
+<li>代理Proxy,一个类被AOP织入增强后，就产生一个结果代理类.</li>
+<li>切面Aspect,切入点和通知(引介)的结合<ul>
+<li>Advisor 一般切面,Advice本身就是一个切面,对目标类所有方法拦截</li>
+<li>PointCutAdvisor具有切点的切面,可以指定拦截的方法<ul>
+<li>DefaultPointCutAdvisor 任意组合</li>
+<li>JdkRegexpMethodPointCut 构造正则表达式切入点<ul>
+<li>配置 RegexpMethodPointCut bean<ul>
+<li>property(patterns/advice[ref])</li>
+</ul>
+</li>
+<li>配置代理类的InterceptorName(value引用上面的bean)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IntroductionAdvisor引介切面,针对引介通知使用的切面</li>
+</ul>
+</li>
+</ul>
+<h2 id="AOP实现"><a href="#AOP实现" class="headerlink" title="AOP实现"></a>AOP实现</h2><ul>
+<li>JDK动态代理(接口代理,不能是实体类)</li>
+<li>CGLIB(对没有实现接口的类进行代理-创建子类)</li>
+</ul>
+<h2 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h2><p>AspectJ是一种基于Java语言的AOP框架。通过JDK5注解技术,允许直接在Bean类中定义切面.</p>
+<ul>
+<li>spring-aop-4.2.4.RELEASE.jar</li>
+<li>com.springsource.org.aopalliance-1.0.0.jar</li>
+<li>spring-aspects-4.2.4.RELEASE.jar</li>
+<li>com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar</li>
+</ul>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li>配置spring的xml文件约束</li>
+<li>开启自动代理 aop:aspectj-autoproxy (注解开发)</li>
+</ul>
+<h4 id="通知类型"><a href="#通知类型" class="headerlink" title="通知类型"></a>通知类型</h4><ul>
+<li>@Before 前置通知,BeforeAdvice</li>
+<li>@AfterReturning 后置通知,AfterReturningAdvice</li>
+<li>@Around 环绕通知,MethodInterceptor</li>
+<li>@AfterThrowing 异常抛出通知 ThrowAdvice</li>
+<li>@After 最终通知 finally</li>
+<li>@DeclareParents 引介通知 IntroductionInteceptor<br>在通知中可以定义value属性定义切点： execution(&lt;访问修饰符&gt;?&lt;返回类型&gt;&lt;方法名&gt;(&lt;参数&gt;)&lt;异常&gt;)</li>
+</ul>
+<h4 id="切点命名"><a href="#切点命名" class="headerlink" title="切点命名"></a>切点命名</h4><ul>
+<li>@PointCut 其实是替换通知的value值的,相当于定义变量</li>
+<li>切点方法: private void 无参方法,方法名为切点名</li>
+<li>多个切点可以使用 ||</li>
+</ul>
+<h4 id="xml方式"><a href="#xml方式" class="headerlink" title="xml方式"></a>xml方式</h4><ul>
+<li>配置目标类</li>
+<li>配置切面类</li>
+<li>配置切面<ul>
+<li>aop:config<ul>
+<li>aop:aspect(ref)<ul>
+<li>aop:before(method/point-ref)</li>
+</ul>
+</li>
+<li>aop:pointcut(id/execution)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="JDBC-Template"><a href="#JDBC-Template" class="headerlink" title="JDBC Template"></a>JDBC Template</h1><p>为简化持久化操作,Spring在JDBC API之上提供了JDBC Template组件。</p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
+<li>安装依赖<ul>
+<li>mysql-connector-java</li>
+<li>spring-jdbc</li>
+<li>spring-tx</li>
+</ul>
+</li>
+<li>配置数据源和template<ul>
+<li>DriverManagerDataSource</li>
+<li>JdbcTemplate</li>
+</ul>
+</li>
+<li>注入使用<ul>
+<li>execute 执行ddl语句</li>
+<li>update/batchUpdate 执行增删改</li>
+<li>query/queryXXX 执行查询(For List/Object/Map, RowMapper)</li>
+<li>call 调用存储过程</li>
+</ul>
+</li>
+</ul>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p>简洁灵活,但SQL和Java代码参杂,功能不丰富(分页,关联关系等)</p>
+<h1 id="Spring事务管理"><a href="#Spring事务管理" class="headerlink" title="Spring事务管理"></a>Spring事务管理</h1><p>事务是正确地执行一系列操作,使得数据库从一种状态转换为另一种状态，并保证操作全部成功或全部失败。遵循ACID原则：</p>
+<ul>
+<li>原子性 Atomicity (不可分割)</li>
+<li>一致性 Consistency (状态转换)</li>
+<li>隔离性 Isolation (多个事务是独立的)</li>
+<li>持久性 Durability (结果永久保存)</li>
+</ul>
+<h2 id="Java事务"><a href="#Java事务" class="headerlink" title="Java事务"></a>Java事务</h2><ul>
+<li>JDBC事务,用Conenction对象控制(局限于一个数据库连接内)<ul>
+<li>手动模式</li>
+<li>自动模式</li>
+</ul>
+</li>
+<li>JTA事务(Java Transaction API),与实现无关,与协议无关的API(跨库/DAO)</li>
+<li>容器事务,应用服务器提供,大多基于JTA完成(JNDI) (局限于EJB)</li>
+</ul>
+<h2 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h2><ul>
+<li>PlatformTransactionManager<ul>
+<li>DataSourceTransactionManager - JDBC</li>
+<li>HibernateTransactionManager - Hibernate …</li>
+</ul>
+</li>
+<li>TransationDefinition<ul>
+<li>getPropagationBehavior() 事务传播行为,事务方法被另一个事务调用<ul>
+<li>PROPAGATION_REQUIRED当前方法必须运行在事务中,事务存在,则运行在事务中;否则启动新事务</li>
+<li>PROPAGATION_SUPPORTS 不需要事务上下文,存在事务则运行其中</li>
+<li>PROPAGATION_MANDATORY 事务不存在抛异常</li>
+<li>PROPAGATION_REQUIRED_NEW 必须运行在自己的事务中,新事务启动,当前挂起</li>
+<li>PROPAGATION_NOT_SUPPORTED 不应该运行在事务中,存在则挂起</li>
+<li>PROPAGATION_NEVER 不应运行在事务上下文中,如果有抛异常</li>
+<li>PROPAGATION_NESTED 当前存在事务,将会在嵌套事务中运行</li>
+</ul>
+</li>
+<li>getIsolationLevel() 事务隔离级别<ul>
+<li>脏读,事务没提交提前读取</li>
+<li>不可重复读,两次读取的数据不一致(被其他事务改变)</li>
+<li>幻读,事务不是独立执行时发生的非预期现象</li>
+<li>具体级别:<ul>
+<li>ISLOLATION_DEFAULT</li>
+<li>ISLOLATION_READ_UNCOMMITTED 最低级别</li>
+<li>ISLOLATION_READ_COMMITTED 可能幻读/不可重复读</li>
+<li>ISLOLATION_REPEATABLE_READ 可能幻读</li>
+<li>ISLOLATION_SERIALIZABLE 最高级别,较慢</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>getTimeout() 超时</li>
+<li>isReadOnly() 是否只读,根据厂商</li>
+</ul>
+</li>
+<li>TransacetionStatus<ul>
+<li>isNewTransaction()</li>
+<li>hasSavePoint() 是否有恢复点</li>
+<li>setRollbackOnly()</li>
+<li>isRollbackOnly()</li>
+<li>isCompleted()</li>
+</ul>
+</li>
+</ul>
+<h2 id="Spring事务管理方式"><a href="#Spring事务管理方式" class="headerlink" title="Spring事务管理方式"></a>Spring事务管理方式</h2><ul>
+<li>编程式<ul>
+<li>事务管理器PlatformTransactionManager(对3个对象设置及JdbcTemplate类)</li>
+<li>模板事务TransactionTemplate(推荐, JdbcTemplate类)</li>
+</ul>
+</li>
+<li>声明式(基于AOP机制的环绕通知)<ul>
+<li>独立代理</li>
+<li>共享代理</li>
+<li>拦截器</li>
+<li>tx拦截器(推荐)<ul>
+<li>tx:advice<ul>
+<li>tx:attributes<ul>
+<li>tx:method</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>aop:config<ul>
+<li>aop:pointcut</li>
+<li>aop:advisor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注解@Transactional(推荐)<ul>
+<li>tx:annotatoin-driven</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Spring整合Mybatis"><a href="#Spring整合Mybatis" class="headerlink" title="Spring整合Mybatis"></a>Spring整合Mybatis</h1><ul>
+<li>配置dataSource bean</li>
+<li>配置sqlSessionFactory bean</li>
+<li>配置MapperScannerConfigurer bean</li>
+<li>配置事务<ul>
+<li>TransactionManager bean</li>
+<li>tx:advice (REQUIRED)</li>
+<li>aop:config</li>
+</ul>
+</li>
+<li>全局扫描<ul>
+<li>context:component-scan</li>
+<li>aop:aspectj-autoproxy</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-EE/" rel="tag">#Java EE</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/06/java/25.MyBatis简介/" rel="next" title="MyBatis简介">
+                <i class="fa fa-chevron-left"></i> MyBatis简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/08/java/27.SpringMVC简介/" rel="prev" title="SpringMCV简介">
+                SpringMCV简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">1.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring的优点"><span class="nav-number">2.</span> <span class="nav-text">Spring的优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring模块"><span class="nav-number">3.</span> <span class="nav-text">Spring模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring使用步骤"><span class="nav-number">4.</span> <span class="nav-text">Spring使用步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-IOC-Inverse-Of-Control-控制反转"><span class="nav-number">5.</span> <span class="nav-text">Spring IOC(Inverse Of Control - 控制反转)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DI-Dependency-Injection-依赖注入"><span class="nav-number">6.</span> <span class="nav-text">DI (Dependency Injection)依赖注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOP-Aspect-Oriented-Programming面向切面编程"><span class="nav-number">7.</span> <span class="nav-text">AOP(Aspect Oriented Programming面向切面编程)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关jar包"><span class="nav-number">7.1.</span> <span class="nav-text">相关jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关术语"><span class="nav-number">7.2.</span> <span class="nav-text">相关术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP实现"><span class="nav-number">7.3.</span> <span class="nav-text">AOP实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AspectJ"><span class="nav-number">7.4.</span> <span class="nav-text">AspectJ</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">7.4.0.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通知类型"><span class="nav-number">7.4.0.2.</span> <span class="nav-text">通知类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切点命名"><span class="nav-number">7.4.0.3.</span> <span class="nav-text">切点命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml方式"><span class="nav-number">7.4.0.4.</span> <span class="nav-text">xml方式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC-Template"><span class="nav-number">8.</span> <span class="nav-text">JDBC Template</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用步骤"><span class="nav-number">8.1.</span> <span class="nav-text">使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">8.2.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring事务管理"><span class="nav-number">9.</span> <span class="nav-text">Spring事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java事务"><span class="nav-number">9.1.</span> <span class="nav-text">Java事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring事务"><span class="nav-number">9.2.</span> <span class="nav-text">Spring事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring事务管理方式"><span class="nav-number">9.3.</span> <span class="nav-text">Spring事务管理方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring整合Mybatis"><span class="nav-number">10.</span> <span class="nav-text">Spring整合Mybatis</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java EE," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="SpringMVC简介;">
+<meta name="keywords" content="Java EE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMCV简介">
+<meta property="og:url" content="http://yoursite.com/2020/04/08/java/27.SpringMVC简介/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="SpringMVC简介;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-08T15:10:31.985Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMCV简介">
+<meta name="twitter:description" content="SpringMVC简介;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/08/java/27.SpringMVC简介/"/>
+
+
+  <title> SpringMCV简介 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SpringMCV简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-04-08T18:56:26+08:00" content="2020-04-08">
+              2020-04-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>SpringMVC简介;</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><p>SpringMVC是实现MVC设计模式的框架,它是Spring框架的后续产品(子模块),不需要整合.</p>
+<h1 id="SpringMVC核心组件"><a href="#SpringMVC核心组件" class="headerlink" title="SpringMVC核心组件"></a>SpringMVC核心组件</h1><ul>
+<li>DispatcherServlet 前置控制器</li>
+<li>Handler 处理器完成具体业务逻辑</li>
+<li>HandlerMapping 将请求映射到Handler</li>
+<li>HandlerInterceptor 处理器拦截器(接口)</li>
+<li>HandlerExecutionChain 处理器执行链</li>
+<li>HandlerAdapter 处理器适配器</li>
+<li>ModelAndView 转载模型数据和视图信息</li>
+<li>ViewResolver 视图解析器</li>
+</ul>
+<h1 id="SpringMVC实现流程"><a href="#SpringMVC实现流程" class="headerlink" title="SpringMVC实现流程"></a>SpringMVC实现流程</h1><ul>
+<li>客户端请求被DispatcherServlet接收</li>
+<li>DispatcherServlet将请求映射到Handler</li>
+<li>生成Handler及HandlerInterceptor</li>
+<li>返回HandlerExecutionChain(Handler+HandlerInterceptor)</li>
+<li>DispatcherServlet通过HandlerAdapter执行Handler</li>
+<li>返回一个ModelAndView</li>
+<li>DispacherServlet通过ViewResolver进行解析</li>
+<li>返回填充了模型数据的View返回客户端</li>
+</ul>
+<h1 id="SpringMVC的使用"><a href="#SpringMVC的使用" class="headerlink" title="SpringMVC的使用"></a>SpringMVC的使用</h1><ul>
+<li><p>基于XML配置使用</p>
+<ul>
+<li>SpringMVC基础配置<ul>
+<li>web.xml配置DispatcherServlet</li>
+<li>springmvc.xml<ul>
+<li>配置SimpleUrlHandlerMapping<ul>
+<li>Property/props/prop</li>
+</ul>
+</li>
+<li>配置Handler(继承Controller) bean参照prop里值</li>
+<li>配置视图解析器InternalResourceViewResolver<ul>
+<li>property前缀和后缀</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>XML配置Controller/HandlerMapping组件映射</li>
+<li>XML配置ViewResolver组件映射</li>
+</ul>
+</li>
+<li><p>基于注解方式</p>
+<ul>
+<li>基础配置(配置自动扫描)</li>
+<li>Controller/HandlerMapping通过注解映射(不需要再实现接口)<ul>
+<li>@Controller</li>
+<li>@RequestMapping(“path”)/@PostMapping(“path”)-&gt;@PathVariable/@RequestParam/@RequestBody(json格式)</li>
+<li>@ResponseBody 直接响应给客户端而不是页面<ul>
+<li>ModelAndView</li>
+<li>Model传值 (return String view)</li>
+<li>Map传值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置ViewResovler映射</li>
+</ul>
+</li>
+</ul>
+<h1 id="SpringMVC数据绑定"><a href="#SpringMVC数据绑定" class="headerlink" title="SpringMVC数据绑定"></a>SpringMVC数据绑定</h1><p>将HTTP请求的参数绑定到Handler业务方法的形参。</p>
+<ul>
+<li>HandlerAdapter</li>
+<li>HttpMessageConverter –&gt; DataBind<ul>
+<li>基本类型</li>
+<li>包装类</li>
+<li>对象</li>
+<li>结合</li>
+<li>json (jackson-databind,还要配置bean)</li>
+</ul>
+</li>
+<li>Handler</li>
+</ul>
+<h1 id="SpringMVC拦截器"><a href="#SpringMVC拦截器" class="headerlink" title="SpringMVC拦截器"></a>SpringMVC拦截器</h1><p>拦截器是使用JDK动态代理,拦截的是对应调用<strong>方法</strong>的拦截。(过滤器是使用Filter实现的,拦截的是request对象)</p>
+<ul>
+<li>实现HandlerInterceptor<ul>
+<li>preHandle() 返回布尔类型</li>
+<li>postHandle()</li>
+<li>afterCompletion()</li>
+</ul>
+</li>
+<li>定义配置(要导空间)<ul>
+<li>mvc:interceptors /interceptor<ul>
+<li>bean</li>
+<li>mvc:mapping</li>
+<li>mvc:exclude-mapping(排除)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-EE/" rel="tag">#Java EE</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/06/java/26.Spring简介/" rel="next" title="Spring简介">
+                <i class="fa fa-chevron-left"></i> Spring简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/08/java/28.Spring Boot简介 copy/" rel="prev" title="Spring Boot简介">
+                Spring Boot简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC核心组件"><span class="nav-number">2.</span> <span class="nav-text">SpringMVC核心组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC实现流程"><span class="nav-number">3.</span> <span class="nav-text">SpringMVC实现流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC的使用"><span class="nav-number">4.</span> <span class="nav-text">SpringMVC的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC数据绑定"><span class="nav-number">5.</span> <span class="nav-text">SpringMVC数据绑定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC拦截器"><span class="nav-number">6.</span> <span class="nav-text">SpringMVC拦截器</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

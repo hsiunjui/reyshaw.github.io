@@ -1,0 +1,813 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java EE," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="XML简介,XML基本规则及解析方式,XPATH及相关语法;">
+<meta name="keywords" content="Java EE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XML的简介">
+<meta property="og:url" content="http://yoursite.com/2020/04/02/java/17.XML简介/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="XML简介,XML基本规则及解析方式,XPATH及相关语法;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-03T07:56:27.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XML的简介">
+<meta name="twitter:description" content="XML简介,XML基本规则及解析方式,XPATH及相关语法;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/02/java/17.XML简介/"/>
+
+
+  <title> XML的简介 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                XML的简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-04-02T19:22:19+08:00" content="2020-04-02">
+              2020-04-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>XML简介,XML基本规则及解析方式,XPATH及相关语法;</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h1><p>XML(Extensiable Markup Language),即可扩展标记语言。允许开发这自由定义标签,将标签和内容分离;XML不再侧重于数据的展示,而是关注数据如何存储和传输。</p>
+<h2 id="XML应用场景"><a href="#XML应用场景" class="headerlink" title="XML应用场景"></a>XML应用场景</h2><ul>
+<li>XML把数据从HTML中分离出来</li>
+<li>简化数据共享</li>
+<li>简化数据传输</li>
+<li>简化平台变更</li>
+</ul>
+<h2 id="XML的优势"><a href="#XML的优势" class="headerlink" title="XML的优势"></a>XML的优势</h2><ul>
+<li>简单易用的标记语言</li>
+<li>严格的格式</li>
+<li>数据逻辑和显示逻辑分离</li>
+</ul>
+<h2 id="XML文档规则"><a href="#XML文档规则" class="headerlink" title="XML文档规则"></a>XML文档规则</h2><ul>
+<li>有且只有一个根元素</li>
+<li>元素必须合理结束</li>
+<li>元素之间必须合理地嵌套</li>
+<li>元素地属性必须有值</li>
+</ul>
+<h2 id="XML声明"><a href="#XML声明" class="headerlink" title="XML声明"></a>XML声明</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> standalone=<span class="string">"yes"</span><span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="XML基本规则"><a href="#XML基本规则" class="headerlink" title="XML基本规则"></a>XML基本规则</h2><ul>
+<li>合法标签名<ul>
+<li>由开始标签和结束标签组成</li>
+<li>区分大小写</li>
+<li>标签名由数字(非开头)/字母/下划线/中划线(非开头)/冒号/点号(非开头)组成(可以用中文,不建议)</li>
+<li>尽量不要出现冒号(除非使用名字空间)</li>
+<li>不能以xml大小写或混合的形式出现</li>
+<li>不能包含空格</li>
+</ul>
+</li>
+<li>嵌套子元素<ul>
+<li>允许无限深度嵌套子元素</li>
+<li>可以嵌套多个重名子元素(有序)</li>
+</ul>
+</li>
+<li>空元素<ul>
+<li>不可接收子元素,也不可接收字符串内容</li>
+<li>可以接收多个属性</li>
+</ul>
+</li>
+<li>字符数据(标签内的数据)<ul>
+<li>可以是任意unicode字符集</li>
+<li>特殊字符需要使用cdata(&lt;![CDATA][&lt;]&gt;)或使用实体(&lt;)</li>
+</ul>
+</li>
+<li>注释 <!-- --></li>
+<li>换行 LF</li>
+<li><p>DTD</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE TAGNAME[</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT SUBTAGNAME((SUBNAME1+))&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT SUBNAME1((CHILDNAME1,CHILDNAME2))&gt;</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT CHILDNAME1(#PCDATA)&gt;</span></span><br><span class="line"><span class="meta">....</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>命名空间</p>
+<ul>
+<li>一般是一个绝对url地址(由特殊字符)<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xmlns[:prefix]="命名空间字符串"</span><br><span class="line"><span class="tag">&lt;<span class="name">book</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">computerbook</span> <span class="attr">xmlns:category</span>=<span class="string">"http://xxx.com"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category:name</span>&gt;</span>categoryName<span class="tag">&lt;/<span class="name">category:name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">author</span> <span class="attr">xmlns:author</span>=<span class="string">"http//xx.com"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">author:name</span>&gt;</span>Author<span class="tag">&lt;<span class="name">author:name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">author</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">computerbook</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="XML文档解析方式"><a href="#XML文档解析方式" class="headerlink" title="XML文档解析方式"></a>XML文档解析方式</h2><ul>
+<li>DOM(Document Object Model文档对象模型,w3c推荐规范)</li>
+<li>SAX(Simple API for XML,事实规范)</li>
+<li>JAXP(Java API for XML Parser,Java解析xml文档,这是个接口,Xerces解析器)<ul>
+<li>DocumentBuilderFactory (DOM方式)</li>
+<li>DocumentBuilder (Dom解析)</li>
+<li>SAXParserFactory (SAX方式)<ul>
+<li>newSAXParser()</li>
+</ul>
+</li>
+<li>SAXParser(事件机制,SAX解析)<ul>
+<li>parse(File f, DefaultHandler(该类对下面方法有空实现) dh) // 还有一系列重载</li>
+<li>contentHandler()</li>
+<li>DTDHandler()</li>
+<li>EntityResolver()</li>
+<li>ErrorHandler()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="读取XML文档"><a href="#读取XML文档" class="headerlink" title="读取XML文档"></a>读取XML文档</h4><ul>
+<li>引入Xerces-J解析器的jar包</li>
+<li><p>自定义监听器(继承自DefaultHandler)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">DefaultHandler</span>() </span>&#123; <span class="comment">// 方法体内可以只是打印</span></span><br><span class="line">  <span class="keyword">private</span> String currentTag; <span class="comment">//当前处理的tag</span></span><br><span class="line">    <span class="comment">// 文档开始</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDocument</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="comment">// 元素开始</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startElement</span><span class="params">(String uri,String localName,String qName, Attributes attr)</span></span>&#123;&#125;</span><br><span class="line">  <span class="comment">// 每当处理文本数据时触发该方法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">characters</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> len)</span></span>&#123;&#125;</span><br><span class="line">  <span class="comment">// 元素结束</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endElement</span><span class="params">(String uri,String localName,String qName)</span></span>&#123;&#125;</span><br><span class="line">  <span class="comment">// 文档结束</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endDodument</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建SAX解析器工厂</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXParserFactory sf = SAXParserFactory.newInstance();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建SAX解析器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXParser sp = sf.newSAXParser();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解析文档</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sp.parse(<span class="string">"XMLfilePath"</span>, <span class="keyword">new</span> MyHandler());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="生成XML文档"><a href="#生成XML文档" class="headerlink" title="生成XML文档"></a>生成XML文档</h4><ul>
+<li><p>创建保存XML结果流对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Result rt = <span class="keyword">new</span> StreamResult(<span class="keyword">new</span> File(path));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取SAX生成工厂实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXTransformerFactory saxTf = (SAXTransformerFactory)SAXTransformerFactory.newInstance();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取SAX生成处理者对象实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TransformerHandler th = saxTf.newTransformerHandler();</span><br><span class="line">th.setResult(rt);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取SAX生成器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  Transformer tf = th.getTransformer();</span><br><span class="line">  tf.setOutputProperty(OutputKeys.INDENT, <span class="string">"yes"</span>);</span><br><span class="line">  ```  </span><br><span class="line">- 生成文档</span><br><span class="line">  ```java</span><br><span class="line">  tf.startDocument();</span><br><span class="line">  AttributesImpl attr = <span class="keyword">new</span> AttributesImpl(); <span class="comment">// 属性生成</span></span><br><span class="line">  tf.setElement(<span class="string">""</span>,<span class="string">""</span>,<span class="string">"elementName"</span>, attr); <span class="comment">// 开始标签</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  tf.characters(<span class="string">"String"</span>.toCharArray(),<span class="number">0</span>, <span class="string">"String"</span>.length()); <span class="comment">// 设置内容</span></span><br><span class="line">  tf.endElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"elementName"</span>); <span class="comment">// 结束标签</span></span><br><span class="line">  tf.endDocument();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="XPATH"><a href="#XPATH" class="headerlink" title="XPATH"></a>XPATH</h1><p>XPATH是专门用于在XML文档中查找信息的语言</p>
+<h2 id="XPATH的节点"><a href="#XPATH的节点" class="headerlink" title="XPATH的节点"></a>XPATH的节点</h2><ul>
+<li>XML文档根节点</li>
+<li>元素节点</li>
+<li>属性节点</li>
+<li>注释节点</li>
+<li>命名空间节点</li>
+<li>文本节点</li>
+</ul>
+<h2 id="XPATH的基本概念"><a href="#XPATH的基本概念" class="headerlink" title="XPATH的基本概念"></a>XPATH的基本概念</h2><ul>
+<li>基本值(简单数据值,包括数值/字符串等)</li>
+<li>项(一个节点或基本值)</li>
+<li>节点集和序列(多个节点组合)</li>
+<li>节点关系<ul>
+<li>父节点</li>
+<li>子节点</li>
+<li>兄弟节点</li>
+<li>祖先节点</li>
+<li>后代节点</li>
+</ul>
+</li>
+<li>相对路径(非/开头)和绝对路径(/开头)</li>
+</ul>
+<h2 id="XPATH基本语法"><a href="#XPATH基本语法" class="headerlink" title="XPATH基本语法"></a>XPATH基本语法</h2><p>XPATH使用路径表达式来定位XML文档中的节点(集),每个XPATH表达式总是由多个步(step)组成,多部之间用/分隔<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">轴::节点ceshi[限定谓语]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>轴(XPAHT的步使用轴来定义所选节点与当前节点之间的结构关系)<ul>
+<li>ancestor(祖先节点)</li>
+<li>ancestor-or-self(祖先节点及自身)</li>
+<li>attribute(选择节点所有属性)</li>
+<li>child (选择当前节点的子节点)</li>
+<li>parent (选择当前节点的父节点)</li>
+<li>descendant (当前节点所有后代节点)</li>
+<li>descendant-or-self (当前节点所有后代节点及自身)</li>
+<li>self (当前节点自身)</li>
+<li>following-sibling (当前节点的兄弟节点)</li>
+</ul>
+</li>
+<li>节点测试(用于从指定轴所匹配的节点集中选出特定的节点)<ul>
+<li>nodename 具有nodename的节点</li>
+<li>node() 所有类型的节点</li>
+<li>text() 所有文本类型节点</li>
+<li>comment() 所有注释节点</li>
+<li>*通配符</li>
+</ul>
+</li>
+<li>限定谓语(布尔表达式)</li>
+</ul>
+<h2 id="XPATH的运算符"><a href="#XPATH的运算符" class="headerlink" title="XPATH的运算符"></a>XPATH的运算符</h2><ul>
+<li>算术运算符(+/-/*/div/mod)</li>
+<li>比较运算符</li>
+<li>逻辑运算符(or/and)</li>
+<li>| 组合运算符</li>
+</ul>
+<h2 id="XPATH常见函数"><a href="#XPATH常见函数" class="headerlink" title="XPATH常见函数"></a>XPATH常见函数</h2><ul>
+<li>fn:position() - 返回index</li>
+<li>fn:last() - 项的数目</li>
+<li>fn:name() - 当前节点名称/节点集中第一个</li>
+<li>fn:root() - 文本根节点</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-EE/" rel="tag">#Java EE</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/30/java/16.JSP简介/" rel="next" title="JSP的简介">
+                <i class="fa fa-chevron-left"></i> JSP的简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/02/java/18.Servlet简介/" rel="prev" title="Servlet的简介">
+                Servlet的简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XML"><span class="nav-number">1.</span> <span class="nav-text">XML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XML应用场景"><span class="nav-number">1.1.</span> <span class="nav-text">XML应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML的优势"><span class="nav-number">1.2.</span> <span class="nav-text">XML的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML文档规则"><span class="nav-number">1.3.</span> <span class="nav-text">XML文档规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML声明"><span class="nav-number">1.4.</span> <span class="nav-text">XML声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML基本规则"><span class="nav-number">1.5.</span> <span class="nav-text">XML基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML文档解析方式"><span class="nav-number">1.6.</span> <span class="nav-text">XML文档解析方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取XML文档"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">读取XML文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成XML文档"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">生成XML文档</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XPATH"><span class="nav-number">2.</span> <span class="nav-text">XPATH</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH的节点"><span class="nav-number">2.1.</span> <span class="nav-text">XPATH的节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH的基本概念"><span class="nav-number">2.2.</span> <span class="nav-text">XPATH的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH基本语法"><span class="nav-number">2.3.</span> <span class="nav-text">XPATH基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH的运算符"><span class="nav-number">2.4.</span> <span class="nav-text">XPATH的运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH常见函数"><span class="nav-number">2.5.</span> <span class="nav-text">XPATH常见函数</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

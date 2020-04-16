@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
 <meta property="og:description" content="MySQL对数据的增删改查.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T12:08:59.522Z">
+<meta property="og:updated_time" content="2020-04-05T16:38:26.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据记录的操作">
 <meta name="twitter:description" content="MySQL对数据的增删改查.">
@@ -386,7 +386,11 @@
 </li>
 <li><p>DISTINCT,删除结果中的重复数据</p>
 </li>
-<li>UNION [ALL|DISTINCT]用于连接两个以上SELECT语句的结果组合到一个结构集中(可以选择是否去重)      </li>
+<li>UNION [ALL|DISTINCT]用于连接两个以上SELECT语句的结果组合到一个结构集中(可以选择是否去重)</li>
+<li>ANY/SOME/ALL</li>
+<li>EXISTS</li>
+<li>CREATE/INSERT…SELECT</li>
+<li>自身连接</li>
 </ul>
 <h1 id="添加记录"><a href="#添加记录" class="headerlink" title="添加记录"></a>添加记录</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> [<span class="keyword">INTO</span>] tbl_name [(col_name,...)] &#123;<span class="keyword">VALUE</span>|<span class="keyword">VALUES</span>&#125; (val1,...),(val1,...);</span><br><span class="line"><span class="comment">-- 如果不写列名,会按建表的顺序依次赋值</span></span><br><span class="line"><span class="comment">-- 可以一次性插入多条记录</span></span><br><span class="line"><span class="comment">-- 也可以插入查询的结果(INSERT ... SELECT...)</span></span><br></pre></td></tr></table></figure>
 <h1 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> tbl_name <span class="keyword">SET</span> 字段名称=值,字段名称=值,... [<span class="keyword">WHERE</span> 条件];</span><br><span class="line"><span class="comment">-- 如果不添加条件真个表都会被更新</span></span><br></pre></td></tr></table></figure>
@@ -438,8 +442,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/16/database/6.mysql数据类型/" rel="prev" title="MySQL的数据类型">
-                MySQL的数据类型 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/16/database/4.SQL语法/" rel="prev" title="SQL语法">
+                SQL语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -508,7 +512,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-count">180</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -525,7 +529,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

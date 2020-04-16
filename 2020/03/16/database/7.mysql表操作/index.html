@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
 <meta property="og:description" content="MySQL对数据表的创建、修改、删除等操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T12:08:21.600Z">
+<meta property="og:updated_time" content="2020-04-05T16:36:04.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据表的操作">
 <meta name="twitter:description" content="MySQL对数据表的创建、修改、删除等操作。">
@@ -370,8 +370,11 @@
 <li>[PRIMARY] KEY 主键,标识唯一性,一个表只能有一个主键</li>
 <li>UNIQUE KEY 唯一性</li>
 <li>AUTO_INCREMENT 自动增长,默认从1开始</li>
-<li>FOREIGN KEY 外键约束</li>
-<li>COMMENT 注释</li>
+<li><p>FOREIGN KEY 外键约束(只有InnoDB引擎支持)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...CONSTRAINT key_name FOREIGN KEY(f_id) REFERENCES main_table(id);</span><br><span class="line">CASCADE # 级联操作</span><br><span class="line"><span class="keyword">SET</span> <span class="literal">NULL</span> # 级联,子表外键会被设为<span class="literal">null</span></span><br><span class="line"><span class="keyword">NO</span> <span class="keyword">ACTION</span> | RESTRICT # 不允许对父表操作</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>COMMENT 注释</p>
+</li>
 </ul>
 <h1 id="查看表"><a href="#查看表" class="headerlink" title="查看表"></a>查看表</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</span><br><span class="line"><span class="keyword">SHOW</span> [<span class="keyword">FULL</span>] <span class="keyword">TABLES</span> [&#123;<span class="keyword">FROM</span>|<span class="keyword">IN</span>&#125; db_name] [<span class="keyword">LIKE</span> <span class="string">'pattern'</span>| <span class="keyword">WHERE</span> expr]; <span class="comment">-- 完整方式</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tbl_name; <span class="comment">-- 查看指定数据表的详细信息</span></span><br><span class="line">&#123;DESC|DESCRIBE&#125; tbl_name; / SHOW COLUMNS FROM tbl_name; -- 查看表结构</span><br></pre></td></tr></table></figure>
 <h1 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h1><ul>
@@ -420,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/16/linux/CentOS 8基本操作/" rel="next" title="centOS基本操作">
-                <i class="fa fa-chevron-left"></i> centOS基本操作
+              <a href="/2020/03/16/database/5.mysql库操作/" rel="next" title="MySQL数据库的操作">
+                <i class="fa fa-chevron-left"></i> MySQL数据库的操作
               </a>
             
           </div>
@@ -498,7 +501,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-count">180</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -515,7 +518,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
