@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux命令," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,18 +84,16 @@
 
 
 
-<meta name="description" content="忘记centOS的密码,并执行修改root管理员密码的操作.">
-<meta name="keywords" content="linux命令">
-<meta property="og:type" content="article">
-<meta property="og:title" content="centOS修改root密码">
-<meta property="og:url" content="http://yoursite.com/2020/03/16/linux/CentOS 8忘记并修改root密码/index.html">
+<meta name="description" content="与其更好，不如不同！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rey Shaw&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/page/19/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="忘记centOS的密码,并执行修改root管理员密码的操作.">
+<meta property="og:description" content="与其更好，不如不同！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T11:59:45.979Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="centOS修改root密码">
-<meta name="twitter:description" content="忘记centOS的密码,并执行修改root管理员密码的操作.">
+<meta name="twitter:title" content="Rey Shaw&#39;s Blog">
+<meta name="twitter:description" content="与其更好，不如不同！">
 
 
 
@@ -116,10 +114,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/16/linux/CentOS 8忘记并修改root密码/"/>
+  <link rel="canonical" href="http://yoursite.com/page/19/"/>
 
 
-  <title> centOS修改root密码 | Rey Shaw's Blog </title>
+  <title> Rey Shaw's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -140,7 +138,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -247,9 +247,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
   
@@ -269,7 +269,10 @@
             
             
               
-                centOS修改root密码
+                
+                <a class="post-title-link" href="/2016/10/17/github/github-sshkey/" itemprop="url">
+                  github ssh key的配置
+                </a>
               
             
           </h1>
@@ -281,8 +284,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
-              2020-03-16
+            <time itemprop="dateCreated" datetime="2016-10-17T13:31:43+08:00" content="2016-10-17">
+              2016-10-17
             </time>
           </span>
 
@@ -295,8 +298,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
                   </a>
                 </span>
 
@@ -328,75 +331,165 @@
       
 
       
-        <blockquote>
-<p>忘记centOS的密码,并执行修改root管理员密码的操作.</p>
+        
+          <blockquote>
+<p>用于无密码输入的git提交,验证github的需要</p>
 </blockquote>
-<a id="more"></a>
-<h1 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. 启动centos8,在启动界面按向下方向键选择第二项(救援模式)</span><br><span class="line">2. 按e键进入编辑模式</span><br><span class="line">3. 在kernel=...quiet这一行尾部追加[ rd.break]</span><br><span class="line">4. 按ctrl+x键</span><br><span class="line">5. mount | grep sysroot <span class="comment">#会显示ro-&gt;read only</span></span><br><span class="line">6. monut -o remount, rw /sysroot <span class="comment">#以读写权限重写挂载</span></span><br><span class="line">7. mount | grep sysroot  <span class="comment">#再次查看,已经是rw-&gt; read and write</span></span><br><span class="line">8. chroot /sysroot <span class="comment">#切换系统根目录</span></span><br><span class="line">9. passwd <span class="comment">#设置密码</span></span><br><span class="line">10. 输入新密码</span><br><span class="line">11. 确认新密码</span><br><span class="line">12. touch /.autorelabel <span class="comment">#让文件系统强制重新relabeling</span></span><br><span class="line">13. <span class="built_in">exit</span></span><br><span class="line">14. <span class="built_in">logout</span></span><br><span class="line">15. 等待relabeling完成，自动重启后用新密码登录</span><br></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
-<p><a href="https://blog.csdn.net/dyb2010fly/article/details/103592854" target="_blank" rel="noopener">centos8 修改root密码</a> </p>
-</blockquote>
-<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
-<p>创建时间：2020/01/20 01:34:49</p>
-</blockquote>
-
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/17/github/github-sshkey/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/linux命令/" rel="tag">#linux命令</a>
-          
-        </div>
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/03/16/php/1.PHP简介/" rel="next" title="PHP简介">
-                <i class="fa fa-chevron-left"></i> PHP简介
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/16/linux/常用软件下载地址/" rel="prev" title="linux常用下载">
-                linux常用下载 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
+    
+      
 
-    <div class="post-spread">
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/16/github/hexo-blog/" itemprop="url">
+                  用hexo搭建github博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T14:39:30+08:00" content="2016-10-16">
+              2016-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>hexo是基于Node.js的静态博客程序，可以生成静态网页托管在github和Heroku上。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/16/github/hexo-blog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
       
     </div>
-  </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span>
+  </nav>
+
 
 
           </div>
@@ -404,10 +497,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -427,17 +516,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -448,7 +528,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-count">182</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -456,7 +536,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -507,17 +587,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#修改root密码"><span class="nav-number">1.</span> <span class="nav-text">修改root密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">3.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -621,10 +690,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 

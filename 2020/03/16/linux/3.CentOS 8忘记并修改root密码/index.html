@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux命令," />
+  <meta name="keywords" content="linux基础," />
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="centOS环境下,linux的基本命令.">
-<meta name="keywords" content="linux命令">
+<meta name="description" content="忘记centOS的密码,并执行修改root管理员密码的操作.">
+<meta name="keywords" content="linux基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="centOS基本操作">
-<meta property="og:url" content="http://yoursite.com/2020/03/16/linux/CentOS 8基本操作/index.html">
+<meta property="og:title" content="centOS修改root密码">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/linux/3.CentOS 8忘记并修改root密码/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="centOS环境下,linux的基本命令.">
+<meta property="og:description" content="忘记centOS的密码,并执行修改root管理员密码的操作.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T12:00:35.040Z">
+<meta property="og:updated_time" content="2020-06-06T17:56:25.526Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="centOS基本操作">
-<meta name="twitter:description" content="centOS环境下,linux的基本命令.">
+<meta name="twitter:title" content="centOS修改root密码">
+<meta name="twitter:description" content="忘记centOS的密码,并执行修改root管理员密码的操作.">
 
 
 
@@ -116,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/16/linux/CentOS 8基本操作/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/16/linux/3.CentOS 8忘记并修改root密码/"/>
 
 
-  <title> centOS基本操作 | Rey Shaw's Blog </title>
+  <title> centOS修改root密码 | Rey Shaw's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +269,7 @@
             
             
               
-                centOS基本操作
+                centOS修改root密码
               
             
           </h1>
@@ -329,10 +329,17 @@
 
       
         <blockquote>
-<p>centOS环境下,linux的基本命令.</p>
+<p>忘记centOS的密码,并执行修改root管理员密码的操作.</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ls <span class="comment">#列出目录 -a/all -l/long -h</span></span><br><span class="line"><span class="built_in">cd</span> <span class="comment">#切换到指定目录</span></span><br><span class="line">mkdir <span class="comment">#创建目录 -p/递归创建</span></span><br><span class="line">rmdir <span class="comment">#删除目录 -p/递归删除</span></span><br><span class="line">cat <span class="comment">#查看文件内容</span></span><br><span class="line">vi <span class="comment">#创建或编辑文件 【a(光标后)/i(光标前)/o(当前行下一行光标处)插入】【 h(左)j(下)k(上)l(右)移动光标】【dd/剪切 yy/复制 p/粘贴】</span></span><br><span class="line">touch <span class="comment">#创建文件</span></span><br><span class="line">rm <span class="comment">#删除文件 -rf/递归不询问</span></span><br><span class="line">cp <span class="comment">#拷贝文件</span></span><br><span class="line">mv <span class="comment">#移动文件或重命名文件</span></span><br><span class="line">useradd <span class="comment">#添加用户</span></span><br><span class="line">userdel <span class="comment">#删除用户</span></span><br><span class="line">groups <span class="comment">#查看组</span></span><br><span class="line">groupadd <span class="comment">#添加组</span></span><br><span class="line">groupdel <span class="comment">#删除组</span></span><br><span class="line">usermod <span class="comment">#改变用户的组</span></span><br><span class="line">chmod <span class="comment">#改变权限</span></span><br><span class="line">chown <span class="comment">#改变拥有者</span></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<h1 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. 启动centos8,在启动界面按向下方向键选择第二项(救援模式)</span><br><span class="line">2. 按e键进入编辑模式</span><br><span class="line">3. 在kernel=...quiet这一行尾部追加[ rd.break]</span><br><span class="line">4. 按ctrl+x键</span><br><span class="line">5. mount | grep sysroot <span class="comment">#会显示ro-&gt;read only</span></span><br><span class="line">6. monut -o remount, rw /sysroot <span class="comment">#以读写权限重写挂载</span></span><br><span class="line">7. mount | grep sysroot  <span class="comment">#再次查看,已经是rw-&gt; read and write</span></span><br><span class="line">8. chroot /sysroot <span class="comment">#切换系统根目录</span></span><br><span class="line">9. passwd <span class="comment">#设置密码</span></span><br><span class="line">10. 输入新密码</span><br><span class="line">11. 确认新密码</span><br><span class="line">12. touch /.autorelabel <span class="comment">#让文件系统强制重新relabeling</span></span><br><span class="line">13. <span class="built_in">exit</span></span><br><span class="line">14. <span class="built_in">logout</span></span><br><span class="line">15. 等待relabeling完成，自动重启后用新密码登录</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
+<p><a href="https://blog.csdn.net/dyb2010fly/article/details/103592854" target="_blank" rel="noopener">centos8 修改root密码</a> </p>
+</blockquote>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间：2020/01/20 01:34:49</p>
+</blockquote>
+
       
     </div>
 
@@ -354,7 +361,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux命令/" rel="tag">#linux命令</a>
+            <a href="/tags/linux基础/" rel="tag">#linux基础</a>
           
         </div>
       
@@ -363,16 +370,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/16/linux/CentOS 8的安装/" rel="next" title="centOS8的安装">
-                <i class="fa fa-chevron-left"></i> centOS8的安装
+              <a href="/2020/03/16/linux/6.CentOS 8基本命令/" rel="next" title="centOS基本命令">
+                <i class="fa fa-chevron-left"></i> centOS基本命令
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/16/database/6.mysql数据类型/" rel="prev" title="MySQL的数据类型">
-                MySQL的数据类型 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/16/linux/2.CentOS 8的安装/" rel="prev" title="centOS8的安装">
+                centOS8的安装 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -441,7 +448,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-count">182</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -449,7 +456,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -507,7 +514,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#修改root密码"><span class="nav-number">1.</span> <span class="nav-text">修改root密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">3.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>

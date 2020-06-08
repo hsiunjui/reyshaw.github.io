@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="MySQL在windows下的安装流程.">
+<meta name="description" content="MySQL在windows/linux下的安装流程.">
 <meta name="keywords" content="安装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL的安装">
 <meta property="og:url" content="http://yoursite.com/2020/03/16/database/2.mysql安装/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="MySQL在windows下的安装流程.">
+<meta property="og:description" content="MySQL在windows/linux下的安装流程.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T12:03:31.158Z">
+<meta property="og:updated_time" content="2020-06-08T02:26:47.298Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的安装">
-<meta name="twitter:description" content="MySQL在windows下的安装流程.">
+<meta name="twitter:description" content="MySQL在windows/linux下的安装流程.">
 
 
 
@@ -329,7 +329,7 @@
 
       
         <blockquote>
-<p>MySQL在windows下的安装流程.</p>
+<p>MySQL在windows/linux下的安装流程.</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="mysql的定义"><a href="#mysql的定义" class="headerlink" title="mysql的定义"></a>mysql的定义</h1><p>mysql是一种关系型数据库,它运行在服务器上,供web等终端使用。mysql的数据存储在表中。</p>
@@ -347,8 +347,60 @@
 <li>启动服务(net start mysql)</li>
 <li>登录mysql然后使用</li>
 </ul>
+<h1 id="CentOS-8"><a href="#CentOS-8" class="headerlink" title="CentOS 8"></a>CentOS 8</h1><h2 id="源码包安装，失败了-放弃"><a href="#源码包安装，失败了-放弃" class="headerlink" title="(源码包安装，失败了,放弃)"></a>(源码包安装，失败了,放弃)</h2><ul>
+<li><p>检查</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/system-release <span class="comment"># 检查系统</span></span><br><span class="line">uname -a <span class="comment"># 查看是64位还是32位</span></span><br><span class="line">rpm -qa | grep mysql* <span class="comment"># rpm检查</span></span><br><span class="line">yum list mysql* <span class="comment"># yum检查</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载系统的mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum remove mysql* <span class="comment"># yum 卸载</span></span><br><span class="line">rpm -e mysql* <span class="comment"># rpm卸载</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载版本并上传到linux</p>
+<ul>
+<li><a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">地址</a></li>
+<li>选择操作系统位 Linux - Generic</li>
+<li>选择通用型 Linux - Generic (glibc 2.12) (x86, 64-bit), Compressed TAR Archive,下载并上传到linux /root目录</li>
+</ul>
+</li>
+<li><p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf mysql-8.0.20-linux-glibc2.12-x86_64.tar.xz <span class="comment"># -xvf =&gt; .tar.xz</span></span><br><span class="line">mv mysql-8.0.20-linux-glibc2.12-x86_64 /usr/<span class="built_in">local</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">mv  mysql-8.0.20-linux-glibc2.12-x86_64 mysql <span class="comment"># 修改文件夹名称</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为系统添加mysql组和用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd mysql <span class="comment"># 添加mysql组</span></span><br><span class="line">useradd -r -g mysql mysqlu <span class="comment"># 添加用户mysqlu,并指定到mysql组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mysql-8.0.20-linux-glibc2.12-x86_64</span><br><span class="line">    chown -R mysqlu:mysql ./ <span class="comment"># 修改当前目录为mysqlu所有,  用户名:组名 -R 递归</span></span><br><span class="line">  ```  </span><br><span class="line">- 添加配置文件</span><br><span class="line">  ```bash</span><br><span class="line">    touch my-default.cnf</span><br><span class="line">    chmod 755 my-default.cnf</span><br><span class="line">    cp my-default.cnf /etc/my.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># my-default.cnf具体配置</span></span><br><span class="line">[mysqld]</span><br><span class="line">lower_case_table_names=1 <span class="comment"># 表名大小写不敏感</span></span><br><span class="line">basedir=/usr/<span class="built_in">local</span>/mysql <span class="comment"># mysql安装目录</span></span><br><span class="line">datadir=/usr/<span class="built_in">local</span>/mysql/data <span class="comment"># 数据存放目录</span></span><br><span class="line">port=3306 <span class="comment"># 端口号</span></span><br><span class="line">socket=/tmp/mysql.sock</span><br><span class="line"><span class="comment"># log-error=/var/log/mysql.log # 这个要启动后再放开,不然报错</span></span><br><span class="line">pid-file=/usr/<span class="built_in">local</span>/mysql/data/<span class="variable">$hostname</span>.pid</span><br><span class="line">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bin/mysqld  --initialize --user=mysqlu --basedir=/usr/<span class="built_in">local</span>/mysql --datadir=/usr/<span class="built_in">local</span>/mysql/data <span class="comment"># 会生成一个临时密码,需记住, data目录要为空</span></span><br><span class="line"><span class="comment"># l,gtl0Hr._&lt;%</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"><span class="comment"># 在文件后追加</span></span><br><span class="line"><span class="built_in">export</span> MYSQL_HOME</span><br><span class="line">MYSQL_HOME=/usr/<span class="built_in">local</span>/mysql</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$MYSQL_HOME</span>/lib:<span class="variable">$MYSQL_HOME</span>/bin</span><br><span class="line"><span class="comment"># 让其立马生效</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机自启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    cp /usr/<span class="built_in">local</span>/mysql/support-files/mysql.server /etc/init.d/mysql <span class="comment"># 拷贝配置</span></span><br><span class="line">    chmod +x /etc/init.d/mysql <span class="comment"># 添加执行权限</span></span><br><span class="line">    chkconfig --add mysql <span class="comment"># 注册启动服务</span></span><br><span class="line">    chkconfig --list <span class="comment"># 查看是否添加成功</span></span><br><span class="line">  ```  </span><br><span class="line">- 启动并登录mysql</span><br><span class="line">  ```bash</span><br><span class="line">    service mysql start <span class="comment"># 启动服务(如报错,删除my.cnf的pid-file配置)</span></span><br><span class="line">    mysql -uroot -p <span class="comment"># 然后输入临时的密码</span></span><br><span class="line">    alert user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">"你的密码"</span> <span class="comment"># 修改密码,必须</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建远程操作账户,进行远程访问授权</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">      create user <span class="string">'root'</span>@<span class="string">'%'</span> identified with mysql_native_password by <span class="string">'123456'</span>;</span><br><span class="line">      grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span> with grant option;</span><br><span class="line">      flush privileges;</span><br><span class="line">    ```  </span><br><span class="line"></span><br><span class="line"><span class="comment">## yum源安装</span></span><br><span class="line">  - 删除已有的mysql</span><br><span class="line">  - 下载rpm包(Red Hat Enterprise Linux / Oracle Linux -&gt; RPM Bundle) / 或者 wget -i -c https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar</span><br><span class="line">  - 解压并安装</span><br><span class="line">    ```bash</span><br><span class="line">    <span class="comment"># 把下载好的包解压到/usr/local/mysql目录,并顺序安装</span></span><br><span class="line">    rpm -ivh mysql-community-common-5.7.29-1.el7.x86_64.rpm</span><br><span class="line">    rpm -ivh mysql-community-libs-5.7.29-1.el7.x86_64.rpm</span><br><span class="line">    rpm -ivh mysql-community-client-5.7.29-1.el7.x86_64.rpm <span class="comment"># --force --nodeps</span></span><br><span class="line">    rpm -ivh  mysql-community-server-5.7.29-1.el7.x86_64.rpm <span class="comment"># --force --nodeps</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>配置数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">skip-grant-tables</span><br><span class="line">character_set_server=utf8</span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    systemctl start mysqld.service</span><br><span class="line">    ```   </span><br><span class="line">- 启动mysql</span><br><span class="line">  ```bash</span><br><span class="line">  mysql <span class="comment"># 如报错则: dnf install ncurses-compat-libs</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>设置密码和开启远程登录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  update mysql.user <span class="built_in">set</span> authentication_string=password(<span class="string">'123456'</span>) <span class="built_in">where</span> user=<span class="string">'root'</span>; <span class="comment"># 设置密码</span></span><br><span class="line">  fulsh privileges; <span class="comment"># 立即生效</span></span><br><span class="line">  vim /etc/my.cnf <span class="comment"># skip-grant-tables这一行注释掉</span></span><br><span class="line">  <span class="comment"># 重启mysql服务</span></span><br><span class="line">  systemctl stop mysqld.service</span><br><span class="line">  systemctl start mysqld.service</span><br><span class="line">  ``` </span><br><span class="line">- 重置密码(必须)</span><br><span class="line">  ```bash</span><br><span class="line">  <span class="built_in">set</span> global validate_password_policy=LOW; <span class="comment"># 设置密码策略，根据需要</span></span><br><span class="line">  <span class="built_in">set</span> global validate_password_length=4; <span class="comment"># 最小长度是4</span></span><br><span class="line">  <span class="built_in">set</span> password=password(<span class="string">"root"</span>);</span><br><span class="line">  ```  </span><br><span class="line">- 开放3306端口</span><br><span class="line">  ```bash</span><br><span class="line">  firewall-cmd --zone=public --add-port=3306/tcp --permanent <span class="comment"># 添加端口</span></span><br><span class="line">  firewall-cmd --reload <span class="comment"># 重启防火墙</span></span><br><span class="line">  grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span> identified by <span class="string">'root'</span> with grant option; <span class="comment"># 开启远程访问</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
-<p><a href="https://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="noopener">菜鸟教程 -MySQL安装</a></p>
+<p><a href="https://www.runoob.com/mysql/mysql-install.html" target="_blank" rel="noopener">菜鸟教程 -MySQL安装</a><br><a href="https://blog.csdn.net/qq_36631900/article/details/102482768" target="_blank" rel="noopener">centos7安装mysql8.0.17版本过程</a><br><a href="https://www.cnblogs.com/lzhdonald/p/12511998.html" target="_blank" rel="noopener">centos7安装mysql（完整</a><br><a href="https://www.freesion.com/article/1369259796/" target="_blank" rel="noopener">解决CENTOS8 中安装MYSQL5.7.26时 LIBTINFO.SO.5()(64BIT)被依赖的问题</a><br><a href="https://blog.csdn.net/hello_world_qwp/article/details/79551789" target="_blank" rel="noopener">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</a></p>
+</blockquote>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间: 2020-03-16 19:51:26<br>修改时间: 2020-06-07 13:51:21</p>
 </blockquote>
 
       
@@ -389,8 +441,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/16/database/3.mysql管理/" rel="prev" title="MySQL管理">
-                MySQL管理 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/23/java/1.Java简介/" rel="prev" title="Java简介">
+                Java简介 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -459,7 +511,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-count">182</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -467,7 +519,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -525,7 +577,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的定义"><span class="nav-number">1.</span> <span class="nav-text">mysql的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的特点："><span class="nav-number">2.</span> <span class="nav-text">mysql的特点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的安装-windows"><span class="nav-number">3.</span> <span class="nav-text">mysql的安装(windows)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的定义"><span class="nav-number">1.</span> <span class="nav-text">mysql的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的特点："><span class="nav-number">2.</span> <span class="nav-text">mysql的特点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的安装-windows"><span class="nav-number">3.</span> <span class="nav-text">mysql的安装(windows)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS-8"><span class="nav-number">4.</span> <span class="nav-text">CentOS 8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码包安装，失败了-放弃"><span class="nav-number">4.1.</span> <span class="nav-text">(源码包安装，失败了,放弃)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">6.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>

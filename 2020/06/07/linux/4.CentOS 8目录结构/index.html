@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="安装," />
+  <meta name="keywords" content="linux基础," />
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="vmware的安装流程">
-<meta name="keywords" content="安装">
+<meta name="description" content="centOS 8基本目录结构及用途。">
+<meta name="keywords" content="linux基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vmware的安装">
-<meta property="og:url" content="http://yoursite.com/2020/03/16/linux/vmware的安装/index.html">
+<meta property="og:title" content="centOS 8的目录结构">
+<meta property="og:url" content="http://yoursite.com/2020/06/07/linux/4.CentOS 8目录结构/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="vmware的安装流程">
+<meta property="og:description" content="centOS 8基本目录结构及用途。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T11:57:45.939Z">
+<meta property="og:updated_time" content="2020-06-07T06:22:31.397Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vmware的安装">
-<meta name="twitter:description" content="vmware的安装流程">
+<meta name="twitter:title" content="centOS 8的目录结构">
+<meta name="twitter:description" content="centOS 8基本目录结构及用途。">
 
 
 
@@ -116,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/16/linux/vmware的安装/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/07/linux/4.CentOS 8目录结构/"/>
 
 
-  <title> vmware的安装 | Rey Shaw's Blog </title>
+  <title> centOS 8的目录结构 | Rey Shaw's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +269,7 @@
             
             
               
-                vmware的安装
+                centOS 8的目录结构
               
             
           </h1>
@@ -281,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2020-03-16T19:51:26+08:00" content="2020-03-16">
-              2020-03-16
+            <time itemprop="dateCreated" datetime="2020-06-07T01:51:26+08:00" content="2020-06-07">
+              2020-06-07
             </time>
           </span>
 
@@ -329,28 +329,15 @@
 
       
         <blockquote>
-<p>vmware的安装流程</p>
+<p>centOS 8基本目录结构及用途。</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="下载-vmware-Workstation-15-Pro"><a href="#下载-vmware-Workstation-15-Pro" class="headerlink" title="下载 vmware Workstation 15 Pro"></a>下载 vmware Workstation 15 Pro</h1><blockquote>
-<p><a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank" rel="noopener">官方下载地址</a>：Try Workstation 15.5 Player for Windows,大约138M左右(太慢，放弃)。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin -&gt; usr/bin <span class="comment"># 常用命令,如vi,su</span></span><br><span class="line">├── boot <span class="comment"># 引导系统启动</span></span><br><span class="line">├── dev <span class="comment"># device缩写,所有外部设备</span></span><br><span class="line">├── etc <span class="comment"># 配置文件</span></span><br><span class="line">│   ├── rc.d <span class="comment"># 开机和关机脚本</span></span><br><span class="line">│   └── xinetd.d <span class="comment"># 启动其他额外服务</span></span><br><span class="line">├── home <span class="comment"># 普通用户相关文件</span></span><br><span class="line">├── lib -&gt; usr/lib <span class="comment"># 动态链接共享库</span></span><br><span class="line">├── lib64 -&gt; usr/lib64</span><br><span class="line">├── media <span class="comment"># 临时挂在别的文件系统</span></span><br><span class="line">├── mnt <span class="comment"># 默认挂在光驱和软驱</span></span><br><span class="line">├── opt <span class="comment"># 给主机额外安装软件所摆放</span></span><br><span class="line">├── proc <span class="comment"># 虚拟目录，系统内存映射,访问这个目录获取系统信息</span></span><br><span class="line">├── root <span class="comment"># root用户的相关文件</span></span><br><span class="line">├── run </span><br><span class="line">├── sbin -&gt; usr/sbin <span class="comment"># 要有一定权限才可以使用的命令</span></span><br><span class="line">├── srv <span class="comment"># servic缩写,存放服务启动后需要读取的数据</span></span><br><span class="line">├── sys <span class="comment"># linux2.6内核中新出现的文件系统</span></span><br><span class="line">├── tmp <span class="comment"># 存放临时文件</span></span><br><span class="line">├── usr <span class="comment"># 安装一个软件的默认目录(widnows下的program files)</span></span><br><span class="line">│   ├── include <span class="comment"># 一些distribution套件头文件,安装程序可能会用到</span></span><br><span class="line">│   └── <span class="built_in">local</span> <span class="comment"># 软件默认安装目录</span></span><br><span class="line">└── var <span class="comment"># 经常变化的文件,如网络连接的sock文件、日志等</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
+<p><a href="[xxxxx](https://www.jianshu.com/p/a7f16e901da6">linux的目录结构</a>) </p>
 </blockquote>
-<blockquote>
-<p><a href="https://pan.baidu.com/s/1K5NjAO8jU7wBREKjDfEoIQ" target="_blank" rel="noopener">百度网盘</a>: 提取码<strong>ka7y</strong>,大约541.16M,下载后文件名为VMware-workstation-full-15.5.1-15018445.exe。</p>
-</blockquote>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code>* 双击.exe文件(被要求重启了一次)
-* 下一步
-* 我接受，再下一步
-* 更改安装路径(D:\software\vmware\)[非必须],下一步
-* 取消启动时检查产品更新、加入vmware客户体验提升计划[非必须],下一步 
-* 取消开始菜单程序文件夹[非必须],下一步
-* 安装
-* 完成
-</code></pre><h1 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h1><blockquote>
-<p>密钥地址: <a href="https://www.jianshu.com/p/9e9c74801509" target="_blank" rel="noopener">简书密钥地址</a>,本人使用第一个：UG5J2-0ME12-M89WY-NPWXX-WQH88,亲测有效。</p>
-</blockquote>
-<h1 id="创建及修改日志"><a href="#创建及修改日志" class="headerlink" title="创建及修改日志"></a>创建及修改日志</h1><blockquote>
-<p>创建时间：2020/01/20 00:00:06</p>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间：2020/06/07 01:54:49</p>
 </blockquote>
 
       
@@ -374,7 +361,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/安装/" rel="tag">#安装</a>
+            <a href="/tags/linux基础/" rel="tag">#linux基础</a>
           
         </div>
       
@@ -383,16 +370,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/16/linux/常用软件下载地址/" rel="next" title="linux常用下载">
-                <i class="fa fa-chevron-left"></i> linux常用下载
+              <a href="/2020/04/08/java/28.Spring Boot简介 copy/" rel="next" title="Spring Boot简介">
+                <i class="fa fa-chevron-left"></i> Spring Boot简介
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/16/linux/CentOS 8的安装/" rel="prev" title="centOS8的安装">
-                centOS8的安装 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/07/linux/5.CentOS 8 常用软件安装/" rel="prev" title="CentOS 8常用软件">
+                CentOS 8常用软件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -461,7 +448,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">180</span>
+              <span class="site-state-item-count">182</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -469,7 +456,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -527,7 +514,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载-vmware-Workstation-15-Pro"><span class="nav-number">1.</span> <span class="nav-text">下载 vmware Workstation 15 Pro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#破解"><span class="nav-number">3.</span> <span class="nav-text">破解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改日志"><span class="nav-number">4.</span> <span class="nav-text">创建及修改日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">3.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>
