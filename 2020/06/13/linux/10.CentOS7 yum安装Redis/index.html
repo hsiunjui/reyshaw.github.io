@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="下载," />
 
 
 
@@ -84,16 +84,18 @@
 
 
 
-<meta name="description" content="与其更好，不如不同！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rey Shaw&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/常用软件的下载与安装/index.html">
+<meta name="description" content="centos7下yum安装Redis步骤">
+<meta name="keywords" content="下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7 yum安装Redis">
+<meta property="og:url" content="http://yoursite.com/2020/06/13/linux/10.CentOS7 yum安装Redis/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="与其更好，不如不同！">
+<meta property="og:description" content="centos7下yum安装Redis步骤">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-13T06:29:23.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rey Shaw&#39;s Blog">
-<meta name="twitter:description" content="与其更好，不如不同！">
+<meta name="twitter:title" content="CentOS7 yum安装Redis">
+<meta name="twitter:description" content="centos7下yum安装Redis步骤">
 
 
 
@@ -114,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/常用软件的下载与安装/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/13/linux/10.CentOS7 yum安装Redis/"/>
 
 
-  <title> 分类: 常用软件的下载与安装 | Rey Shaw's Blog </title>
+  <title> CentOS7 yum安装Redis | Rey Shaw's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -138,7 +140,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -246,47 +248,153 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        常用软件的下载与安装
-        <small>分类</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CentOS7 yum安装Redis
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-06-13T14:22:19+08:00" content="2020-06-13">
+              2020-06-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <blockquote>
+<p>centos7下yum安装Redis步骤</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum update</span><br><span class="line">yum -y install redis</span><br></pre></td></tr></table></figure>
+<h1 id="允许远程访问"><a href="#允许远程访问" class="headerlink" title="允许远程访问"></a>允许远程访问</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/redis.conf</span><br><span class="line"><span class="comment">#bind 127.0.0.1 # 注释这一行</span></span><br><span class="line">requirepass foobared <span class="comment"># 打开注释,设置密码, foobared是当前密码</span></span><br></pre></td></tr></table></figure>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis <span class="comment"># 启动</span></span><br><span class="line">systemctl restart redis <span class="comment"># 重启</span></span><br><span class="line">systemctl <span class="built_in">enable</span> redis.service <span class="comment"># 开机启动</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/34527270" target="_blank" rel="noopener">centos7安装redis</a></li>
+</ul>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间：2020/06/13 14:22:19</p>
+</blockquote>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2020/06/07/linux/5.CentOS 8 常用软件安装/" itemprop="url">
-              
-                <span itemprop="name">CentOS 8常用软件</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-07T02:14:49+08:00"
-              content="2020-06-07" >
-          06-07
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/下载/" rel="tag">#下载</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/13/distributed/1.Spring Cloud简介/" rel="next" title="Spring Cloud简介">
+                <i class="fa fa-chevron-left"></i> Spring Cloud简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -294,6 +402,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -313,8 +425,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -325,7 +446,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">182</span>
+              <span class="site-state-item-count">186</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -342,7 +463,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -384,6 +505,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Redis"><span class="nav-number">1.</span> <span class="nav-text">安装Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#允许远程访问"><span class="nav-number">2.</span> <span class="nav-text">允许远程访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">3.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">5.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -487,6 +619,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
 <meta property="og:description" content="MySQL在windows/linux下的安装流程.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-08T02:26:47.298Z">
+<meta property="og:updated_time" content="2020-06-08T02:36:23.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的安装">
 <meta name="twitter:description" content="MySQL在windows/linux下的安装流程.">
@@ -381,7 +381,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    cp /usr/<span class="built_in">local</span>/mysql/support-files/mysql.server /etc/init.d/mysql <span class="comment"># 拷贝配置</span></span><br><span class="line">    chmod +x /etc/init.d/mysql <span class="comment"># 添加执行权限</span></span><br><span class="line">    chkconfig --add mysql <span class="comment"># 注册启动服务</span></span><br><span class="line">    chkconfig --list <span class="comment"># 查看是否添加成功</span></span><br><span class="line">  ```  </span><br><span class="line">- 启动并登录mysql</span><br><span class="line">  ```bash</span><br><span class="line">    service mysql start <span class="comment"># 启动服务(如报错,删除my.cnf的pid-file配置)</span></span><br><span class="line">    mysql -uroot -p <span class="comment"># 然后输入临时的密码</span></span><br><span class="line">    alert user <span class="string">'root'</span>@<span class="string">'localhost'</span> identified by <span class="string">"你的密码"</span> <span class="comment"># 修改密码,必须</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建远程操作账户,进行远程访问授权</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">      create user <span class="string">'root'</span>@<span class="string">'%'</span> identified with mysql_native_password by <span class="string">'123456'</span>;</span><br><span class="line">      grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span> with grant option;</span><br><span class="line">      flush privileges;</span><br><span class="line">    ```  </span><br><span class="line"></span><br><span class="line"><span class="comment">## yum源安装</span></span><br><span class="line">  - 删除已有的mysql</span><br><span class="line">  - 下载rpm包(Red Hat Enterprise Linux / Oracle Linux -&gt; RPM Bundle) / 或者 wget -i -c https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar</span><br><span class="line">  - 解压并安装</span><br><span class="line">    ```bash</span><br><span class="line">    <span class="comment"># 把下载好的包解压到/usr/local/mysql目录,并顺序安装</span></span><br><span class="line">    rpm -ivh mysql-community-common-5.7.29-1.el7.x86_64.rpm</span><br><span class="line">    rpm -ivh mysql-community-libs-5.7.29-1.el7.x86_64.rpm</span><br><span class="line">    rpm -ivh mysql-community-client-5.7.29-1.el7.x86_64.rpm <span class="comment"># --force --nodeps</span></span><br><span class="line">    rpm -ivh  mysql-community-server-5.7.29-1.el7.x86_64.rpm <span class="comment"># --force --nodeps</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create user <span class="string">'root'</span>@<span class="string">'%'</span> identified with mysql_native_password by <span class="string">'123456'</span>;</span><br><span class="line">grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span> with grant option;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="yum源安装"><a href="#yum源安装" class="headerlink" title="yum源安装"></a>yum源安装</h2><ul>
+<li>删除已有的mysql</li>
+<li>下载rpm包(Red Hat Enterprise Linux / Oracle Linux -&gt; RPM Bundle) / 或者 wget -i -c <a href="https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar" target="_blank" rel="noopener">https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.29-1.el7.x86_64.rpm-bundle.tar</a></li>
+<li><p>解压并安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把下载好的包解压到/usr/local/mysql目录,并顺序安装</span></span><br><span class="line">rpm -ivh mysql-community-common-5.7.29-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.29-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.29-1.el7.x86_64.rpm <span class="comment"># --force --nodeps</span></span><br><span class="line">rpm -ivh  mysql-community-server-5.7.29-1.el7.x86_64.rpm <span class="comment"># --force --nodeps</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>配置数据库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">skip-grant-tables</span><br><span class="line">character_set_server=utf8</span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8'</span></span><br></pre></td></tr></table></figure>
@@ -511,7 +518,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">182</span>
+              <span class="site-state-item-count">186</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -528,7 +535,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -577,7 +584,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的定义"><span class="nav-number">1.</span> <span class="nav-text">mysql的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的特点："><span class="nav-number">2.</span> <span class="nav-text">mysql的特点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的安装-windows"><span class="nav-number">3.</span> <span class="nav-text">mysql的安装(windows)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS-8"><span class="nav-number">4.</span> <span class="nav-text">CentOS 8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码包安装，失败了-放弃"><span class="nav-number">4.1.</span> <span class="nav-text">(源码包安装，失败了,放弃)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">6.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的定义"><span class="nav-number">1.</span> <span class="nav-text">mysql的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的特点："><span class="nav-number">2.</span> <span class="nav-text">mysql的特点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql的安装-windows"><span class="nav-number">3.</span> <span class="nav-text">mysql的安装(windows)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS-8"><span class="nav-number">4.</span> <span class="nav-text">CentOS 8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码包安装，失败了-放弃"><span class="nav-number">4.1.</span> <span class="nav-text">(源码包安装，失败了,放弃)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yum源安装"><span class="nav-number">4.2.</span> <span class="nav-text">yum源安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">6.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>

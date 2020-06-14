@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="spring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Spring cloud的基本组成及相关功能.">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud简介">
+<meta property="og:url" content="http://yoursite.com/2020/06/13/distributed/1.Spring Cloud简介/index.html">
+<meta property="og:site_name" content="Rey Shaw&#39;s Blog">
+<meta property="og:description" content="Spring cloud的基本组成及相关功能.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-14T17:33:15.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Cloud简介">
+<meta name="twitter:description" content="Spring cloud的基本组成及相关功能.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/13/distributed/1.Spring Cloud简介/"/>
+
+
+  <title> Spring Cloud简介 | Rey Shaw's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Rey Shaw's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">好记性，不如烂笔头！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring Cloud简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-06-13T11:21:45+08:00" content="2020-06-13">
+              2020-06-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/分布式/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Spring cloud的基本组成及相关功能.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是Spring-Cloud"><a href="#什么是Spring-Cloud" class="headerlink" title="什么是Spring Cloud"></a>什么是Spring Cloud</h1><p>Spring Cloud是为开发人员快速构建分布式系统常见模块的工具集(如配置管理,服务发现,断路器,只能路由,微代理,控制总线等)。</p>
+<h1 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h1><h2 id="Eureka服务注册与发现"><a href="#Eureka服务注册与发现" class="headerlink" title="Eureka服务注册与发现"></a>Eureka服务注册与发现</h2><ul>
+<li>register server(注册中心)<ul>
+<li>spring-cloud-starter-netflix-eureka-server<ul>
+<li>@EnableEurekaServer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>producer(服务提供者/被调用方)<ul>
+<li>spring-cloud-starter-netflix-eureka-client<ul>
+<li>@EnableEurekaClient</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>comsumer(服务消费者/调用方)<ul>
+<li>spring-cloud-starter-netflix-eureka-client<ul>
+<li>@EnableEurekaClient (如果也需要注册到Euraka)</li>
+<li>@EnableDiscoveryClient(可省略)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Ribbon负载均衡器"><a href="#Ribbon负载均衡器" class="headerlink" title="Ribbon负载均衡器"></a>Ribbon负载均衡器</h2><p>负载均衡器是在客户端(调用方)使用的。</p>
+<ul>
+<li>spring-cloud-starter-netflix-ribbon<ul>
+<li>@LoadBalanced</li>
+<li>@RibbonClients(配置多个服务负载规则时)</li>
+<li>@RibbonClient(name=”service-name”, configration=ClassName)<ul>
+<li>RandomRule: 随机</li>
+<li>RoundRobinRule: 轮询 (默认)</li>
+<li>WeighedResponseTimeRule: 相应速度快的权重越大</li>
+<li>RetryRule: 先按照RoundRobinRule获取,失败后会重试</li>
+<li>BestAvailableRule: 过滤掉多次访问处于短路跳匝状态的服务,然后选择一个并发较小的</li>
+<li>ZoneAvoidanceRule: 符合判断server所在域的性能和可用性(有资料显示是默认)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Feign-声明式服务调用"><a href="#Feign-声明式服务调用" class="headerlink" title="Feign(声明式服务调用)"></a>Feign(声明式服务调用)</h2><p>feignClient默认集成了Ribbon。</p>
+<ul>
+<li>spring-cloud-starter-openfeign<ul>
+<li>@EnableFeignClients(basePackages={xx.xxx})</li>
+<li>@FeignClient(value=service-name)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Hystrix-断路器-服务容错保护"><a href="#Hystrix-断路器-服务容错保护" class="headerlink" title="Hystrix(断路器/服务容错保护)"></a>Hystrix(断路器/服务容错保护)</h2><p>当请求目标在一定时间内无响应时，返回或执行默认响应内容。分熔断(故障后的快速反应)与降级(牺牲某块服务)。即使在关停服务的情况下，也可以响应！</p>
+<ul>
+<li>spring-cloud-starter-netflix-hystrix<ul>
+<li>@EnableCircuitBreaker</li>
+<li>@HystrixCommand(fallbackMethod = “callbackMethod”)</li>
+<li>@DefaultProperties(defaultFallback=”defaultCallbackMethod”)</li>
+<li>@FeignClient(fallbackFactory=xxx.class),需要实现接口,然后范型是该注解下的类</li>
+</ul>
+</li>
+</ul>
+<h2 id="Zuul-API网关服务-路由网关-单独项目"><a href="#Zuul-API网关服务-路由网关-单独项目" class="headerlink" title="Zuul(API网关服务/路由网关,单独项目)"></a>Zuul(API网关服务/路由网关,单独项目)</h2><p>网关作为统一的API入口,可以实现黑名单、日志、协议适配、身份认证、计流限流、路由等功能。</p>
+<ul>
+<li>spring-cloud-starter-eureka</li>
+<li>spring-cloud-starter-netflix-zuul<ul>
+<li>@EnableZuulProxy</li>
+</ul>
+</li>
+</ul>
+<h2 id="Config-分布式配置中心"><a href="#Config-分布式配置中心" class="headerlink" title="Config(分布式配置中心)"></a>Config(分布式配置中心)</h2><p>集中化的外部配置支持,分服务端和客户端两部分</p>
+<ul>
+<li>创建远程仓库,并放置配置文件(github)</li>
+<li>spring-cloud-config-server<ul>
+<li>@EnableConfigServer </li>
+</ul>
+</li>
+<li>可启动本地/远程文件名</li>
+<li>spring-cloud-starter-config<ul>
+<li>bootstrap.yml</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.springcloud.cc/spring-cloud-greenwich.html" target="_blank" rel="noopener">Spring Cloud Greenwich中文文档</a></li>
+<li><a href="https://www.extlight.com/categories/%E5%90%8E%E7%AB%AF/" target="_blank" rel="noopener">后端 (分类)</a></li>
+</ul>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间：2020-06-13 11:21:45</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/12/linux/9.CentOS7 yum安装ngnix/" rel="next" title="CentOS7 yum安装nginx">
+                <i class="fa fa-chevron-left"></i> CentOS7 yum安装nginx
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/13/linux/10.CentOS7 yum安装Redis/" rel="prev" title="CentOS7 yum安装Redis">
+                CentOS7 yum安装Redis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Rey Shaw" />
+          <p class="site-author-name" itemprop="name">Rey Shaw</p>
+          <p class="site-description motion-element" itemprop="description">与其更好，不如不同！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">186</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/reyshaw" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/reyshaw" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Spring-Cloud"><span class="nav-number">1.</span> <span class="nav-text">什么是Spring Cloud</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心组件"><span class="nav-number">2.</span> <span class="nav-text">核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka服务注册与发现"><span class="nav-number">2.1.</span> <span class="nav-text">Eureka服务注册与发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon负载均衡器"><span class="nav-number">2.2.</span> <span class="nav-text">Ribbon负载均衡器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign-声明式服务调用"><span class="nav-number">2.3.</span> <span class="nav-text">Feign(声明式服务调用)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hystrix-断路器-服务容错保护"><span class="nav-number">2.4.</span> <span class="nav-text">Hystrix(断路器/服务容错保护)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zuul-API网关服务-路由网关-单独项目"><span class="nav-number">2.5.</span> <span class="nav-text">Zuul(API网关服务/路由网关,单独项目)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-分布式配置中心"><span class="nav-number">2.6.</span> <span class="nav-text">Config(分布式配置中心)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">4.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rey Shaw</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
