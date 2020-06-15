@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
 <meta property="og:description" content="Redis的简介及安装和命令行操作.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T12:45:58.173Z">
+<meta property="og:updated_time" content="2020-06-15T07:19:47.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP之Redis">
 <meta name="twitter:description" content="Redis的简介及安装和命令行操作.">
@@ -360,6 +360,61 @@
 <li>Redis Desktop Manager(生产环境不要使用)</li>
 </ul>
 <h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>缓存独立于数据库,并不是所有数据都接受延迟,更要注意数据的一致性.也就是说在更新数据库的同时,有时也需要更缓存。</p>
+<h1 id="Redis使用场景"><a href="#Redis使用场景" class="headerlink" title="Redis使用场景"></a>Redis使用场景</h1><ul>
+<li>会话缓存(session cache)</li>
+<li>队列</li>
+<li>全页缓存</li>
+<li>排行榜/计数器</li>
+</ul>
+<h1 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h1><ul>
+<li>RDB(Redis Database),(不同时间点的快照)</li>
+<li>AOF(Append Only File),记录指令,追加到文件末尾,需要设置同步选项<ul>
+<li>always 影响性能</li>
+<li>everysec 合适</li>
+<li>no 让操作系统决定,容易丢失数据</li>
+</ul>
+</li>
+</ul>
+<h1 id="Redis复制"><a href="#Redis复制" class="headerlink" title="Redis复制"></a>Redis复制</h1><ul>
+<li>从库发送sync指令到主库</li>
+<li>主库接收命令后,保存快照,创建一个rdb文件</li>
+<li>主库保存快照完毕,向从库发送rdb文件</li>
+<li>主库将缓冲区命令发给从库执行</li>
+<li>之后主库每条写命令都会发给从库执行</li>
+</ul>
+<h1 id="Redis架构"><a href="#Redis架构" class="headerlink" title="Redis架构"></a>Redis架构</h1><ul>
+<li>一主一从<ul>
+<li>主库配置(日常)</li>
+<li>从库配置 slaveof xxx.xxx.xxx</li>
+</ul>
+</li>
+<li>哨兵(一主二从三哨兵)<ul>
+<li>主从监控<ul>
+<li>从机指定master: slaveof</li>
+<li>配置3哨兵sentinel.conf: sentinel monitor mymaster 主ip 主端口 2(客观下线投票数)</li>
+</ul>
+</li>
+<li>消息通知</li>
+<li>故障转移 (主观下线/客观下线/选举)</li>
+<li>配置中心</li>
+</ul>
+</li>
+<li>集群(16384 slot,至少需要6个节点-3主3从模式, HASH_SLOT = CRC16(key) mod 16384)<ul>
+<li>cluster-enabled </li>
+<li>cluster-config-file</li>
+<li>cluster-node-timeout</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.jianshu.com/p/6c970eb652d5" target="_blank" rel="noopener">Redis架构原理及应用实践</a></li>
+<li><a href="https://blog.csdn.net/u010648555/article/details/73423560" target="_blank" rel="noopener">Redis学习——redis.conf 配置文件介绍</a></li>
+<li><a href="https://my.oschina.net/wangxu3655/blog/2214310" target="_blank" rel="noopener">redis 一主二从三哨兵的搭建</a></li>
+<li><a href="https://www.cnblogs.com/mafly/p/redis_cluster.html" target="_blank" rel="noopener">Redis 集群搭建详细指南</a></li>
+</ul>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间：2020-03-16 19:51:26<br>修改时间: 2020-06-15 14:25:31</p>
+</blockquote>
 
       
     </div>
@@ -469,7 +524,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">186</span>
+              <span class="site-state-item-count">189</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -535,7 +590,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存系统"><span class="nav-number">1.</span> <span class="nav-text">缓存系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis的定义"><span class="nav-number">2.</span> <span class="nav-text">Redis的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis的优势"><span class="nav-number">3.</span> <span class="nav-text">Redis的优势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis数据类型"><span class="nav-number">4.</span> <span class="nav-text">Redis数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis安装-linux"><span class="nav-number">5.</span> <span class="nav-text">Redis安装(linux)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis桌面软件"><span class="nav-number">6.</span> <span class="nav-text">Redis桌面软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意"><span class="nav-number">7.</span> <span class="nav-text">注意</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存系统"><span class="nav-number">1.</span> <span class="nav-text">缓存系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis的定义"><span class="nav-number">2.</span> <span class="nav-text">Redis的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis的优势"><span class="nav-number">3.</span> <span class="nav-text">Redis的优势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis数据类型"><span class="nav-number">4.</span> <span class="nav-text">Redis数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis安装-linux"><span class="nav-number">5.</span> <span class="nav-text">Redis安装(linux)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis桌面软件"><span class="nav-number">6.</span> <span class="nav-text">Redis桌面软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意"><span class="nav-number">7.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis使用场景"><span class="nav-number">8.</span> <span class="nav-text">Redis使用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis持久化"><span class="nav-number">9.</span> <span class="nav-text">Redis持久化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis复制"><span class="nav-number">10.</span> <span class="nav-text">Redis复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis架构"><span class="nav-number">11.</span> <span class="nav-text">Redis架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">13.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>

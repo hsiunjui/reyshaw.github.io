@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
 <meta property="og:description" content="centos7下yum安装nginx步骤">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-12T05:53:17.780Z">
+<meta property="og:updated_time" content="2020-06-15T04:45:02.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7 yum安装nginx">
 <meta name="twitter:description" content="centos7下yum安装nginx步骤">
@@ -332,10 +332,68 @@
 <p>centos7下yum安装nginx步骤</p>
 </blockquote>
 <a id="more"></a>
+<h1 id="Ngnix是什么"><a href="#Ngnix是什么" class="headerlink" title="Ngnix是什么"></a>Ngnix是什么</h1><p>Ngnix是一个开源且高性能、可靠的HTTP中间件,反向代理服务器(正向是<strong>客户端</strong>指定目标如vpn,反向是由反向代理<strong>服务器</strong>决定目标,如转发)。</p>
+<ul>
+<li>静态HTTP服务器 (location)</li>
+<li>反向代理服务器</li>
+<li>虚拟主机 (proxy_pass)</li>
+<li>负载均衡 (upstream)<ul>
+<li>轮询 (默认)</li>
+<li>加权weight</li>
+<li>ip_hash (一致性hash)</li>
+<li>fair响应时间</li>
+<li>url_hash</li>
+</ul>
+</li>
+</ul>
+<h1 id="ngnix的工作模式"><a href="#ngnix的工作模式" class="headerlink" title="ngnix的工作模式"></a>ngnix的工作模式</h1><ul>
+<li>一个master,多个worker</li>
+<li>IO多路复用epoll (事件驱动)</li>
+</ul>
+<h1 id="nginx模块"><a href="#nginx模块" class="headerlink" title="nginx模块"></a>nginx模块</h1><ul>
+<li>全局模块<ul>
+<li>worker_processes/user/log/pid</li>
+</ul>
+</li>
+<li>events模块<ul>
+<li>worker_connections/use epoll</li>
+</ul>
+</li>
+<li>http模块<ul>
+<li>upstream /server (主备 backup/down)</li>
+</ul>
+</li>
+</ul>
+<h1 id="ngnix高可用-keepalived配置"><a href="#ngnix高可用-keepalived配置" class="headerlink" title="ngnix高可用(keepalived配置)"></a>ngnix高可用(keepalived配置)</h1><ul>
+<li><p>主备(vrrp_instance -&gt; virtual_ipaddress主备一致)</p>
+<ul>
+<li>主 state MASTER</li>
+<li>备 state BACKUP</li>
+</ul>
+</li>
+<li><p>双主热备(双vrrp_instance)</p>
+<ul>
+<li>主(备)<ul>
+<li>vrrp_instance A -&gt; state MASTER | virtual_ipaddress A</li>
+<li>vrrp_instance B -&gt; state BACKUP | virtual_ipaddress B</li>
+</ul>
+</li>
+<li>备(主)<ul>
+<li>vrrp_instance A -&gt; state BACKUP | virtual_ipaddress A</li>
+<li>vrrp_instance B -&gt; state MASTER | virtual_ipaddress B</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line">sudo yum install -y nginx</span><br></pre></td></tr></table></figure>
 <h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service <span class="comment"># 启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> nginx.service <span class="comment"># 设置开机自启动</span></span><br><span class="line">ngnix -s reload <span class="comment"># 重新加载配置</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://juejin.im/post/5c1616186fb9a049a42ef21d" target="_blank" rel="noopener">nginx.conf 配置文件详解</a></li>
+<li><a href="https://blog.51cto.com/3241766/2103154" target="_blank" rel="noopener">Keepalived+Nginx+Apache主备及双活搭建测试</a></li>
+</ul>
 <h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
-<p>创建时间：2020/06/12 11:54:19</p>
+<p>创建时间：2020/06/12 11:54:19<br>修改时间：2020/06/15 12:43:43</p>
 </blockquote>
 
       
@@ -446,7 +504,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">186</span>
+              <span class="site-state-item-count">189</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -512,7 +570,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装nginx"><span class="nav-number">1.</span> <span class="nav-text">安装nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">2.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">3.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ngnix是什么"><span class="nav-number">1.</span> <span class="nav-text">Ngnix是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ngnix的工作模式"><span class="nav-number">2.</span> <span class="nav-text">ngnix的工作模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx模块"><span class="nav-number">3.</span> <span class="nav-text">nginx模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ngnix高可用-keepalived配置"><span class="nav-number">4.</span> <span class="nav-text">ngnix高可用(keepalived配置)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装nginx"><span class="nav-number">5.</span> <span class="nav-text">安装nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">6.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">8.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>
