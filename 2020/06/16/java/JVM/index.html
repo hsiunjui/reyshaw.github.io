@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="数据连接," />
+  <meta name="keywords" content="Java SE," />
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="Java JDBC链接mysql数据库。">
-<meta name="keywords" content="数据连接">
+<meta name="description" content="JVM的架构,GC.">
+<meta name="keywords" content="Java SE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDBC示例">
-<meta property="og:url" content="http://yoursite.com/2016/11/04/java/jdbc/index.html">
+<meta property="og:title" content="JVM简介">
+<meta property="og:url" content="http://yoursite.com/2020/06/16/java/JVM/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="Java JDBC链接mysql数据库。">
+<meta property="og:description" content="JVM的架构,GC.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-16T11:12:16.772Z">
+<meta property="og:updated_time" content="2020-06-16T07:22:56.659Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JDBC示例">
-<meta name="twitter:description" content="Java JDBC链接mysql数据库。">
+<meta name="twitter:title" content="JVM简介">
+<meta name="twitter:description" content="JVM的架构,GC.">
 
 
 
@@ -116,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/04/java/jdbc/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/16/java/JVM/"/>
 
 
-  <title> JDBC示例 | Rey Shaw's Blog </title>
+  <title> JVM简介 | Rey Shaw's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +269,7 @@
             
             
               
-                JDBC示例
+                JVM简介
               
             
           </h1>
@@ -281,8 +281,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-04T15:39:11+08:00" content="2016-11-04">
-              2016-11-04
+            <time itemprop="dateCreated" datetime="2020-06-16T14:50:15+08:00" content="2020-06-16">
+              2020-06-16
             </time>
           </span>
 
@@ -329,13 +329,133 @@
 
       
         <blockquote>
-<p>Java JDBC链接mysql数据库。</p>
+<p>JVM的架构,GC.</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCConnection</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Connection conn = <span class="keyword">null</span>;</span><br><span class="line">		Statement stmt = <span class="keyword">null</span>;</span><br><span class="line">		ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		String user = <span class="string">"root"</span>;</span><br><span class="line">		String pwd = <span class="string">""</span>;</span><br><span class="line">		String url = <span class="string">"jdbc:mysql://localhost:3306/test"</span>;</span><br><span class="line">		String sql = <span class="string">"select * from class"</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">			conn = DriverManager.getConnection(url,user,pwd);</span><br><span class="line">			stmt = conn.createStatement();</span><br><span class="line">			rs = stmt.executeQuery(sql);</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				System.out.println(rs.getString(<span class="number">1</span>));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(rs!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					rs.close();</span><br><span class="line">					rs = <span class="keyword">null</span>;</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(stmt != <span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					stmt.close();</span><br><span class="line">					stmt = <span class="keyword">null</span>;</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(conn != <span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					conn.close();</span><br><span class="line">					conn = <span class="keyword">null</span>;</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
-<li>过程中要引入mysql的驱动包。</li>
+<h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><p>Java Virtial Merchine。</p>
+<ul>
+<li>SUN HotSpot (主流, Oracle所有)</li>
+<li>BEA JRockit (被Oracle收购)</li>
+<li>IBM J9</li>
 </ul>
+<h1 id="JVM内存结构图"><a href="#JVM内存结构图" class="headerlink" title="JVM内存结构图"></a>JVM内存结构图</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">        class 文件  --&gt; Class Loader ||</span><br><span class="line">--------------------------------------V---------------------</span><br><span class="line">|        Runtime Data Area(运行时数据区)                    |</span><br><span class="line">|                                                           |</span><br><span class="line">|   @@@@@@@@@@@@@@@   ############  ######################  |</span><br><span class="line">|   @ Method Area @   #  Stack   #  # Native Mthod Stack #  |</span><br><span class="line">|   @ (方法区)    @   # (Java栈) #  #    (本地方法栈)    #  |</span><br><span class="line">|   @@@@@@@@@@@@@@@   ############  ######################  |</span><br><span class="line">|                                                           |</span><br><span class="line">|   @@@@@@@@@@@@@@@   ####################################  |</span><br><span class="line">|   @    Heap     @   #   Program Counter Register       #  |</span><br><span class="line">|   @    (堆)     @   #        (程序计数器)              #  |</span><br><span class="line">|   @@@@@@@@@@@@@@@   ####################################  |</span><br><span class="line">|                                                           |</span><br><span class="line">-------------------------------------------------------------</span><br><span class="line">    ||                  ||                 ||</span><br><span class="line">excution engine -&gt; Native Interface --&gt;Native Libraires</span><br><span class="line">    (执行引擎)      (本地接口)          (本地接口)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>class文件通过class Loader加载到内存空间,然后交给执行引擎执行。<ul>
+<li>Bootstrap ClassLoader (顶层加载类,c++)</li>
+<li>Extention ClassLoader (扩展的类加载器, \lib\ext)</li>
+<li>Appclass Loader(加载当前应用的classpath的所有类)</li>
+<li>User ClassLoader (用户自定义加载器)</li>
+</ul>
+</li>
+<li>本地方法栈通过本地接口再调用本地方法</li>
+<li>##区域不会发生垃圾回收,线程私有</li>
+<li>@@区域线程间共享</li>
+</ul>
+<h2 id="运行时五大功能区-核心"><a href="#运行时五大功能区-核心" class="headerlink" title="运行时五大功能区(核心)"></a>运行时五大功能区(核心)</h2><ul>
+<li>方法区 (永久代/元数据处于该区)<ul>
+<li>类信息</li>
+<li>常量</li>
+<li>静态变量</li>
+<li>常量池</li>
+</ul>
+</li>
+<li>堆(-Xms=1/64 -Xmx=1/4)<ul>
+<li>年轻代 (Young Generation 8:1:1)<ul>
+<li>伊甸区 (Eden)<ul>
+<li>刚new出来的对象都会放这里, Minor GC存活的会进入Survivor区</li>
+</ul>
+</li>
+<li>幸存1区 (Survivor from)<ul>
+<li>from区和to区会经常发生转换</li>
+<li>经历过15次Minor GC后会进入老年代</li>
+</ul>
+</li>
+<li>幸存2区 (Servivor to)</li>
+</ul>
+</li>
+<li>老年代 (Old Generation)<ul>
+<li>该区域会触发Full GC</li>
+</ul>
+</li>
+<li>永久代/元数据(Permernent Generation/MetaData ,位于方法区)<ul>
+<li>存活时间长,同jvm。如连接池,线程池等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Java栈<ul>
+<li>局部变量(对象引用/8种基本数据类型)</li>
+<li>操作数栈</li>
+<li>动态链接</li>
+<li>方法出口</li>
+</ul>
+</li>
+<li>本地方法栈<ul>
+<li>为虚拟机执行native方法服务</li>
+</ul>
+</li>
+<li>程序计数器<ul>
+<li>当前线程所执行的字节码的行号显示器,它会指出下一条指令的执行地址。</li>
+<li>每条线程都有一个独立的程序计数器</li>
+<li>唯一一个不会出现OutOfMemoryError的内存区域</li>
+</ul>
+</li>
+</ul>
+<h2 id="OOM"><a href="#OOM" class="headerlink" title="OOM"></a>OOM</h2><ul>
+<li>java.lang.OutOfMemoryError:Java heap space <ul>
+<li>内存泄漏,不能被回收的对象消耗太多内存(死循环new 类)</li>
+</ul>
+</li>
+<li>java.lang.OutOfMemoryError:Permgen space</li>
+<li>java.lang.OutOfMemoryError:Metaspace <ul>
+<li>加载类太多(依赖太多的jar包)</li>
+</ul>
+</li>
+</ul>
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><ul>
+<li>引用计数法(淘汰)<ul>
+<li>给对象添加一个引用计数器,为0是回收<ul>
+<li>影响性能</li>
+<li>对循环引用无法回收</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>复制算法(适用于年轻代)<ul>
+<li>从一块内存空间复制到另一块(如从from区到to区)<ul>
+<li>效率高</li>
+<li>占用空间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>标记-清除法<ul>
+<li>遍历,第一遍标记哪些是存活的,第二遍清除未标记的<ul>
+<li>可以节省空间</li>
+<li>应用程序会停止,且需遍历两遍,效率低</li>
+<li>空闲内存不连续</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>标记-压缩法<ul>
+<li>同标记-清除法一样,第一遍标记,第二遍是整理,即把存活的对象压缩到一块区域,然后清理末端。<ul>
+<li>比起标记-清除法,它的空间是连续的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：GC采用分代收集算法。年轻代触发的是Minor GC(轻量级GC),且采用复制算法; 老年代触发的Full GC,采用的标记-清除/标记-整理算法。</p>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://juejin.im/post/5c73c6446fb9a04a0d577d14" target="_blank" rel="noopener">深入理解 JVM 之 JVM 内存结构</a></li>
+<li><a href="https://www.cnblogs.com/qianguyihao/p/4744233.html" target="_blank" rel="noopener">Java虚拟机详解04—-GC算法和种类【重要】</a></li>
+</ul>
+<h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
+<p>创建时间: 2020-06-16 14:50:15  </p>
+</blockquote>
 
       
     </div>
@@ -358,7 +478,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据连接/" rel="tag">#数据连接</a>
+            <a href="/tags/Java-SE/" rel="tag">#Java SE</a>
           
         </div>
       
@@ -367,17 +487,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/04/java/key/" rel="next" title="创建密钥">
-                <i class="fa fa-chevron-left"></i> 创建密钥
+              <a href="/2020/06/15/distributed/4.mycat/" rel="next" title="Mycat">
+                <i class="fa fa-chevron-left"></i> Mycat
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/04/database/mysql-setup/" rel="prev" title="mysql的安装">
-                mysql的安装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -445,7 +561,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">189</span>
+              <span class="site-state-item-count">183</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -511,7 +627,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">2.</span> <span class="nav-text">说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM内存结构图"><span class="nav-number">2.</span> <span class="nav-text">JVM内存结构图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时五大功能区-核心"><span class="nav-number">2.1.</span> <span class="nav-text">运行时五大功能区(核心)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OOM"><span class="nav-number">2.2.</span> <span class="nav-text">OOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC"><span class="nav-number">2.3.</span> <span class="nav-text">GC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">4.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>

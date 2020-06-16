@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="mycat实现分库分表(待实践后完善)。">
+<meta name="description" content="Mysql同步,Mycat分库分表。">
 <meta name="keywords" content="spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mycat分库分表">
+<meta property="og:title" content="Mycat">
 <meta property="og:url" content="http://yoursite.com/2020/06/15/distributed/4.mycat/index.html">
 <meta property="og:site_name" content="Rey Shaw&#39;s Blog">
-<meta property="og:description" content="mycat实现分库分表(待实践后完善)。">
+<meta property="og:description" content="Mysql同步,Mycat分库分表。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-15T14:09:45.960Z">
+<meta property="og:updated_time" content="2020-06-16T13:30:23.601Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mycat分库分表">
-<meta name="twitter:description" content="mycat实现分库分表(待实践后完善)。">
+<meta name="twitter:title" content="Mycat">
+<meta name="twitter:description" content="Mysql同步,Mycat分库分表。">
 
 
 
@@ -119,7 +119,7 @@
   <link rel="canonical" href="http://yoursite.com/2020/06/15/distributed/4.mycat/"/>
 
 
-  <title> mycat分库分表 | Rey Shaw's Blog </title>
+  <title> Mycat | Rey Shaw's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +269,7 @@
             
             
               
-                mycat分库分表
+                Mycat
               
             
           </h1>
@@ -329,26 +329,89 @@
 
       
         <blockquote>
-<p>mycat实现分库分表(待实践后完善)。</p>
+<p>Mysql同步,Mycat分库分表。</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="mycat是什么"><a href="#mycat是什么" class="headerlink" title="mycat是什么"></a>mycat是什么</h1><p>MyCat是一个开源的分布式数据库系统。</p>
-<ul>
-<li>Schema.xml</li>
-<li>Server.xml</li>
-<li>Rule.xml</li>
+<h1 id="Mycat发展"><a href="#Mycat发展" class="headerlink" title="Mycat发展"></a>Mycat发展</h1><ul>
+<li>2008 Amoeba</li>
+<li>2012 Cobar</li>
+<li>2013 Mycat</li>
 </ul>
-<h1 id="数据库分片"><a href="#数据库分片" class="headerlink" title="数据库分片"></a>数据库分片</h1><ul>
-<li>schema(逻辑库)</li>
-<li>table(逻辑表)</li>
-<li>datanode(数据节点)</li>
-<li>datasource(物理库的访问地址)<h2 id="水平拆分-分库"><a href="#水平拆分-分库" class="headerlink" title="水平拆分(分库)"></a>水平拆分(分库)</h2><h2 id="垂直拆分-分表"><a href="#垂直拆分-分表" class="headerlink" title="垂直拆分(分表)"></a>垂直拆分(分表)</h2></li>
+<h1 id="Mycat作用"><a href="#Mycat作用" class="headerlink" title="Mycat作用"></a>Mycat作用</h1><ul>
+<li>分布式数据库系统中间层<ul>
+<li>实现数据库的读写分离</li>
+<li>读库负载均衡</li>
+<li>Mysql的高可用</li>
+<li>数据库垂直拆分(一个库到多个库)</li>
+<li>数据库水平拆分(一张表变多个表)</li>
+</ul>
+</li>
+</ul>
+<h1 id="Mysql主从同步"><a href="#Mysql主从同步" class="headerlink" title="Mysql主从同步"></a>Mysql主从同步</h1><h2 id="原理-bin-log日志"><a href="#原理-bin-log日志" class="headerlink" title="原理(bin log日志)"></a>原理(bin log日志)</h2><ul>
+<li>当master上的数据发生写操作时,该事件会按顺序写入binlog日志中</li>
+<li>开启binlog dump线程,通知并发送事件给slave</li>
+<li>slave会开启两个线程. I/O线程,接收binlog dump线程的binlog内容,写入本地relay log;SQL线程根据I/O线程的relay log对数据库进行操作。</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
+<li><p>master</p>
+<ul>
+<li>开启log-bin/server-id/binlog-do-db(要复制的db名称)</li>
+<li><p>开启slave授权</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># user 是授权给主库哪个用户</span></span><br><span class="line"><span class="comment"># xx.xx.xx.xx是slave的ip</span></span><br><span class="line"><span class="comment"># password是user的密码</span></span><br><span class="line">grant replication slave on *.* to <span class="string">'user'</span>@<span class="string">'xx.xx.xx.xx'</span> identified by <span class="string">'password'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看binlog信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>slave</p>
+<ul>
+<li>server-id/replicate-do-db/ready_only(可选)</li>
+<li><p>设置master信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># master_log_file,master_log_pos可以从master的最后一步看到</span></span><br><span class="line">change master to master_host=<span class="string">'xx.xx.xx.xx'</span>,master_user=<span class="string">'user'</span>,master_password=<span class="string">'password'</span>,master_log_file=<span class="string">'xxx'</span>,master_log_pos=xxx;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>start slave;</p>
+</li>
+<li>show slave status\G; <ul>
+<li>Slave_IO_Running</li>
+<li>Slave_SQL_Running </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Mysql主主同步"><a href="#Mysql主主同步" class="headerlink" title="Mysql主主同步"></a>Mysql主主同步</h2><p>跟Mysql主从同步类似,只是在另一台上反向再做一次主从同步。</p>
+<h2 id="Mysql一主多从"><a href="#Mysql一主多从" class="headerlink" title="Mysql一主多从"></a>Mysql一主多从</h2><p>对另外一个slave做同样的slave操作。</p>
+<h1 id="Mycat中的基本概念"><a href="#Mycat中的基本概念" class="headerlink" title="Mycat中的基本概念"></a>Mycat中的基本概念</h1><ul>
+<li>Schema(逻辑库)</li>
+<li>Table(逻辑表)</li>
+<li>Datanode(数据节点)</li>
+<li>Datasource(物理库的访问地址)</li>
+</ul>
+<h1 id="Mycat使用"><a href="#Mycat使用" class="headerlink" title="Mycat使用"></a>Mycat使用</h1><ul>
+<li>Schema.xml 用于配置逻辑库/表/数据节点<ul>
+<li>schema -&gt; table 定义逻辑库 -&gt; 逻辑表</li>
+<li>dataNode 定义数据节点</li>
+<li>dataHost 数据节点的物理数据源<ul>
+<li>balance </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Server.xml 配置服务器权限</li>
+<li>Rule.xml 配置表的分片规则<ul>
+<li>tableRule 定义表使用的分片规则</li>
+<li>function 定义分片算法</li>
+</ul>
+</li>
 </ul>
 <h1 id="mycat原理"><a href="#mycat原理" class="headerlink" title="mycat原理"></a>mycat原理</h1><ul>
 <li>拦截</li>
-<li>基于mysql的binlog日志</li>
 </ul>
 <h1 id="全局表"><a href="#全局表" class="headerlink" title="全局表"></a>全局表</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://juejin.im/post/5ca2a176f265da30ba5b0b91" target="_blank" rel="noopener">MySQL主从复制原理</a></li>
+<li><a href="https://juejin.im/post/5c9d8109f265da612f1bb019" target="_blank" rel="noopener">Mysql主从同步实战(一)【知其然】</a></li>
+<li><a href="https://www.jianshu.com/p/0adcef2d6b05" target="_blank" rel="noopener">MySQL配置主主同步(master-master)</a></li>
 <li><a href="https://www.imooc.com/learn/951" target="_blank" rel="noopener">MyCAT入门及应用</a></li>
 </ul>
 <h1 id="创建及修改时间"><a href="#创建及修改时间" class="headerlink" title="创建及修改时间"></a>创建及修改时间</h1><blockquote>
@@ -392,6 +455,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/16/java/JVM/" rel="prev" title="JVM简介">
+                JVM简介 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -459,7 +526,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">189</span>
+              <span class="site-state-item-count">183</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -525,7 +592,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mycat是什么"><span class="nav-number">1.</span> <span class="nav-text">mycat是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库分片"><span class="nav-number">2.</span> <span class="nav-text">数据库分片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#水平拆分-分库"><span class="nav-number">2.1.</span> <span class="nav-text">水平拆分(分库)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直拆分-分表"><span class="nav-number">2.2.</span> <span class="nav-text">垂直拆分(分表)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mycat原理"><span class="nav-number">3.</span> <span class="nav-text">mycat原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全局表"><span class="nav-number">4.</span> <span class="nav-text">全局表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">6.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mycat发展"><span class="nav-number">1.</span> <span class="nav-text">Mycat发展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mycat作用"><span class="nav-number">2.</span> <span class="nav-text">Mycat作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql主从同步"><span class="nav-number">3.</span> <span class="nav-text">Mysql主从同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理-bin-log日志"><span class="nav-number">3.1.</span> <span class="nav-text">原理(bin log日志)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql主主同步"><span class="nav-number">3.3.</span> <span class="nav-text">Mysql主主同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql一主多从"><span class="nav-number">3.4.</span> <span class="nav-text">Mysql一主多从</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mycat中的基本概念"><span class="nav-number">4.</span> <span class="nav-text">Mycat中的基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mycat使用"><span class="nav-number">5.</span> <span class="nav-text">Mycat使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mycat原理"><span class="nav-number">6.</span> <span class="nav-text">mycat原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全局表"><span class="nav-number">7.</span> <span class="nav-text">全局表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建及修改时间"><span class="nav-number">9.</span> <span class="nav-text">创建及修改时间</span></a></li></ol></div>
             
           </div>
         </section>
